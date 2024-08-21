@@ -1,4 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  
+
+@layer base {
+  button {
+    @apply hover:bg-slate-50 focus:outline-0 focus:ring-0 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0;
+  }
+}
+
+@layer components {
+  .dateBtn {
+    @apply rounded-md border-2 border-transparent bg-teal-500 px-4 py-2 font-bold text-white transition duration-200 hover:border-teal-500 hover:bg-white hover:text-black;
+  }
+
+  .dropdownList {
+    @apply cursor-pointer rounded-sm hover:bg-slate-100;
+  }
+
+  .btn-primary {
+    @apply cursor-pointer rounded-md bg-slate-100;
+  }
+
+  .btn-form {
+    @apply relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-bold text-white !transition-colors hover:from-zinc-300 hover:text-slate-950 dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 hover:dark:bg-zinc-600;
+    box-shadow:
+      0px 1px 0px 0px #ffffff40 inset,
+      0px -1px 0px 0px #ffffff40 inset;
+    @media (prefers-color-scheme: dark) {
+      box-shadow:
+        inset 0px 1px 0px 0px var(--zinc-800),
+        inset 0px -1px 0px 0px var(--zinc-800);
+    }
+  }
+
+  .btn-link {
+    @apply relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black shadow-input dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)];
+  }
+}
+
+@layer utilities {
+  .centerAll {
+    @apply flex items-center justify-center;
+  }
+
+  .section {
+    @apply relative rounded-md bg-white py-4 shadow-md;
+  }
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #292929 transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #292929;
+  border-radius: 12px;
+  border: 3px solid #ffffff;
+}
