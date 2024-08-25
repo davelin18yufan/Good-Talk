@@ -23,23 +23,23 @@ const config = {
       colors: {
         primary: {
           light: "#CAC6BD",
-          dark: "#1F0737",
+          dark: "#151515",
         },
         secondary: {
           light: "#BB9A88",
-          dark: "#a21caf",
+          dark: "#393E4",
         },
         tertiary: {
           light: "#B5A8A0",
-          dark: "#9412BC",
+          dark: "#222831",
         },
-        text: {
+        invert: {
           light: "#0f172a",
-          dark: "#3E74AE",
+          dark: "#EEEEEE",
         },
         btn: {
           light: "#979D6E",
-          dark: "#52BFEA",
+          dark: "#FFD369",
         },
         danger: {
           light: "#fda4af",
@@ -48,6 +48,9 @@ const config = {
       },
       boxShadow: {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
+      },
+      transitionTimingFunction: {
+        "button-in": "cubic-bezier(0.785,0.135,0.15,0.86)",
       },
       keyframes: {
         "accordion-down": {

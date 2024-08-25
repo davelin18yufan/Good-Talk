@@ -4,7 +4,7 @@
 
 @layer base {
   button {
-    @apply hover:bg-slate-50 focus:outline-0 focus:ring-0 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0;
+    @apply transition-transform focus:outline-0 focus:ring-0 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 active:scale-95;
   }
 }
 
@@ -17,20 +17,8 @@
     @apply cursor-pointer rounded-sm hover:bg-slate-100;
   }
 
-  .btn-primary {
-    @apply cursor-pointer rounded-md bg-slate-100;
-  }
-
-  .btn-form {
-    @apply relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-bold text-white !transition-colors hover:from-zinc-300 hover:text-slate-950 dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 hover:dark:bg-zinc-600;
-    box-shadow:
-      0px 1px 0px 0px #ffffff40 inset,
-      0px -1px 0px 0px #ffffff40 inset;
-    @media (prefers-color-scheme: dark) {
-      box-shadow:
-        inset 0px 1px 0px 0px var(--zinc-800),
-        inset 0px -1px 0px 0px var(--zinc-800);
-    }
+  .section {
+    @apply relative rounded-md bg-white py-4 shadow-md;
   }
 
   .btn-link {
@@ -39,12 +27,74 @@
 }
 
 @layer utilities {
-  .centerAll {
+  .flex-center {
     @apply flex items-center justify-center;
   }
 
-  .section {
-    @apply relative rounded-md bg-white py-4 shadow-md;
+  .invert-colors {
+    @apply invert dark:invert-0;
+  }
+
+  /* Primary */
+  .bg-primary {
+    @apply bg-primary-light dark:bg-primary-dark;
+  }
+
+  .text-primary {
+    @apply text-primary-light dark:text-primary-dark;
+  }
+
+  /* Secondary */
+  .bg-secondary {
+    @apply bg-secondary-light dark:!bg-secondary-dark;
+  }
+
+  .text-secondary {
+    @apply text-secondary-light dark:text-secondary-dark;
+  }
+
+  /* Tertiary */
+  .bg-tertiary {
+    @apply bg-tertiary-light dark:!bg-tertiary-dark;
+  }
+
+  .text-tertiary {
+    @apply text-tertiary-light dark:text-tertiary-dark;
+  }
+
+  /* Button (btn) */
+  .bg-button {
+    @apply bg-btn-light dark:!bg-btn-dark;
+  }
+
+  .text-btn {
+    @apply text-btn-light dark:text-btn-dark;
+  }
+
+  /* Danger */
+  .bg-danger {
+    @apply bg-danger-light dark:bg-danger-dark;
+  }
+
+  .text-danger {
+    @apply text-danger-light dark:text-danger-dark;
+  }
+
+  /* Text */
+  .text-header {
+    @apply text-neutral-900 dark:text-neutral-100;
+  }
+
+  .text-paragraph {
+    @apply text-neutral-800 dark:text-neutral-200;
+  }
+
+  .text-subtext {
+    @apply text-neutral-700 dark:text-neutral-300/80;
+  }
+
+  .text-invert {
+    @apply text-slate-100 dark:text-slate-800;
   }
 }
 
