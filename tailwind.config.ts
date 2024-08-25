@@ -8,7 +8,7 @@ const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
 const config = {
-  darkMode: ["class"],
+  darkMode: "selector",
   content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
@@ -20,6 +20,32 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        primary: {
+          light: "#CAC6BD",
+          dark: "#1F0737",
+        },
+        secondary: {
+          light: "#BB9A88",
+          dark: "#a21caf",
+        },
+        tertiary: {
+          light: "#B5A8A0",
+          dark: "#9412BC",
+        },
+        text: {
+          light: "#0f172a",
+          dark: "#3E74AE",
+        },
+        btn: {
+          light: "#979D6E",
+          dark: "#52BFEA",
+        },
+        danger: {
+          light: "#fda4af",
+          dark: "#e11d48",
+        },
+      },
       boxShadow: {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
       },
