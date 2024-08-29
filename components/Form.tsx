@@ -5,24 +5,28 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { IconBrandGoogle } from "@tabler/icons-react"
-import ButtonEffect from "./ButtonEffect"
+import ButtonEffect, { BottomGradient } from "./ButtonEffect"
 import Link from "next/link"
+import { FadeText } from "./FadeText"
+import { AnimatePresence } from "framer-motion"
+import { FORM_TYPES, FormBaseProps, CustomInputProps } from "@/types/form.d"
+import TypingAnimation from "./TypingAnimation"
 
+/**
+ * Form container with submit button
+ *
+ * @param {obj} props
+ * @returns
+ */
 export function FormBase({
   title,
   description,
   formClass,
-  type = "auth",
-  onSubmit,
+  type = FORM_TYPES.AUTH,
+  action,
+  pending = false,
   children,
-}: {
-  title: string
-  description?: string
-  formClass?: string
-  type?: "auth" | "regular"
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-  children: React.ReactNode
-}) {
+}: FormBaseProps) {
   const pathname = usePathname()
   const isLoginPage = pathname === "/login"
   return (
@@ -32,16 +36,22 @@ export function FormBase({
         formClass,
       )}
     >
-      <h2 className="text-2xl font-bold">{title}</h2>
+      <h2 className="font-mono text-2xl font-bold">{title}</h2>
       {description && (
         <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
       )}
 
-      <form className="my-4" onSubmit={onSubmit}>
+      <form className="my-4" action={action}>
         {children}
 
         <ButtonEffect className="mb-2 mt-4" type="submit">
-          {isLoginPage ? "登入" : "註冊"}
+          {pending ? (
+            <TypingAnimation text="Loading..." />
+          ) : isLoginPage ? (
+            "登入"
+          ) : (
+            "註冊"
+          )}
         </ButtonEffect>
 
         {type === "auth" && <AuthFooter isLoginPage={isLoginPage} />}
@@ -69,15 +79,12 @@ export function FormBase({
   )
 }
 
-function BottomGradient() {
-  return (
-    <>
-      <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-      <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
-    </>
-  )
-}
-
+/**
+ * Third-party login buttons
+ *
+ * @param props
+ * @returns
+ */
 function AuthFooter({ isLoginPage }: { isLoginPage: boolean }) {
   return (
     <div className="text-subtext pt-0.5 text-end">
@@ -92,37 +99,44 @@ function AuthFooter({ isLoginPage }: { isLoginPage: boolean }) {
   )
 }
 
-export function LabelInputContainer({
-  children,
-  className,
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
+export function CustomInput({
+  id,
+  labelName,
+  type = "text",
+  containerClass,
+  onChange,
+  errorMessage,
+  ...props
+}: CustomInputProps) {
   return (
-    <div className={cn("flex w-full flex-col space-y-2", className)}>
-      {children}
+    <div className={cn("flex w-full flex-col space-y-2", containerClass)}>
+      <Label htmlFor={id}>{labelName}</Label>
+      <Input id={id} name={id} type={type} onChange={onChange} {...props} />
+      {errorMessage && <ErrorMessage message={errorMessage} />}
     </div>
   )
 }
 
-export function CustomInput({
-  id,
-  labelName,
-  placeholder,
-  type = "text",
-  containerClass,
+export function ErrorMessage({
+  message,
+  classNames,
 }: {
-  id: string
-  labelName: string
-  placeholder?: string
-  type?: string
-  containerClass?: string
+  message: string
+  classNames?: string
 }) {
   return (
-    <LabelInputContainer className={containerClass}>
-      <Label htmlFor={id}>{labelName}</Label>
-      <Input id={id} placeholder={placeholder} type={type} />
-    </LabelInputContainer>
+    <AnimatePresence>
+      <FadeText
+        className={cn(
+          "text-danger m-0 inline-block w-full text-end font-mono text-sm",
+          classNames,
+        )}
+        direction="down"
+        framerProps={{
+          show: { transition: { delay: 0.6 } },
+        }}
+        text={`! ${message}`}
+      />
+    </AnimatePresence>
   )
 }
