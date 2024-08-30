@@ -1,9 +1,24 @@
-import { Inter } from "next/font/google"
+import type { Metadata } from "next"
+import { Inter, Roboto_Mono } from "next/font/google"
 import "../globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+})
 
-export default function RootLayout({
+const roboto_mono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+})
+
+export const metadata: Metadata = {
+  title: "Good Talk",
+  description: "To boost your investment performance",
+}
+export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
@@ -11,7 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="min-h-screen">{children}</main>
+        <main className="bg-primary grid min-h-screen place-items-center">
+          {children}
+        </main>
       </body>
     </html>
   )
