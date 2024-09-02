@@ -1,8 +1,8 @@
 
-export default function ArticlePage() {
+export default function Article() {
   return (
   <main>
-
+    Article page
   </main>
   )
 }
