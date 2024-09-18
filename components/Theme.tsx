@@ -15,7 +15,7 @@ const SYSTEM_THEME = "system"
 const DARK_THEME = "dark"
 const LIGHT_THEME = "light"
 
-type Theme = typeof SYSTEM_THEME | typeof DARK_THEME | typeof LIGHT_THEME
+export type Theme = typeof SYSTEM_THEME | typeof DARK_THEME | typeof LIGHT_THEME
 
 export const useTheme = () => {
   const [theme, setTheme] = useState<Theme>(SYSTEM_THEME)
@@ -126,36 +126,39 @@ export function ThemeSwitcher() {
 }
 
 export function ThemeToggleButton ({iconSize}:{iconSize:number}){
-  const { theme, applyTheme } = useTheme()
-  const [prefersDarkMode, setPrefersDarkMode] = useState(false)
+  const { theme: currentTheme, applyTheme } = useTheme()
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-    setPrefersDarkMode(mediaQuery.matches)
-
-    const handler = () => setPrefersDarkMode(mediaQuery.matches)
-    mediaQuery.addEventListener("change", handler)
-    return () => mediaQuery.removeEventListener("change", handler)
-  }, [])
-
-  const toggleTheme = () => {
-    switch (theme) {
+  const handleToggleTheme = () => {
+    // System preference
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+  
+    const effectiveTheme =
+      currentTheme === SYSTEM_THEME
+        ? prefersDark
+          ? DARK_THEME
+          : LIGHT_THEME
+        : currentTheme
+  
+    switch (effectiveTheme) {
       case LIGHT_THEME:
         applyTheme(DARK_THEME)
         break
       case DARK_THEME:
         applyTheme(LIGHT_THEME)
         break
-      case SYSTEM_THEME:
       default:
-        applyTheme(LIGHT_THEME)
+        applyTheme(DARK_THEME)
         break
     }
   }
+  const isDark =
+    currentTheme === DARK_THEME ||
+    (currentTheme === SYSTEM_THEME &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
 
-  const getThemeIcon = () => {
-    if (theme === SYSTEM_THEME) {
-      return prefersDarkMode ? (
+  return (
+    <button onClick={handleToggleTheme} className="rounded-full p-2">
+      {isDark ? (
         <Image
           src="/moon.svg"
           width={iconSize}
@@ -171,30 +174,7 @@ export function ThemeToggleButton ({iconSize}:{iconSize:number}){
           alt="sun icon"
           className="object-contain dark:invert"
         />
-      )
-    }
-    return theme === DARK_THEME ? (
-      <Image
-        src="/moon.svg"
-        width={iconSize}
-        height={iconSize}
-        alt="moon icon"
-        className="object-contain dark:invert"
-      />
-    ) : (
-      <Image
-        src="/sun.svg"
-        width={iconSize}
-        height={iconSize}
-        alt="sun icon"
-        className="object-contain dark:invert"
-      />
-    )
-  }
-
-  return (
-    <button onClick={toggleTheme} className="rounded-full p-2">
-      {getThemeIcon()}
+      )}
     </button>
   )
 }
