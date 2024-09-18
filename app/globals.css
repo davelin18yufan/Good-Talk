@@ -1,4 +1,121 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  
+
+@layer base {
+  button {
+    @apply transition-transform focus:outline-0 focus:ring-0 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 active:scale-95;
+  }
+}
+
+@layer components {
+  .dateBtn {
+    @apply rounded-md border-2 border-transparent bg-teal-500 px-4 py-2 font-bold text-white transition duration-200 hover:border-teal-500 hover:bg-white hover:text-black;
+  }
+
+  .dropdownList {
+    @apply cursor-pointer rounded-sm hover:bg-slate-100;
+  }
+
+  .section {
+    @apply relative rounded-md bg-white py-4 shadow-md;
+  }
+
+  .btn-link {
+    @apply relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black shadow-input dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)];
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .invert-colors {
+    @apply invert-0 dark:invert;
+  }
+
+  /* Primary */
+  .bg-primary {
+    @apply bg-primary-light dark:bg-primary-dark;
+  }
+
+  .text-primary {
+    @apply text-primary-light dark:text-primary-dark;
+  }
+
+  /* Secondary */
+  .bg-secondary {
+    @apply bg-secondary-light dark:!bg-secondary-dark;
+  }
+
+  .text-secondary {
+    @apply text-secondary-light dark:text-secondary-dark;
+  }
+
+  /* Tertiary */
+  .bg-tertiary {
+    @apply bg-tertiary-light dark:!bg-tertiary-dark;
+  }
+
+  .text-tertiary {
+    @apply text-tertiary-light dark:text-tertiary-dark;
+  }
+
+  /* Button (btn) */
+  .bg-button {
+    @apply bg-btn-light dark:!bg-btn-dark;
+  }
+
+  .text-btn {
+    @apply text-btn-light dark:text-btn-dark;
+  }
+
+  /* Danger */
+  .bg-danger {
+    @apply bg-danger-light dark:bg-danger-dark;
+  }
+
+  .text-danger {
+    @apply text-danger-light dark:text-danger-dark;
+  }
+
+  /* Text */
+  .text-header {
+    @apply text-neutral-900 dark:text-neutral-100;
+  }
+
+  .text-paragraph {
+    @apply text-neutral-800 dark:text-neutral-200;
+  }
+
+  .text-subtext {
+    @apply text-neutral-700 dark:text-neutral-300/80;
+  }
+
+  .text-invert {
+    @apply text-slate-100 dark:text-slate-800;
+  }
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #292929 transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #292929;
+  border-radius: 12px;
+  border: 3px solid #ffffff;
+}

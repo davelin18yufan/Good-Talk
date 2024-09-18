@@ -1,11 +1,15 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography"
+const defaultTheme = require("tailwindcss/defaultTheme");
 
+const colors = require("tailwindcss/colors");
+
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
 const config = {
-  darkMode: ["class"],
-  content: [
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-  ],
+  darkMode: "selector",
+  content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
@@ -16,6 +20,42 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+        mono: ["var(--font-roboto-mono)"],
+      },
+      colors: {
+        primary: {
+          light: "#CAC6BD",
+          dark: "#151515",
+        },
+        secondary: {
+          light: "#BB9A88",
+          dark: "#393E46",
+        },
+        tertiary: {
+          light: "#B5A8A0",
+          dark: "#222831",
+        },
+        invert: {
+          light: "#0f172a",
+          dark: "#EEEEEE",
+        },
+        btn: {
+          light: "#979D6E",
+          dark: "#FFD369",
+        },
+        danger: {
+          light: "#982B1C",
+          dark: "#e11d48",
+        },
+      },
+      boxShadow: {
+        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
+      },
+      transitionTimingFunction: {
+        "button-in": "cubic-bezier(0.785,0.135,0.15,0.86)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -32,7 +72,18 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), addVariablesForColors, typography],
 } satisfies Config
 
-export default config
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+ 
+  addBase({
+    ":root": newVars,
+  });
+}
+
+export default config;
