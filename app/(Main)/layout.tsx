@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import { Inter, Roboto_Mono } from "next/font/google"
 import "../globals.css"
+
 import MainHeader from "@/components/MainHeader"
+import { METADATA } from "@/constants/metadata"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,8 +18,8 @@ const roboto_mono = Roboto_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Good Talk",
-  description: "To boost your invetment performance.",
+  title: METADATA.title,
+  description: METADATA.description,
 }
 
 export default function RootLayout({

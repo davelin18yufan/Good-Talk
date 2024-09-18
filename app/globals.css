@@ -32,7 +32,7 @@
   }
 
   .invert-colors {
-    @apply invert dark:invert-0;
+    @apply invert-0 dark:invert;
   }
 
   /* Primary */
