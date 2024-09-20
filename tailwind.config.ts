@@ -20,10 +20,6 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ["var(--font-inter)"],
-        mono: ["var(--font-roboto-mono)"],
-      },
       colors: {
         primary: {
           light: "#CAC6BD",
@@ -31,7 +27,7 @@ const config = {
         },
         secondary: {
           light: "#BB9A88",
-          dark: "#393E46",
+          dark: "#393E4",
         },
         tertiary: {
           light: "#B5A8A0",
@@ -46,7 +42,7 @@ const config = {
           dark: "#FFD369",
         },
         danger: {
-          light: "#982B1C",
+          light: "#fda4af",
           dark: "#e11d48",
         },
       },
