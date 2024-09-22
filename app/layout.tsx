@@ -1,7 +1,20 @@
 import type { Metadata } from "next"
+import { Inter, Roboto_Mono } from "next/font/google"
+import "./globals.css"
 
-import MainHeader from "@/components/MainHeader"
 import { METADATA } from "@/constants/metadata"
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+})
+
+const roboto_mono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+})
 
 export const metadata: Metadata = {
   title: METADATA.title,
@@ -15,8 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="container mt-28 bg-primary text-header">
-        <MainHeader />
+      <body className={`relative ${inter.className}`}>
         {children}</body>
     </html>
   )

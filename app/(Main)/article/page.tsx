@@ -1,7 +1,7 @@
 
 export default function Article() {
   return (
-  <main>
+  <main className="">
     Article page
   </main>
   )
