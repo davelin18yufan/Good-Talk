@@ -8,16 +8,15 @@ export const metadata: Metadata = {
   description: METADATA.description,
 }
 
-export default function RootLayout({
+export default function MainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="container mt-28 bg-primary text-header">
-        <MainHeader />
-        {children}</body>
-    </html>
+    <div className="bg-primary text-header container pt-32 min-h-screen">
+      <MainHeader />
+      {children}
+    </div>
   )
 }

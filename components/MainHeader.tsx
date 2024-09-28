@@ -7,7 +7,7 @@ import MobileNavbar from "./navbar/MobileNavbar"
 
 export default function MainHeader() {
   return (
-    <header className="group/header fixed left-0 right-0 top-0 flex h-24 w-full origin-top items-center justify-between bg-neutral-50 p-2 transition-all !duration-300 hover:md:h-48 dark:bg-slate-800">
+    <header className="group/header fixed left-0 right-0 top-0 flex h-24 w-full origin-top items-center justify-between bg-neutral-50 p-2 transition-all !duration-300 hover:md:h-48 dark:bg-slate-800 z-30">
       <Link href="/article" className="h-full">
         <Image
           src={logo}
