@@ -14,9 +14,11 @@ export default function MainLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div className="bg-primary text-header container pt-32 min-h-screen">
-      <MainHeader />
-      {children}
+    <div className="bg-primary text-header min-h-screen pt-32">
+      <div className="container">
+        <MainHeader />
+        {children}
+      </div>
     </div>
   )
 }

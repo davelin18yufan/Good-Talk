@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/form/input"
 import { cn } from "@/lib/utils"
 import { IconBrandGoogle } from "@tabler/icons-react"
 import ButtonEffect, { BottomGradient } from "./ButtonEffect"

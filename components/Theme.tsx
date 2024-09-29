@@ -164,7 +164,7 @@ export function ThemeToggleButton ({iconSize}:{iconSize:number}){
           width={iconSize}
           height={iconSize}
           alt="moon icon"
-          className="object-contain dark:invert"
+          className="object-contain "
         />
       ) : (
         <Image

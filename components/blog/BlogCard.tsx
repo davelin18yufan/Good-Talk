@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 import { ChevronRightIcon } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
-import ButtonEffect from "../ButtonEffect"
+import ButtonEffect from "../buttons/ButtonEffect"
 import Image from "next/image"
 
 interface ResumeCardProps {

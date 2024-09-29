@@ -89,43 +89,38 @@ const DATA = {
 
 export default function HomePage() {
   return (
-    <main className="">
-      <div className="flex items-center justify-between gap-2">
-        {/* Article List */}
-        <section id="blogs" className="flex-1">
-          <div className="flex min-h-0 flex-col gap-y-3">
-            <BlurFade delay={BLUR_FADE_DELAY * 5}>
-              <h2 className="text-xl font-bold">最新文章</h2>
-            </BlurFade>
-            {DATA.blog.map((blog, id) => (
-              <BlurFade
-                key={blog.title}
-                delay={BLUR_FADE_DELAY * 6 + id * 0.05}
-              >
-                <BlogCard
-                  key={blog.title}
-                  avatarUrl={blog.avatarUrl}
-                  coverUrl={blog.coverUrl}
-                  altText={blog.title}
-                  title={blog.title}
-                  author={blog.author}
-                  href={blog.href}
-                  badges={blog.badges}
-                  date={`${blog.start} - ${blog.end ?? "Present"}`}
-                  description={blog.description}
-                />
-              </BlurFade>
-            ))}
-          </div>
-        </section>
-
-        {/* Sidebar/Authors */}
-        <aside id="authors" className="mb-auto">
+    <main className="flex flex-col-reverse items-center justify-between gap-2 md:flex-row">
+      {/* Article List */}
+      <section id="blogs" className="basis-2/3">
+        <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <ArticleSidebar />
+            <h2 className="text-xl font-bold">最新文章</h2>
           </BlurFade>
-        </aside>
-      </div>
+          {DATA.blog.map((blog, id) => (
+            <BlurFade key={blog.title} delay={BLUR_FADE_DELAY * 6 + id * 0.05}>
+              <BlogCard
+                key={blog.title}
+                avatarUrl={blog.avatarUrl}
+                coverUrl={blog.coverUrl}
+                altText={blog.title}
+                title={blog.title}
+                author={blog.author}
+                href={blog.href}
+                badges={blog.badges}
+                date={`${blog.start} - ${blog.end ?? "Present"}`}
+                description={blog.description}
+              />
+            </BlurFade>
+          ))}
+        </div>
+      </section>
+
+      {/* Sidebar/Authors */}
+      <aside id="authors" className="mb-auto max-md:w-full flex-1">
+        <BlurFade delay={BLUR_FADE_DELAY * 5}>
+          <ArticleSidebar />
+        </BlurFade>
+      </aside>
     </main>
   )
 }
