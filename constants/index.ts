@@ -82,3 +82,5 @@ export const BLOG_FILTERS = [
     ],
   },
 ]
+
+export const DEFAULT_COVER_URL = "/image.svg"

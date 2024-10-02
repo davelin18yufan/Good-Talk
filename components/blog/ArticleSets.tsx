@@ -9,30 +9,21 @@ import { ChevronRightIcon } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import ButtonEffect from "../buttons/ButtonEffect"
+import BlurFade from "../BlurFade"
 import Image from "next/image"
+import type { BaseBlog } from "@/types/blog"
+import { DEFAULT_COVER_URL } from "@/constants"
 
-interface ResumeCardProps {
-  avatarUrl: string
-  coverUrl: string
-  altText: string
-  title: string
-  href?: string
-  author: string
-  badges?: readonly string[]
-  date: string
-  description?: string
-}
-export const BlogCard = ({
-  avatarUrl,
+export function BlogSetCard({
   coverUrl,
   altText,
   title,
   author,
-  href,
-  badges,
+  id,
+  tags,
   date,
   description,
-}: ResumeCardProps) => {
+}: BaseBlog) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -46,15 +37,15 @@ export const BlogCard = ({
     <article className="block cursor-pointer" onClick={handleClick}>
       <Card className="bg-tertiary flex gap-2">
         {/* Cover */}
-        <div className="relative w-1/6 overflow-hidden rounded-lg">
+        <div className="relative w-1/6 overflow-hidden rounded-lg min-w-24">
           <Image
-            src={coverUrl}
-            alt={altText}
+            src={coverUrl || DEFAULT_COVER_URL}
+            alt={altText || title}
             style={{
               transitionTimingFunction:
                 "cubic-bezier(0.130, 0.620, 0.005, 1.040)",
             }}
-            className="object-fill transition duration-700 hover:scale-75"
+            className="scale-[140%] object-fill transition duration-700 hover:scale-100"
             fill
             priority
           />
@@ -68,11 +59,11 @@ export const BlogCard = ({
               <div className="flex-none">
                 <Avatar className="bg-muted-background m-auto size-12 border dark:bg-foreground">
                   <AvatarImage
-                    src={avatarUrl}
-                    alt={author}
+                    src={author?.url}
+                    alt={author.name}
                     className="object-contain"
                   />
-                  <AvatarFallback>{author[0]}</AvatarFallback>
+                  <AvatarFallback>{author.name[0]}</AvatarFallback>
                 </Avatar>
               </div>
 
@@ -81,15 +72,15 @@ export const BlogCard = ({
                 <div className="flex items-center justify-between gap-x-2 text-base">
                   <h3 className="inline-flex items-center justify-center gap-2 text-sm font-semibold leading-none md:text-base lg:text-xl">
                     {title}
-                    {badges && (
-                      <span className="inline-flex gap-x-1 capitalize">
-                        {badges.map((badge, index) => (
+                    {tags && (
+                      <span className="inline-flex gap-x-1 capitalize max-md:hidden">
+                        {tags.map((tag, index) => (
                           <Badge
                             variant="outline"
                             className="bg-secondary align-middle max-md:text-xs"
                             key={index}
                           >
-                            {badge}
+                            {tag}
                           </Badge>
                         ))}
                       </span>
@@ -107,7 +98,7 @@ export const BlogCard = ({
                   </div>
                 </div>
                 <div className="mt-1.5 font-sans text-sm max-md:text-xs">
-                  {author}
+                  {author.name}
                 </div>
               </div>
             </div>
@@ -119,19 +110,20 @@ export const BlogCard = ({
               initial={{ opacity: 0, height: 0 }}
               animate={{
                 opacity: isExpanded ? 1 : 0,
-
                 height: isExpanded ? "auto" : 0,
               }}
               transition={{
                 duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="text-paragraph relative clear-left line-clamp-3 overflow-hidden text-ellipsis text-xs antialiased sm:text-sm"
+              className={cn(
+                "text-paragraph relative clear-left",
+                "line-clamp-3 overflow-hidden text-ellipsis text-xs antialiased sm:text-sm",
+              )}
             >
-              <p className="line-clamp-3 pl-4 pr-24">{description}</p>
-              {/* //TODO: article ID */}
+              <p className="line-clamp-3 pl-4 pr-24 sm:py-2 md:py-3">{description}</p>
               <Link
-                href={href || "#"}
+                href={`blog/${id}`}
                 className="text-subtext absolute bottom-0 right-4"
               >
                 <ButtonEffect emphasis={0} className="px-2 py-1 text-xs">
@@ -143,5 +135,26 @@ export const BlogCard = ({
         </div>
       </Card>
     </article>
+  )
+}
+
+export function BlogSets({
+  blogs,
+  delay,
+}: {
+  blogs: BaseBlog[]
+  delay: number
+}) {
+  return (
+    <div className="flex min-h-0 flex-col gap-y-3">
+      <BlurFade delay={delay * 5}>
+        <h2 className="text-xl font-bold">最新文章</h2>
+      </BlurFade>
+      {blogs.map((blog, id) => (
+        <BlurFade key={blog.title} delay={delay * 6 + id * 0.05}>
+          <BlogSetCard key={blog.title} {...blog} />
+        </BlurFade>
+      ))}
+    </div>
   )
 }

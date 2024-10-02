@@ -1,20 +1,22 @@
 const createRemotePattern = (hostname) =>
   hostname
-? [
-  {
-    protocol: "https",
-    hostname,
-    port: "",
-    pathname: "/**",
-  },
-]
-: []
+    ? [
+        {
+          protocol: "https",
+          hostname,
+          port: "",
+          pathname: "/**",
+        },
+      ]
+    : []
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [].concat(createRemotePattern("res.cloudinary.com")),
+    remotePatterns: []
+      .concat(createRemotePattern("res.cloudinary.com"))
+      .concat(createRemotePattern("images.unsplash.com")),
   },
 }
 
-export default nextConfig;
+export default nextConfig

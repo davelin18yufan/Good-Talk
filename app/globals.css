@@ -66,7 +66,7 @@
   }
 
   button {
-    @apply transition-transform focus:outline-0 focus:ring-0 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 active:scale-95;
+    @apply appearance-none transition-transform focus:outline-0 focus:ring-0 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 active:scale-95;
   }
 }
 
@@ -141,8 +141,8 @@
     @apply text-zinc-900 dark:text-white;
   }
 
-  .text-placeholder{
-    @apply text-gray-300 dark:text-gray-500
+  .text-placeholder {
+    @apply text-gray-300 dark:text-gray-500;
   }
 
   /* Danger */
