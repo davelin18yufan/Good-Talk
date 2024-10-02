@@ -17,7 +17,7 @@ export default function MobileNavbar() {
   ])
 
   return (
-    <nav className="relative h-52">
+    <nav className="relative h-52 md:hidden">
       <div
         className="flex-center absolute right-2 top-1/2 z-30 h-12 w-12 -translate-y-6"
       >
