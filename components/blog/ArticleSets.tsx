@@ -35,9 +35,9 @@ export function BlogSetCard({
 
   return (
     <article className="block cursor-pointer" onClick={handleClick}>
-      <Card className="bg-tertiary flex gap-2">
+      <Card className="bg-tertiary flex gap-2 pb-0.5">
         {/* Cover */}
-        <div className="relative w-1/6 overflow-hidden rounded-lg min-w-24">
+        <div className="relative w-1/6 min-w-24 overflow-hidden rounded-lg">
           <Image
             src={coverUrl || DEFAULT_COVER_URL}
             alt={altText || title}
@@ -45,7 +45,7 @@ export function BlogSetCard({
               transitionTimingFunction:
                 "cubic-bezier(0.130, 0.620, 0.005, 1.040)",
             }}
-            className="scale-[140%] object-fill transition duration-700 hover:scale-100"
+            className="scale-[140%] object-cover transition duration-700 hover:scale-100"
             fill
             priority
           />
@@ -69,11 +69,11 @@ export function BlogSetCard({
 
               {/* Title/Badges */}
               <div className="flex-1">
-                <div className="flex items-center justify-between gap-x-2 text-base">
-                  <h3 className="inline-flex items-center justify-center gap-2 text-sm font-semibold leading-none md:text-base lg:text-xl">
+                <div className="flex items-center justify-between text-base">
+                  <h3 className="inline-flex w-full text-start items-center justify-start gap-x-2 text-sm font-semibold leading-none md:text-base lg:text-xl truncate">
                     {title}
                     {tags && (
-                      <span className="inline-flex gap-x-1 capitalize max-md:hidden">
+                      <span className="inline-flex flex-wrap gap-1 capitalize max-md:hidden font-medium">
                         {tags.map((tag, index) => (
                           <Badge
                             variant="outline"
@@ -93,9 +93,9 @@ export function BlogSetCard({
                     />
                   </h3>
                   {/* Date */}
-                  <div className="md:text-md text-right text-xs tabular-nums text-muted-foreground md:text-sm">
+                  <time className="text-right text-xs tabular-nums text-muted-foreground md:text-sm text-nowrap">
                     {date}
-                  </div>
+                  </time>
                 </div>
                 <div className="mt-1.5 font-sans text-sm max-md:text-xs">
                   {author.name}
@@ -117,16 +117,16 @@ export function BlogSetCard({
                 ease: [0.16, 1, 0.3, 1],
               }}
               className={cn(
-                "text-paragraph relative clear-left",
-                "line-clamp-3 overflow-hidden text-ellipsis text-xs antialiased sm:text-sm",
+                "text-paragraph prose-sm relative clear-left",
+                "line-clamp-3 text-ellipsis text-xs antialiased sm:text-sm",
               )}
             >
-              <p className="line-clamp-3 pl-4 pr-24 sm:py-2 md:py-3">{description}</p>
+              <p className="line-clamp-3 pl-6 pr-24 py-0.5">{description}</p>
               <Link
                 href={`blog/${id}`}
                 className="text-subtext absolute bottom-0 right-4"
               >
-                <ButtonEffect emphasis={0} className="px-2 py-1 text-xs">
+                <ButtonEffect emphasis={0} className="z-10 px-2 text-xs">
                   More..
                 </ButtonEffect>
               </Link>
