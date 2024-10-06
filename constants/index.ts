@@ -84,3 +84,26 @@ export const BLOG_FILTERS = [
 ]
 
 export const DEFAULT_COVER_URL = "/image.svg"
+
+export const SOCIAL_LINKS = [
+  {
+    title: "facebook",
+    href: "#",
+    icon: '/facebook.svg'
+  },
+  {
+    title: "github",
+    href: "#",
+    icon: '/github.svg'
+  },
+  {
+    title: "instagram",
+    href: "#",
+    icon: "/instagram.svg"
+  },
+  {
+    title: 'mail',
+    href: "#",
+    icon: '/mail.svg'
+  }
+]

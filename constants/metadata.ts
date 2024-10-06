@@ -10,3 +10,7 @@ export const MAIN_HEADER_INTRO = {
   mainline: "Capture Your Investments, Visualize Your Success.",
   Subline: "Effortlessly track, analyze, and share your financial journey.",
 }
+
+// *Footer
+export const MY_GITHUB = "https://github.com/davelin18yufan"
+export const FOOTER_DESCRIPTION = []

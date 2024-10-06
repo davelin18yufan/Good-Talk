@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import MainHeader from "@/components/MainHeader"
 import { METADATA } from "@/constants/metadata"
+import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
   title: METADATA.title,
@@ -19,6 +20,7 @@ export default function MainLayout({
         <MainHeader />
         {children}
       </div>
+      <Footer />
     </div>
   )
 }

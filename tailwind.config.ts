@@ -1,13 +1,11 @@
-import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography"
-const defaultTheme = require("tailwindcss/defaultTheme");
-
-const colors = require("tailwindcss/colors");
 
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
-const config = {
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: "selector",
   content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
   prefix: "",
@@ -23,6 +21,9 @@ const config = {
       fontFamily: {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-roboto-mono)"],
+      },
+      backgroundImage: {
+        'logo': "url('/logo.svg')",
       },
       colors: {
         background: "hsl(var(--background))",
@@ -83,7 +84,7 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate"), addVariablesForColors, typography],
-} satisfies Config
+}
 
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));
@@ -95,5 +96,3 @@ function addVariablesForColors({ addBase, theme }: any) {
     ":root": newVars,
   });
 }
-
-export default config;
