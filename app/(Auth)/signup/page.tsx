@@ -1,5 +1,5 @@
 "use client"
-import { CustomInput, ErrorMessage, FormBase } from "@/components/Form"
+import { CustomInput, ErrorMessage, FormBase } from "@/components/form/Form"
 import { SignUpSchema } from "@/lib/validation"
 import { useFormState } from "react-dom"
 import { ZodError } from "zod"
@@ -49,7 +49,7 @@ function SignUpPage() {
   const getErrorMessage = (inputName: string) =>
     messages?.find((m) => m.name === inputName)?.message
   return (
-    <div className="bg-primary grid min-h-screen place-items-center">
+    <div className="w-full">
       {getErrorMessage("form") && (
         <ErrorMessage message={getErrorMessage("form") as string} />
       )}
