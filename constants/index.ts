@@ -18,7 +18,7 @@ export const NAV_LINKS = [
   },
 ]
 
-export const THEME_ITEMS: Array<{mode: Theme, icon:string}> = [
+export const THEME_ITEMS: Array<{ mode: Theme; icon: string }> = [
   {
     mode: "light",
     icon: "/sun.svg",
@@ -37,7 +37,7 @@ export const ARTICLE_SEARCHBAR_PLACEHOLDERS = [
   "你想找甚麼標題",
   "還是想找甚麼關鍵字",
   "Tag也可以喔",
-  "找作者當然沒問題"
+  "找作者當然沒問題",
 ]
 
 export const BLOG_FILTERS = [
@@ -89,21 +89,65 @@ export const SOCIAL_LINKS = [
   {
     title: "facebook",
     href: "#",
-    icon: '/facebook.svg'
+    icon: "/facebook.svg",
   },
   {
     title: "github",
     href: "#",
-    icon: '/github.svg'
+    icon: "/github.svg",
   },
   {
     title: "instagram",
     href: "#",
-    icon: "/instagram.svg"
+    icon: "/instagram.svg",
   },
   {
-    title: 'mail',
+    title: "mail",
     href: "#",
-    icon: '/mail.svg'
-  }
+    icon: "/mail.svg",
+  },
 ]
+
+// 6 items
+export const DEFAULT_LAYOUTS = {
+  lg: [
+    { w: 4, h: 6, x: 5, y: 0, i: "0", moved: false, static: false },
+    { w: 3, h: 3, x: 9, y: 0, i: "1", moved: false, static: false },
+    { w: 5, h: 6, x: 4, y: 6, i: "2", moved: false, static: false },
+    { w: 3, h: 9, x: 9, y: 3, i: "3", moved: false, static: false },
+    { w: 4, h: 6, x: 0, y: 6, i: "4", moved: false, static: false },
+    { w: 5, h: 6, x: 0, y: 0, i: "5", moved: false, static: false },
+  ],
+  md: [
+    { w: 5, h: 8, x: 5, y: 14, i: "0", moved: false, static: false },
+    { w: 6, h: 6, x: 4, y: 8, i: "1", moved: false, static: false },
+    { w: 4, h: 6, x: 0, y: 8, i: "2", moved: false, static: false },
+    { w: 5, h: 8, x: 5, y: 0, i: "3", moved: false, static: false },
+    { w: 5, h: 8, x: 0, y: 14, i: "4", moved: false, static: false },
+    { w: 5, h: 8, x: 0, y: 0, i: "5", moved: false, static: false },
+  ],
+  sm: [
+    { w: 3, h: 7, x: 3, y: 13, i: "0", moved: false, static: false },
+    { w: 3, h: 6, x: 0, y: 7, i: "1", moved: false, static: false },
+    { w: 3, h: 7, x: 0, y: 13, i: "2", moved: false, static: false },
+    { w: 3, h: 7, x: 3, y: 0, i: "3", moved: false, static: false },
+    { w: 3, h: 6, x: 3, y: 7, i: "4", moved: false, static: false },
+    { w: 3, h: 7, x: 0, y: 0, i: "5", moved: false, static: false },
+  ],
+  xs: [
+    { w: 4, h: 7, x: 0, y: 32, i: "0", moved: false, static: false },
+    { w: 4, h: 6, x: 0, y: 15, i: "1", moved: false, static: false },
+    { w: 4, h: 5, x: 0, y: 21, i: "2", moved: false, static: false },
+    { w: 4, h: 8, x: 0, y: 7, i: "3", moved: false, static: false },
+    { w: 4, h: 6, x: 0, y: 26, i: "4", moved: false, static: false },
+    { w: 4, h: 7, x: 0, y: 0, i: "5", moved: false, static: false },
+  ],
+  xxs: [
+    { w: 2, h: 7, x: 0, y: 33, i: "0", moved: false, static: false },
+    { w: 2, h: 6, x: 0, y: 15, i: "1", moved: false, static: false },
+    { w: 2, h: 6, x: 0, y: 21, i: "2", moved: false, static: false },
+    { w: 2, h: 8, x: 0, y: 7, i: "3", moved: false, static: false },
+    { w: 2, h: 6, x: 0, y: 27, i: "4", moved: false, static: false },
+    { w: 2, h: 7, x: 0, y: 0, i: "5", moved: false, static: false },
+  ],
+}
