@@ -122,15 +122,29 @@ const chartProps: Record<string, any> = {
   TradeSummary: { asset: [], currentPrices: [] },
 }
 
+const initLayoutsState = (
+  initialLayouts: ResponsiveLayouts,
+  chartProps: Record<string, any>,
+): ResponsiveLayouts =>
+  Object.fromEntries(
+    Object.entries(initialLayouts).map(([breakpoint, layouts]) => [
+      breakpoint,
+      layouts.map((layout) => ({
+        ...layout,
+        chartProps: chartProps[layout.i],
+      })),
+    ]),
+  )
+
 // TODO: Fetch userLayouts from database.
 function Dashboard() {
   const [compactType, setCompactType] = useState<CompactType>("vertical")
   const [mounted, setMounted] = useState<boolean>(false)
   const [layouts, setLayouts] = useState<ResponsiveLayouts>(
-    userLayouts.layouts ?? DEFAULT_LAYOUTS,
+    initLayoutsState(userLayouts.layouts ?? DEFAULT_LAYOUTS, chartProps),
   )
   const [toolbox, setToolbox] = useState<ResponsiveLayouts>(
-    userLayouts.toolbox ?? DEFAULT_TOOLBOX,
+    initLayoutsState(userLayouts.toolbox ?? DEFAULT_TOOLBOX, chartProps),
   )
   const [currentBreakpoint, setCurrentBreakpoint] = useState<string>("lg")
 
@@ -156,7 +170,7 @@ function Dashboard() {
       >
         <span className="text">
           {l.static && "Static"}
-          {l.chartId}
+          {l.i}
         </span>
         {/* Render custom charts based on chartId */}
         {/* {renderCustomChart(l.chartId)} */}
@@ -196,7 +210,7 @@ function Dashboard() {
         </div>
       </motion.div>
     ))
-  }, [layouts])
+  }, [layouts,toolbox])
 
   // ?using dynamic import
   //  const renderCustomChart = (chartId: string) => {
@@ -242,23 +256,65 @@ function Dashboard() {
 
   // Handle layout change
   const onLayoutChange = (
-    layout: DashboardItem[],
+    changedLayoutItem: DashboardItem[],
     allLayouts: ResponsiveLayouts,
   ) => {
     defaultProps.onLayoutChange?.(allLayouts)
-    // everytime layout change insert data into chart
+    // console.log("changedLayoutItem", changedLayoutItem)
+    // console.log("allLayouts", allLayouts)
+    
     setLayouts((prev) => {
       const updatedLayouts = { ...prev }
+      let hasChanges = false
+
+      // Iterate over all breakpoints
       Object.keys(updatedLayouts).forEach((breakpoint) => {
-        updatedLayouts[breakpoint] = updatedLayouts[breakpoint].map((l) => ({
-          ...l,
-          chartProps: chartProps[l.i],
-        }))
+        const currentLayouts = updatedLayouts[breakpoint]
+
+        const updatedBreakpointLayouts = currentLayouts.map((l) => {
+          // If the current breakpoint is the one that changed, update its layout properties
+          if (breakpoint === currentBreakpoint) {
+            const newLayout = changedLayoutItem.find((item) => item.i === l.i)
+            if (!newLayout) return l
+
+            const needsUpdate =
+              newLayout.x !== l.x ||
+              newLayout.y !== l.y ||
+              newLayout.w !== l.w ||
+              newLayout.h !== l.h ||
+              chartProps[l.i] !== l.chartProps
+
+            if (needsUpdate) {
+              hasChanges = true
+              return {
+                ...newLayout,
+                chartProps: chartProps[l.i],
+              }
+            }
+            return l
+          } else {
+            // For other breakpoints, only update chartProps if necessary
+            if (chartProps[l.i] !== l.chartProps) {
+              hasChanges = true
+              return {
+                ...l,
+                chartProps: chartProps[l.i],
+              }
+            }
+            return l
+          }
+        })
+
+        // Only update the breakpoint layout if there's an actual change
+        if (currentLayouts !== updatedBreakpointLayouts) {
+          updatedLayouts[breakpoint] = updatedBreakpointLayouts
+        }
       })
-      
-      return updatedLayouts
+
+      return hasChanges ? updatedLayouts : prev
     })
   }
+
 
   const onBreakpointChange = (breakpoint: string) => {
     setCurrentBreakpoint(breakpoint)
@@ -293,6 +349,7 @@ function Dashboard() {
 
   // Remove the item from the toolbox and add it to the layouts
   const onTakeItem = (item: DashboardItem) => {
+    console.log("take", item)
     // Remove the item from the toolbox across all breakpoints
     setToolbox((prev) => {
       const updatedToolbox = { ...prev }
@@ -356,7 +413,7 @@ function Dashboard() {
               onClick={() => onTakeItem(tool)}
               key={tool.i}
             >
-              {tool.chartId}
+              {tool.i}
             </motion.div>
           ))}
         </article>
