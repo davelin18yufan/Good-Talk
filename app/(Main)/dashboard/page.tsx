@@ -8,6 +8,11 @@ import { DEFAULT_TOOLBOX, DEFAULT_LAYOUTS } from "@/constants"
 import { Delete, Pin, PinOff } from "lucide-react"
 import ButtonEffect from "@/components/buttons/ButtonEffect"
 import { motion } from "framer-motion"
+import dynamic from "next/dynamic"
+
+// ?setState邏輯 => 可以用Class去包layout的樣式，最後用function把整個Class轉成所需物件，效能會變差但是可讀性好
+// ?如何處理拿到的資料，在layout.tsx處理再往下傳還是傳進去在各元件處理，拿到的資料是要在後端處理還是前端處理 => 把目前往下包，由父層去打API往下傳給CSR的元件，前端去打不同API再把它組合起來
+
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -169,14 +174,18 @@ function Dashboard() {
         )}
       >
         <span className="text">
-          {l.static && "Static"}
+          {l.static && "Static - "}
           {l.i}
         </span>
         {/* Render custom charts based on chartId */}
         {/* {renderCustomChart(l.chartId)} */}
 
-        {/* function button */}
-        <div className="text-btn flex-center absolute right-2 top-0.5 rounded-sm">
+        {/* function buttons */}
+        {/* //* Button container is higher than icon in DOM tree level, so it will capture container's event first then icon  */}
+        <div
+          className="text-btn flex-center absolute right-2 top-0.5 rounded-sm"
+          onMouseDown={(e)=> e.stopPropagation()} // MouseDowni event will triger immediately when pressed, but click is trigered after MouseUp, so stop propogation at here prevent bubbling to the top level drag event. 
+        >
           {l.static ? (
             <Pin
               width={30}
@@ -212,7 +221,6 @@ function Dashboard() {
     ))
   }, [layouts,toolbox])
 
-  // ?using dynamic import
   //  const renderCustomChart = (chartId: string) => {
   //    const props = chartProps[chartId]
 
@@ -235,6 +243,7 @@ function Dashboard() {
   //  }
 
   // Toggle compaction type
+  
   const onCompactTypeChange = () => {
     setCompactType((oldCompactType) =>
       oldCompactType === "horizontal"
@@ -315,12 +324,11 @@ function Dashboard() {
     })
   }
 
-
   const onBreakpointChange = (breakpoint: string) => {
     setCurrentBreakpoint(breakpoint)
   }
 
-  // Remove from layout and add it to the toolbox
+  // Remove from layout and add it to the toolbox.
   const onRemoveItem = (item: DashboardItem) => {
     setLayouts((prev) => {
       const updatedLayouts = { ...prev }
@@ -347,7 +355,7 @@ function Dashboard() {
     })
   }
 
-  // Remove the item from the toolbox and add it to the layouts
+  // Remove from the toolbox and add it to layouts.
   const onTakeItem = (item: DashboardItem) => {
     console.log("take", item)
     // Remove the item from the toolbox across all breakpoints
@@ -409,7 +417,7 @@ function Dashboard() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-button w-full cursor-pointer"
+              className="bg-button w-full cursor-pointer rounded-md"
               onClick={() => onTakeItem(tool)}
               key={tool.i}
             >
