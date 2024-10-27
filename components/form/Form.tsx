@@ -5,9 +5,9 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/form/input"
 import { cn } from "@/lib/utils"
 import { IconBrandGoogle } from "@tabler/icons-react"
-import ButtonEffect, { BottomGradient } from "./ButtonEffect"
+import ButtonEffect, { BottomGradient } from "../buttons/ButtonEffect"
 import Link from "next/link"
-import { FadeText } from "./FadeText"
+import { FadeText } from "../FadeText"
 import { AnimatePresence } from "framer-motion"
 import { FORM_TYPES, FormBaseProps, CustomInputProps } from "@/types/form.d"
 import TypingAnimation from "./TypingAnimation"
@@ -24,7 +24,7 @@ export function FormBase({
   formClass,
   type = FORM_TYPES.AUTH,
   action,
-  pending = false,
+  isAuth = false,
   children,
 }: FormBaseProps) {
   const pathname = usePathname()
@@ -45,8 +45,8 @@ export function FormBase({
         {children}
 
         <ButtonEffect className="mb-2 mt-4" type="submit">
-          {pending ? (
-            <TypingAnimation text="Loading..." />
+          {isAuth ? (
+            "送出"
           ) : isLoginPage ? (
             "登入"
           ) : (
