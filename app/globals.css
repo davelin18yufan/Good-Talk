@@ -68,6 +68,56 @@
   button {
     @apply appearance-none transition-transform focus:outline-0 focus:ring-0 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 active:scale-95;
   }
+
+  /* ===== Scrollbar CSS ===== */
+  /* !As the MDN web docs state, this feature is non-standard and is not on a standards track. Avoid it. */
+  * {
+    --scrollbar-color-thumb: #636363;
+    --scrollbar-color-track: transparent;
+    --scrollbar-width: none;
+    --scrollbar-width-legacy: 8px;
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* IE10 and IE11 could autohide scrollbar */
+  }
+
+  /* Modern browsers with `scrollbar-*` support */
+  @supports (scrollbar-width: auto) {
+    * {
+      scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+      scrollbar-width: var(--scrollbar-width);
+    }
+  }
+
+  /* Legacy browsers with `::-webkit-scrollbar-*` support */
+  @supports selector(::-webkit-scrollbar) {
+    *::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-color-thumb);
+      border-radius: 12px;
+      border: 3px solid #ffffff;
+    }
+    *::-webkit-scrollbar-track {
+      background: var(--scrollbar-color-track);
+    }
+    *::-webkit-scrollbar {
+      max-width: var(--scrollbar-width-legacy);
+      max-height: var(--scrollbar-width-legacy);
+    }
+  }
+  *::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *:hover::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color-thumb);
+  }
+  *:hover::-webkit-scrollbar-track {
+    background: var(--scrollbar-color-track);
+  }
+
+  *:hover {
+    --fix: ; /* This custom property invalidates styles on hover, thereby enforcing a style recomputation. This is needed to work around a bug in Safari. */
+  }
 }
 
 @layer components {
@@ -80,7 +130,7 @@
   }
 
   .section {
-    @apply relative rounded-md bg-white py-4 shadow-md;
+    @apply text-input relative h-full rounded-md bg-transparent px-4 py-2;
   }
 
   .btn-link {
@@ -89,6 +139,10 @@
 }
 
 @layer utilities {
+  .scrollbar {
+    scrollbar-width: thin !important;
+  }
+
   .flex-center {
     @apply flex items-center justify-center;
   }
@@ -170,26 +224,4 @@
   .text-invert {
     @apply text-slate-100 dark:text-slate-800;
   }
-}
-
-/* ===== Scrollbar CSS ===== */
-/* Firefox */
-* {
-  scrollbar-width: auto;
-  scrollbar-color: #292929 transparent;
-}
-
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 16px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #292929;
-  border-radius: 12px;
-  border: 3px solid #ffffff;
 }
