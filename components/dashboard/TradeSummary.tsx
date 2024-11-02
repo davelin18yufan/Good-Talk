@@ -29,7 +29,7 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
   )
 
   return (
-    <div className={cn("section p-4")}>
+    <div className={cn("section")}>
       <SectionTitle
         title="我的庫存"
         icon={{ icon: <HomeIcon className="h-5 w-5" />, name: "gear" }}
@@ -37,7 +37,7 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
       />
 
       {/* using wrapper for scrolling and max-height */}
-      <div className="relative max-h-[30vh] overflow-y-scroll overscroll-contain">
+      <div className="relative max-h-[230px] overflow-y-auto overscroll-contain">
         <Table>
           <TableHeader>
             <TableRow className="*:lg:px-0">

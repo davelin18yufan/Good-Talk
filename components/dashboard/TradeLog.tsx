@@ -5,9 +5,26 @@ import { cn, formatNumber } from "@/lib/utils"
 // import { useDate } from "@/store/date"
 import { Log as LogType } from "@/types/chart"
 import { Badge, badgeVariants } from "@/components/ui/badge"
-import TooltipCard from "@/components/Tooltip"
+import Tooltip from "@/components/Tooltip"
 
-function Log({ log }: { log: any }) {
+function Log({ log }: { log: LogType }) {
+  const logCardItems = [
+    {
+      tooltipContent: log.target.symbol,
+      value: log.target.name,
+      label: "商品名稱",
+    },
+    {
+      tooltipContent: "成交價",
+      value: `$${formatNumber(log.price)}`,
+      label: "價格",
+    },
+    {
+      tooltipContent: "成交數量",
+      value: formatNumber(log.quantity),
+      label: "數量",
+    },
+  ]
   return (
     <div
       className={cn(
@@ -15,9 +32,12 @@ function Log({ log }: { log: any }) {
         log.type === "多單" ? "border-rose-400" : "border-green-400",
       )}
     >
-      <div className="p-2 text-center text-slate-400">{log.date}</div>
-      <div className="flex-1 p-2.5 text-start">
-        <Badge variant="default">
+      <div className="w-14 p-2 text-center text-slate-400">{log.date}</div>
+      <div className="flex-1 px-1.5 py-2.5 text-start">
+        <Badge
+          variant="default"
+          className="bg-slate-300/50 dark:bg-slate-500/50"
+        >
           <h3
             className={cn(
               "text-lg font-semibold",
@@ -27,30 +47,30 @@ function Log({ log }: { log: any }) {
             {log.action}
           </h3>
         </Badge>
-        <div className="mt-2 flex w-full items-center gap-4">
-          <TooltipCard
-            content={{ trigger: log.target.name, tooltip: log.target.symbol }}
-            badgeVariant="secondary"
-          />
-          <TooltipCard
-            content={{
-              trigger: `$${formatNumber(log.price)}`,
-              tooltip: "成交價",
-            }}
-            badgeVariant="secondary"
-          />
-          <TooltipCard
-            content={{
-              trigger: formatNumber(log.quantity),
-              tooltip: "成交數量",
-            }}
-            badgeVariant="secondary"
-          />
+        <div className="grid w-full grid-cols-4 items-center gap-3 lg:gap-5">
+          {logCardItems.map((item, index) => (
+            <Tooltip
+              key={index}
+              content={
+                <span className="text-nowrap">{item.tooltipContent}</span>
+              }
+              side="right"
+            >
+              <Badge
+                variant="secondary"
+                className="w-full truncate text-center p-1"
+              >
+                {item.value}
+              </Badge>
+            </Tooltip>
+          ))}
+          {/* //TODO: Review Dialogue */}
           <button
             className={cn(
               badgeVariants({ variant: "outline" }),
-              "text-md ml-auto px-2.5 text-slate-800 active:bg-slate-100",
+              "text-md justify-self-end px-2.5 text-slate-800 active:bg-slate-100",
             )}
+            onMouseDown={(e) => e.stopPropagation()}
           >
             復盤
           </button>
@@ -84,11 +104,11 @@ function AllLogs({ logs }: { logs: LogType[] }) {
   ]
 
   return (
-    <div className="h-80">
+    <div className="h-full">
       <Tabs
         tabs={tabs}
-        // activeTabClassName="bg-gray-200 dark:bg-zinc-800 rounded-full"
-        contentClassName="mt-2"
+        activeTabClassName="bg-gray-200 dark:bg-zinc-800 rounded-full"
+        contentClassName="pt-2"
         containerClassName="gap-2"
       />
     </div>
@@ -106,9 +126,9 @@ const TradeLog = ({
   // const { selectDate } = useDate((store) => store.selectDate)
   // const trades = await getTradeLog(selectDate)
   return (
-    <div className={cn("section p-4", className)}>
+    <div className={cn("section", className)}>
       <SectionTitle title="交易紀錄" formType="log" />
-      <AllLogs logs={logs}/>
+      <AllLogs logs={logs} />
     </div>
   )
 }
