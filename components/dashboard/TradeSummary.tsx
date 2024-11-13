@@ -29,7 +29,7 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
   )
 
   return (
-    <div className={cn("section")}>
+    <section className={cn("section")}>
       <SectionTitle
         title="我的庫存"
         icon={{ icon: <HomeIcon className="h-5 w-5" />, name: "gear" }}
@@ -103,7 +103,7 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
           </TableRow>
         </TableFooter>
       </Table>
-    </div>
+    </section>
   )
 }
 

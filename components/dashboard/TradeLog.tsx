@@ -28,53 +28,51 @@ function Log({ log }: { log: LogType }) {
   return (
     <div
       className={cn(
-        "flex items-center justify-between overflow-hidden rounded-lg border-l-8 shadow-md",
+        "flex items-center justify-between overflow-hidden rounded-lg border-l-8 px-1.5 py-2.5 shadow-md",
         log.type === "多單" ? "border-rose-400" : "border-green-400",
       )}
     >
-      <div className="w-14 p-2 text-center text-slate-400">{log.date}</div>
-      <div className="flex-1 px-1.5 py-2.5 text-start">
-        <Badge
-          variant="default"
-          className="bg-slate-300/50 dark:bg-slate-500/50"
+      <time className="w-14 text-center text-slate-400">{log.date}</time>
+      <Badge
+        variant="default"
+        className="basis-1/6 rounded-md bg-slate-200/50 text-center hover:bg-transparent dark:bg-slate-600/50 dark:hover:bg-transparent"
+      >
+        <h3
+          className={cn(
+            "w-full text-lg font-semibold",
+            log.type === "多單" ? "text-rose-600" : "text-green-600",
+          )}
         >
-          <h3
-            className={cn(
-              "text-lg font-semibold",
-              log.type === "多單" ? "text-rose-600" : "text-green-600",
-            )}
+          {log.action}
+        </h3>
+      </Badge>
+
+      <div className="ml-2 grid w-full flex-1 grid-cols-4 items-center gap-3 lg:gap-5">
+        {logCardItems.map((item, index) => (
+          <Tooltip
+            key={index}
+            content={<span className="text-nowrap">{item.tooltipContent}</span>}
+            side="right"
           >
-            {log.action}
-          </h3>
-        </Badge>
-        <div className="grid w-full grid-cols-4 items-center gap-3 lg:gap-5">
-          {logCardItems.map((item, index) => (
-            <Tooltip
-              key={index}
-              content={
-                <span className="text-nowrap">{item.tooltipContent}</span>
-              }
-              side="right"
+            <Badge
+              variant="secondary"
+              className="w-full truncate p-1 text-center"
             >
-              <Badge
-                variant="secondary"
-                className="w-full truncate text-center p-1"
-              >
-                {item.value}
-              </Badge>
-            </Tooltip>
-          ))}
-          {/* //TODO: Review Dialogue */}
-          <button
-            className={cn(
-              badgeVariants({ variant: "outline" }),
-              "text-md justify-self-end px-2.5 text-slate-800 active:bg-slate-100",
-            )}
-            onMouseDown={(e) => e.stopPropagation()}
-          >
-            復盤
-          </button>
-        </div>
+              {item.value}
+            </Badge>
+          </Tooltip>
+        ))}
+
+        {/* //TODO: Review Dialogue */}
+        <button
+          className={cn(
+            badgeVariants({ variant: "outline" }),
+            "text-md justify-self-end px-2.5 text-slate-800 active:bg-slate-100",
+          )}
+          onMouseDown={(e) => e.stopPropagation()}
+        >
+          復盤
+        </button>
       </div>
     </div>
   )
@@ -126,10 +124,10 @@ const TradeLog = ({
   // const { selectDate } = useDate((store) => store.selectDate)
   // const trades = await getTradeLog(selectDate)
   return (
-    <div className={cn("section", className)}>
+    <section className={cn("section", className)}>
       <SectionTitle title="交易紀錄" formType="log" />
       <AllLogs logs={logs} />
-    </div>
+    </section>
   )
 }
 

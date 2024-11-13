@@ -1,10 +1,10 @@
-import React from "react"
 import SectionTitle from "./SectionTitle"
 import { cn } from "@/lib/utils"
 import { Plan } from "@/types/chart"
 import { CheckIcon, CheckCheck } from "lucide-react"
 import ShineBorder from "@/components/buttons/ShineBorder"
 import SubscribeButton from "@/components/buttons/SubscribeButton"
+import { ResponsiveContainer } from "recharts"
 
 function ExpectationBar({
   entryPrice,
@@ -20,7 +20,7 @@ function ExpectationBar({
   const denominator = potentialLoss + potentialProfit
   const expectation = ((potentialProfit / denominator) * 100).toFixed(1)
   return (
-    <div className="centerAll gap-2 p-0.5 text-center align-middle text-sm font-bold">
+    <div className="flex-center gap-2 p-0.5 text-center align-middle text-sm font-bold">
       <div className="flex w-24 items-center overflow-hidden rounded-md md:w-28">
         <div
           className={"bg-rose-400 py-1"}
@@ -56,7 +56,7 @@ function PlanCard({
 }) {
   return (
     <ShineBorder
-      className={cn("w-full p-4", {
+      className={cn("min-h-fit w-full py-2 px-2.5", {
         "!bg-rose-200": type === "多單",
         "!bg-green-200": type === "空單",
       })}
@@ -98,9 +98,9 @@ function PlanCard({
         />
       </div>
 
-      <div className="mt-2 flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <button
-          className={`text-sm ${comment ? "text-sky-700" : "text-slate-700"}`}
+          className={`text-sm ${comment ? "text-sky-700" : "text-slate-700"} cursor-pointer`}
           disabled={!comment}
         >
           備註
@@ -127,18 +127,14 @@ function PlanCard({
   )
 }
 
-// TODO:Plan type
 function TradePlan({ plans }: { plans?: Plan[] }) {
-
   return (
-    <div className={cn("section overflow-y-auto p-4")}>
+    <section className={cn("section overflow-y-auto")}>
       <SectionTitle title="進出場規劃" formType="plan" />
-      <div className="centerAll flex-col gap-2">
-        {plans?.map((plan:any) => (
-          <PlanCard plan={plan} key={plan._id} />
-        ))}
+      <div className="flex-center flex-col gap-0.5">
+        {plans?.map((plan: any) => <PlanCard plan={plan} key={plan._id} />)}
       </div>
-    </div>
+    </section>
   )
 }
 
