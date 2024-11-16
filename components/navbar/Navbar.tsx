@@ -6,7 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { Menu, MenuItem, ProductItem } from "./NavbarMenu"
-import { useTheme, type Theme } from "../Theme"
+import { useTheme, type Theme } from "@/hooks/useTheme"
 
 export default function Navbar({ itemClass }: { itemClass?: string }) {
   const [active, setActive] = useState<string | null>(null)
