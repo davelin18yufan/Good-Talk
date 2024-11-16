@@ -1,65 +1,86 @@
-import NumberTicker from "@/components/NumberTicker"
-import { NoteTooltip } from "@/components/Tooltip"
-import { cn } from "@/lib/utils"
-import FundPieChart from "./FundPieChart"
-import { LightbulbIcon } from "lucide-react"
+"use client"
 
-const getGradientClassForValue = (value: number) => {
-  if (value <= 25) return "from-slate-500 to-sky-500"
-  if (value <= 50) return "from-sky-500 to-teal-500"
-  if (value <= 75) return "from-teal-500 to-green-500"
-  if (value <= 100) return "from-green-500 to-yellow-500"
-  if (value <= 150) return "from-yellow-500 to-orange-500"
-  if (value <= 200) return "from-orange-500 to-pink-500"
-  if (value <= 250) return "from-pink-500 to-rose-500"
-  return "from-rose-500 to-red-700"
-}
+import { useState } from "react"
+import Tooltip from "@/components/Tooltip"
+import { cn } from "@/lib/utils"
+import { IconExclamationCircle } from "@tabler/icons-react"
+import { Separator } from "../ui/separator"
+import { FundPieChart, NumberDiffWithButton, LiquidProgress } from "."
 
 export default function TradeFundBase({
   fundBase,
 }: {
   fundBase: { name: string; value: number }[]
 }) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  // TODO: Fetch and Calculate diffs
+  const diffs = [
+    { label: "總資產淨值", diff: 0.0564, number: 1000000 },
+    { label: "總持倉", diff: -0.114, number: 800000 },
+    { label: "總現金", diff: 0.0029, number: 200000 },
+  ]
+
+  /**
+   * Advances the current index to the next item in the diffs array.
+   */
+  const handleSwitchClick = () => {
+    setCurrentIndex((currentIndex + 1) % diffs.length)
+  }
+
   // TODO: Calculate level => 持股總成本/資金
   const level = 70
 
   return (
-    <div className={cn("section flex flex-col px-4")}>
-      <div className="flex items-center justify-around gap-4">
-        <div className="hidden sm:block">
-          <h2 className="centerAll mb-2 text-center text-lg font-medium md:text-xl">
-            積極度
-            <NoteTooltip tooltip="0 ~ 250%" />
-          </h2>
-          <div className="centerAll mb-2 gap-1">
-            {[0, 50, 100, 150, 200].map((value, index) => (
-              <LightbulbIcon
-                key={index}
-                className={cn(
-                  "aspect-square h-4 w-4 md:h-5 md:w-5",
-                  level >= value && "text-yellow-600",
-                )}
-              />
-            ))}
+    <section className={cn("section", "px-2")}>
+      <div className="flex flex-col items-center justify-around gap-3">
+        <div className="flex w-full flex-wrap items-stretch gap-2">
+          {/* Aggressiveness */}
+          <div className="bg-primary hidden h-full flex-col rounded-md px-3 py-1.5 shadow-sm sm:flex">
+            <h5 className="mb-2 flex w-full items-center gap-2 text-start text-base font-medium md:text-lg">
+              積極度
+              <Tooltip
+                content={<span className="w-fit text-nowrap">0% ~ 250%</span>}
+                side="right"
+                delayTransition={level}
+              >
+                <IconExclamationCircle width={16} height={16} />
+              </Tooltip>
+            </h5>
+
+            <LiquidProgress percent={90} className="px-2.5" />
           </div>
-          <p
-            className={cn(
-              "center-all whitespace-pre-wrap text-2xl font-medium tracking-tighter md:text-4xl lg:text-6xl",
-              "bg-gradient-to-r bg-clip-text text-transparent",
-              getGradientClassForValue(level),
-            )}
-          >
-            <NumberTicker
-              value={level}
-              className={cn("bg-inherit px-2 text-inherit")}
-              // delay={500}
+
+          {/* Net Asset Value */}
+          <div className="bg-primary flex flex-1 flex-col justify-between rounded-md px-3 py-1.5 shadow-sm">
+            <h5 className="mb-2 flex w-full items-center gap-2 text-start text-base font-medium md:text-lg">
+              {diffs[currentIndex].label}
+              <Tooltip
+                content={
+                  <span className="w-fit text-nowrap">
+                    {diffs.map((d) => d.label).join("/")}
+                  </span>
+                }
+                side="right"
+                delayTransition={200}
+              >
+                <IconExclamationCircle width={16} height={16} />
+              </Tooltip>
+            </h5>
+            <NumberDiffWithButton
+              handleSwitchClick={handleSwitchClick}
+              {...diffs[currentIndex]}
+              number={diffs[currentIndex].number}
+              diff={diffs[currentIndex].diff}
+              className="flex-1"
             />
-            <span>%</span>
-          </p>
+          </div>
         </div>
 
-        <FundPieChart data={fundBase} />
+        <Separator />
+
+        <FundPieChart data={fundBase} h={200} />
       </div>
-    </div>
+    </section>
   )
 }

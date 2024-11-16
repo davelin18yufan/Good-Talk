@@ -50,6 +50,7 @@ export const Tabs = ({
             onClick={() => {
               moveSelectedTabToTop(idx)
             }}
+            onMouseDown={(e) => e.stopPropagation()}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             className={cn("relative rounded-full px-4 py-2", tabClassName)}
@@ -100,7 +101,7 @@ export const FadeInDiv = ({
     return tab.value === tabs[0].value
   }
   return (
-    <div className="relative h-full max-h-72 w-full overflow-y-auto">
+    <div className="relative h-full w-full overflow-y-auto bg-slate-100 dark:bg-slate-800">
       {tabs.map((tab, idx) => (
         <motion.div
           key={tab.value}

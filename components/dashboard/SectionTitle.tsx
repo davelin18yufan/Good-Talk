@@ -17,7 +17,7 @@ export default function SectionTitle({
   formType: any
 }) {
   return (
-    <div className="mb-2 flex items-center justify-between">
+    <div className="mb-2 flex items-center gap-2">
       <h2 className="text-xl font-bold">{title}</h2>
       <Dialog>
         <div className="flex items-center justify-end">
@@ -25,6 +25,7 @@ export default function SectionTitle({
             <Button
               variant="secondary"
               className="btn-primary rounded-full transition-transform hover:scale-110"
+              onMouseDown={(e) => e.stopPropagation()}
             >
               {icon.icon}
             </Button>

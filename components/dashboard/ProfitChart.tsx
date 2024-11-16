@@ -17,8 +17,8 @@ import { ProfitChartData } from "@/types/chart"
 
 export default function ProfitChart({ data }: { data: ProfitChartData[] }) {
   return (
-    <div className={cn("section")}>
-      <ResponsiveContainer width="100%" height={360}>
+    <section className={cn("section")}>
+      <ResponsiveContainer width="100%" height={300}>
         <ComposedChart
           data={data}
           margin={{
@@ -46,6 +46,6 @@ export default function ProfitChart({ data }: { data: ProfitChartData[] }) {
           <Line type="natural" dataKey="Me" stroke="#ff7300" />
         </ComposedChart>
       </ResponsiveContainer>
-    </div>
+    </section>
   )
 }

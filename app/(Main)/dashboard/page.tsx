@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Responsive, WidthProvider, Layout } from "react-grid-layout"
 import "@/styles/RGL.css"
 import { cn } from "@/lib/utils"
@@ -8,18 +8,20 @@ import { DEFAULT_TOOLBOX, DEFAULT_LAYOUTS } from "@/constants"
 import { Delete, Pin, PinOff } from "lucide-react"
 import ButtonEffect from "@/components/buttons/ButtonEffect"
 import { motion } from "framer-motion"
-import dynamic from "next/dynamic"
+import { renderChart } from "./helpers"
+import { DynamicChartProps, ChartID, ChartProps } from "@/types/chart"
+
+// export const revalidate = 0 // SSR
 
 // ?setState邏輯 => 可以用Class去包layout的樣式，最後用function把整個Class轉成所需物件，效能會變差但是可讀性好
 // ?如何處理拿到的資料，在layout.tsx處理再往下傳還是傳進去在各元件處理，拿到的資料是要在後端處理還是前端處理 => 把目前往下包，由父層去打API往下傳給CSR的元件，前端去打不同API再把它組合起來
-
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 const defaultProps = {
   rowHeight: 30,
   onLayoutChange: (allLayouts: ResponsiveLayouts) => {},
-  cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+  cols: { lg: 13, md: 10, sm: 6, xs: 4, xxs: 2 },
   breakpoints: { lg: 1024, md: 768, sm: 640, xs: 480, xxs: 0 }, // based on parent container size.
 }
 
@@ -27,24 +29,24 @@ const defaultProps = {
 // * Layouts => { [breakpoints]: Layout[] }
 interface DashboardItem extends Layout {
   static: boolean
-  chartId: string // Identifier for charts
-  chartProps?: any
+  chartId: ChartID // Identifier for charts
+  chartProps?: ChartProps
   content?: React.ReactNode
 }
 
-interface ResponsiveLayouts {
+export interface ResponsiveLayouts {
   [v: string]: DashboardItem[]
 }
 
 type CompactType = "horizontal" | "vertical" | null
 
-// *Replace dummy data
+// TODO:Replace dummy data
 const userLayouts: { layouts: ResponsiveLayouts; toolbox: ResponsiveLayouts } =
   {
     layouts: DEFAULT_LAYOUTS,
     toolbox: DEFAULT_TOOLBOX,
   }
-const chartProps: Record<string, any> = {
+const chartProps: DynamicChartProps = {
   ProfitChart: [
     { month: "Jan", TWSE: 23, Me: 8, 相對表現: ((8 / 23) * 100).toFixed(1) },
     { month: "Feb", TWSE: 27, Me: 10, 相對表現: ((10 / 27) * 100).toFixed(1) },
@@ -59,7 +61,6 @@ const chartProps: Record<string, any> = {
     { week: "June/3", 成交筆數: 10, 報酬率: -2, 獲利筆數: 1 },
     { week: "June/4", 成交筆數: 20, 報酬率: 0.21, 獲利筆數: 10 },
   ],
-  FundPieChart: [],
   TradeFundBase: [
     { name: "現金水位", value: 200000 },
     { name: "持倉部位", value: 800000 },
@@ -124,7 +125,76 @@ const chartProps: Record<string, any> = {
       quantity: 20,
     },
   ],
-  TradeSummary: { asset: [], currentPrices: [] },
+  TradeSummary: {
+    asset: {
+      _id: "1",
+      totalCost: 1000000,
+      totalMarketPrice: 3000000,
+      position: [
+        { asset_id: "2486", asset_name: "一詮", quantity: 4000, cost: 137 },
+        { asset_id: "8103", asset_name: "瀚荃", quantity: 4000, cost: 71 },
+        { asset_id: "9958", asset_name: "世紀剛", quantity: 1000, cost: 223 },
+        { asset_id: "3037", asset_name: "欣興", quantity: 1000, cost: 160 },
+      ],
+    },
+    currentPrices: [
+      { symbol: "2486", name: "一詮", closePrice: 128 },
+      { symbol: "8103", name: "瀚荃", closePrice: 55.1 },
+      { symbol: "9958", name: "世紀剛", closePrice: 208 },
+      { symbol: "3037", name: "欣興", closePrice: 161.5 },
+    ],
+  },
+  TradePlan: [
+    {
+      _id: "123456789",
+      type: "多單",
+      target: {
+        symbol: "AAPL",
+        name: "Apple Inc.",
+      },
+      action: "建倉",
+      entryPrice: 113,
+      targetPrice: 150,
+      stop: {
+        type: "停損",
+        price: 100,
+      },
+      expectation: 150 / 100,
+      isExecuted: false,
+    },
+    {
+      _id: "987654321",
+      type: "空單",
+      target: {
+        symbol: "TSLA",
+        name: "Tesla, Inc.",
+      },
+      action: "建倉",
+      entryPrice: 1000,
+      targetPrice: 1194,
+      stop: {
+        type: "停損",
+        price: 900,
+      },
+      expectation: 1194 / 900,
+      isExecuted: false,
+      comment: "some comment",
+    },
+    {
+      _id: "123456780",
+      type: "多單",
+      target: {
+        symbol: "AAPL",
+        name: "Apple Inc.",
+      },
+      action: "出場",
+      entryPrice: 155,
+      targetPrice: 180,
+      stop: { type: "停利", price: 150 },
+      expectation: 180 / 150,
+      isExecuted: true,
+    },
+  ],
 }
 
 const initLayoutsState = (
@@ -151,6 +221,7 @@ function Dashboard() {
   const [toolbox, setToolbox] = useState<ResponsiveLayouts>(
     initLayoutsState(userLayouts.toolbox ?? DEFAULT_TOOLBOX, chartProps),
   )
+  // TODO: detect current breakpoint based on parent container width
   const [currentBreakpoint, setCurrentBreakpoint] = useState<string>("lg")
 
   // componentDidMount equivalent
@@ -170,21 +241,18 @@ function Dashboard() {
         transition={{ duration: 0.3 }}
         className={cn(
           l.static && "static",
-          "relative z-[2] cursor-pointer rounded-lg bg-slate-100 dark:bg-slate-800",
+          "relative z-[2] cursor-pointer rounded-lg bg-slate-100 shadow-md dark:bg-slate-800 overflow-hidden",
         )}
+        // onClick={() => console.log("layout", 1)}
       >
-        <span className="text">
-          {l.static && "Static - "}
-          {l.i}
-        </span>
         {/* Render custom charts based on chartId */}
-        {/* {renderCustomChart(l.chartId)} */}
+        {renderChart(l.chartId, chartProps)}
 
         {/* function buttons */}
         {/* //* Button container is higher than icon in DOM tree level, so it will capture container's event first then icon  */}
         <div
           className="text-btn flex-center absolute right-2 top-0.5 rounded-sm"
-          onMouseDown={(e)=> e.stopPropagation()} // MouseDowni event will triger immediately when pressed, but click is trigered after MouseUp, so stop propogation at here prevent bubbling to the top level drag event. 
+          onMouseDown={(e) => e.stopPropagation()} // MouseDowni event will triger immediately when pressed, but click is trigered after MouseUp, so stop propogation at here prevent bubbling to the top level drag event.
         >
           {l.static ? (
             <Pin
@@ -219,31 +287,11 @@ function Dashboard() {
         </div>
       </motion.div>
     ))
-  }, [layouts,toolbox])
-
-  //  const renderCustomChart = (chartId: string) => {
-  //    const props = chartProps[chartId]
-
-  //    switch (chartId) {
-  //      case "ProfitChart":
-  //        return <ProfitChart data={props} />
-  //      case "FundPieChart":
-  //        return <FundPieChart data={props} />
-  //      case "RealizedPnlChart":
-  //        return <RealizedPnlChart data={props} />
-  //      case "TradeFundBase":
-  //        return <TradeFundBase data={props} />
-  //      case "TradeLog":
-  //        return <TradeLog data={props} />
-  //      case "TradeSummary":
-  //        return <TradeSummary data={props} />
-  //      default:
-  //        return <div>No chart found</div>
-  //    }
-  //  }
+  }, [layouts, toolbox])
+  // TODO: 把每個圖表的排版訂好，最大最小寬高，剩下DatePicker
+  //TODO: Suspense wrapper
 
   // Toggle compaction type
-  
   const onCompactTypeChange = () => {
     setCompactType((oldCompactType) =>
       oldCompactType === "horizontal"
@@ -271,7 +319,7 @@ function Dashboard() {
     defaultProps.onLayoutChange?.(allLayouts)
     // console.log("changedLayoutItem", changedLayoutItem)
     // console.log("allLayouts", allLayouts)
-    
+
     setLayouts((prev) => {
       const updatedLayouts = { ...prev }
       let hasChanges = false
@@ -291,23 +339,25 @@ function Dashboard() {
               newLayout.y !== l.y ||
               newLayout.w !== l.w ||
               newLayout.h !== l.h ||
-              chartProps[l.i] !== l.chartProps
+              chartProps[l.chartId] !== l.chartProps
 
             if (needsUpdate) {
               hasChanges = true
               return {
                 ...newLayout,
-                chartProps: chartProps[l.i],
+                chartId: l.chartId,
+                chartProps: chartProps[l.chartId],
               }
             }
             return l
           } else {
             // For other breakpoints, only update chartProps if necessary
-            if (chartProps[l.i] !== l.chartProps) {
+            if (chartProps[l.chartId] !== l.chartProps) {
               hasChanges = true
               return {
                 ...l,
-                chartProps: chartProps[l.i],
+                chartId: l.chartId,
+                chartProps: chartProps[l.chartId],
               }
             }
             return l
@@ -316,10 +366,11 @@ function Dashboard() {
 
         // Only update the breakpoint layout if there's an actual change
         if (currentLayouts !== updatedBreakpointLayouts) {
+          // @ts-ignore
           updatedLayouts[breakpoint] = updatedBreakpointLayouts
         }
       })
-
+      // console.log("layouts", layouts)
       return hasChanges ? updatedLayouts : prev
     })
   }
@@ -421,7 +472,7 @@ function Dashboard() {
               onClick={() => onTakeItem(tool)}
               key={tool.i}
             >
-              {tool.i}
+              {tool.chartId}
             </motion.div>
           ))}
         </article>
@@ -433,7 +484,6 @@ function Dashboard() {
         className="relative flex-1 transition-all duration-300 ease-out"
         layouts={layouts}
         onLayoutChange={onLayoutChange}
-        // onDrop={onDrop}
         onBreakpointChange={onBreakpointChange}
         measureBeforeMount={false}
         useCSSTransforms={mounted}

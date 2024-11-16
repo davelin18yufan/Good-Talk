@@ -100,11 +100,11 @@ const renderTooltipContent = ({ payload = [] }: any) => {
   )
 }
 
-function RealizedPnLChart({ pnLData }: { pnLData: PnLChartData[] }) {
+function RealizedPnlChart({ pnLData }: { pnLData: PnLChartData[] }) {
   const [labelA, setLabelA] = useState<string>("報酬率")
   const [labelB, setLabelB] = useState<string>("成交筆數")
   return (
-    <div className={cn("section pr-4")}>
+    <section className={cn("section pr-4")}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -151,7 +151,7 @@ function RealizedPnLChart({ pnLData }: { pnLData: PnLChartData[] }) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <ResponsiveContainer width="100%" height={360}>
+      <ResponsiveContainer width="100%" height={300}>
         <AreaChart
           data={pnLData}
           margin={{ top: 20, right: 10, left: 0, bottom: 20 }}
@@ -187,8 +187,8 @@ function RealizedPnLChart({ pnLData }: { pnLData: PnLChartData[] }) {
           />
         </AreaChart>
       </ResponsiveContainer>
-    </div>
+    </section>
   )
 }
 
-export default RealizedPnLChart
+export default RealizedPnlChart

@@ -11,7 +11,7 @@ export interface FormBaseProps {
   formClass?: string
   type?: FormType
   action: (formData: FormData) => void
-  pending: boolean
+  isAuth: boolean
   children: React.ReactNode
 }
 

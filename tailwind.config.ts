@@ -2,7 +2,7 @@ import typography from "@tailwindcss/typography"
 
 const {
   default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+} = require("tailwindcss/lib/util/flattenColorPalette")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
         mono: ["var(--font-roboto-mono)"],
       },
       backgroundImage: {
-        'logo': "url('/logo.svg')",
+        logo: "url('/logo.svg')",
       },
       colors: {
         background: "hsl(var(--background))",
@@ -76,10 +76,30 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "shine-pulse": {
+          "0%": {
+            "background-position": "0% 0%",
+          },
+          "50%": {
+            "background-position": "100% 100%",
+          },
+          to: {
+            "background-position": "0% 0%",
+          },
+        },
+        "progress-wave": {
+          "from": {
+            transform: "rotate(0deg)"
+          },
+          "to": {
+            transform: "rotate(360deg)"
+          }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "progress-wave": "progress-wave 8s linear infinite",
       },
     },
   },
@@ -87,12 +107,12 @@ module.exports = {
 }
 
 function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme("colors"));
+  let allColors = flattenColorPalette(theme("colors"))
   let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
- 
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
+  )
+
   addBase({
     ":root": newVars,
-  });
+  })
 }

@@ -30,7 +30,7 @@ const renderActiveShape = (props: any) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill} >
         {payload.name}
       </text>
       <Sector
@@ -62,6 +62,7 @@ const renderActiveShape = (props: any) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
+        className="dark:stroke-zinc-400"
       >{`${formatNumber(value)}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
@@ -78,8 +79,10 @@ const renderActiveShape = (props: any) => {
 
 export default function FundPieChart({
   data = [],
+  h = 300
 }: {
   data: { name: string; value: number }[]
+  h?: number
 }) {
   const [activeIndex, setActiveIndex] = useState(1)
   const onPieEnter = (_: any, index: number) => {
@@ -87,7 +90,7 @@ export default function FundPieChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={h}>
       <PieChart>
         <Pie
           activeIndex={activeIndex}
@@ -97,7 +100,7 @@ export default function FundPieChart({
           cy="50%"
           innerRadius={60}
           outerRadius={80}
-          fill="#8884d8"
+          fill="#9994d9"
           dataKey="value"
           onMouseEnter={onPieEnter}
         />
