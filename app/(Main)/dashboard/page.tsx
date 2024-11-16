@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef, Component, use } from "react"
+import { useState, useEffect, useCallback, useRef, Component } from "react"
 import {
   Responsive,
   WidthProvider,
@@ -13,13 +13,10 @@ import { cn } from "@/lib/utils"
 import { DEFAULT_TOOLBOX, DEFAULT_LAYOUTS } from "@/constants"
 import { Delete, Pin, PinOff } from "lucide-react"
 import ButtonEffect from "@/components/buttons/ButtonEffect"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { renderChart } from "./helpers"
 import { DynamicChartProps, ChartID, ChartProps } from "@/types/chart"
 
-// export const revalidate = 0 // SSR
-
-// ?setState邏輯 => 可以用Class去包layout的樣式，最後用function把整個Class轉成所需物件，效能會變差但是可讀性好
 // ?如何處理拿到的資料，在layout.tsx處理再往下傳還是傳進去在各元件處理，拿到的資料是要在後端處理還是前端處理 => 把目前往下包，由父層去打API往下傳給CSR的元件，前端去打不同API再把它組合起來
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
@@ -236,21 +233,25 @@ function Dashboard() {
   // !This is a heck to get the container width
   const containerRef =
     useRef<Component<ResponsiveProps & WidthProviderProps, any, any>>(null)
-  const [currentBreakpoint, setCurrentBreakpoint] = useState<string>(() => {
-    const containerWidth =
-      containerRef.current instanceof HTMLElement
-        ? containerRef.current.getBoundingClientRect().width
-        : window.innerWidth
-    if (containerWidth >= 1024) return "lg"
-    if (containerWidth >= 768) return "md"
-    if (containerWidth >= 640) return "sm"
-    if (containerWidth >= 480) return "xs"
-    return "xxs"
-  })
+  const [currentBreakpoint, setCurrentBreakpoint] = useState<string>("lg")
 
   // componentDidMount equivalent
   useEffect(() => {
     setMounted(true)
+    const calculateSize = () => {
+      const containerWidth =
+        containerRef.current instanceof HTMLElement
+          ? containerRef.current.getBoundingClientRect().width
+          : window.innerWidth
+
+      if (containerWidth >= 1024) return "lg"
+      if (containerWidth >= 768) return "md"
+      if (containerWidth >= 640) return "sm"
+      if (containerWidth >= 480) return "xs"
+      return "xxs"
+    }
+
+    setCurrentBreakpoint(calculateSize()) // Set the size on mount
   }, [mounted])
 
   // Generate DOM elements for the grid.
@@ -312,7 +313,6 @@ function Dashboard() {
     ))
   }, [layouts, toolbox])
   // TODO: 把每個圖表的排版訂好，最大最小寬高，剩下DatePicker
-  //TODO: Suspense wrapper
 
   // Toggle compaction type
   const onCompactTypeChange = () => {
@@ -411,11 +411,11 @@ function Dashboard() {
     })
   }
 
-/**
- * Updates the current breakpoint and sets the layout for the specified breakpoint.
- * 
- * @param breakpoint - The breakpoint that is currently active, affecting the layout.
- */
+  /**
+   * Updates the current breakpoint and sets the layout for the specified breakpoint.
+   *
+   * @param breakpoint - The breakpoint that is currently active, affecting the layout.
+   */
   const onBreakpointChange = (breakpoint: string) => {
     setCurrentBreakpoint(breakpoint)
     setLayouts((prev) => ({
@@ -488,7 +488,7 @@ function Dashboard() {
         {/* Compact type */}
         <div className="flex items-center justify-between last:inline-block">
           <span className="max-sm:hidden">自動排序方向 : </span>
-          <span className="bg-button text-placeholder ml-1 rounded-sm px-1.5 capitalize">
+          <span className="bg-button text-invert ml-1 rounded-sm px-1.5 capitalize">
             {compactType
               ? compactType.charAt(0).toUpperCase() + compactType.slice(1)
               : "None"}
@@ -501,7 +501,7 @@ function Dashboard() {
         {/* Breakpoint */}
         <div className="flex items-center justify-start">
           <span className="max-sm:hidden">現在畫面尺寸 : </span>
-          <span className="bg-button text-placeholder ml-1 rounded-sm px-1.5 capitalize">
+          <span className="bg-button text-invert ml-1 rounded-sm px-1.5 capitalize">
             {currentBreakpoint || "None"}
           </span>
         </div>

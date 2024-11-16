@@ -1,5 +1,5 @@
 import { ResponsiveLayouts } from "@/app/(Main)/dashboard/page"
-import { Theme } from "@/components/Theme"
+import { Theme } from "@/hooks/useTheme"
 import { ROUTES } from "./routes"
 
 export const NAV_LINKS = [
@@ -560,3 +560,13 @@ export const DEFAULT_TOOLBOX = {
 } as ResponsiveLayouts
 
 export const ASSET_DIFF_LABELS = ["總資產淨值", "總持倉", "總現金"] as const
+
+export const FORM_TYPES = Object.freeze({
+  MAIN: "main",
+  LOG: "log",
+  PLAN: "plan",
+  AUTH: "auth",
+  NOTE: "note",
+  REVIEW: "review",
+})
+

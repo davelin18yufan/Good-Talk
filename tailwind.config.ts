@@ -38,7 +38,7 @@ module.exports = {
         },
         primary: {
           light: "#CAC6BD",
-          dark: "#151515",
+          dark: "#030712",
         },
         secondary: {
           light: "#BB9A88",
@@ -88,12 +88,12 @@ module.exports = {
           },
         },
         "progress-wave": {
-          "from": {
-            transform: "rotate(0deg)"
+          from: {
+            transform: "rotate(0deg)",
           },
-          "to": {
-            transform: "rotate(360deg)"
-          }
+          to: {
+            transform: "rotate(360deg)",
+          },
         },
       },
       animation: {

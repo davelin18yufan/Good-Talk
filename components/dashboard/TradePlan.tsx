@@ -4,7 +4,6 @@ import { Plan } from "@/types/chart"
 import { CheckIcon, CheckCheck } from "lucide-react"
 import ShineBorder from "@/components/buttons/ShineBorder"
 import SubscribeButton from "@/components/buttons/SubscribeButton"
-import { ResponsiveContainer } from "recharts"
 
 function ExpectationBar({
   entryPrice,
@@ -57,21 +56,21 @@ function PlanCard({
   return (
     <ShineBorder
       className={cn("min-h-fit w-full py-2 px-2.5", {
-        "!bg-rose-200": type === "多單",
-        "!bg-green-200": type === "空單",
+        "!bg-rose-200 dark:bg-rose-300": type === "多單",
+        "!bg-green-200 dark:bg-green-300": type === "空單",
       })}
       borderWidth={4}
       duration={10}
       color={`${type === "多單" ? ["rgb(251 113 133)", "rgb(225 29 72)"] : ["rgb(74 222 128)", "rgb(22 163 74)"]}`}
     >
       <div className="flex items-center justify-between">
-        <h2 className="font-bold lg:text-lg">
+        <h2 className="font-bold lg:text-lg text-zinc-600">
           {target.name} ({target.symbol})
         </h2>
         <span
-          className={cn("text-sm text-slate-600", {
-            "text-rose-600": type === "多單",
-            "text-green-600": type === "空單",
+          className={cn("text-sm", {
+            "text-rose-700": type === "多單",
+            "text-green-700": type === "空單",
           })}
         >
           {type}

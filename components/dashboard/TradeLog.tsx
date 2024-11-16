@@ -102,7 +102,7 @@ function AllLogs({ logs }: { logs: LogType[] }) {
   ]
 
   return (
-    <div className="h-full">
+    <div className="h-4/5">
       <Tabs
         tabs={tabs}
         activeTabClassName="bg-gray-200 dark:bg-zinc-800 rounded-full"

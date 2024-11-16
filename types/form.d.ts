@@ -1,7 +1,4 @@
-export const FORM_TYPES = {
-  AUTH: "auth",
-  REGULAR: "regular",
-} as const
+import { FORM_TYPES } from "@/constants"
 
 export type FormType = (typeof FORM_TYPES)[keyof typeof FORM_TYPES]
 
@@ -13,6 +10,7 @@ export interface FormBaseProps {
   action: (formData: FormData) => void
   isAuth: boolean
   children: React.ReactNode
+  isDialog?: boolean
 }
 
 export interface CustomInputProps

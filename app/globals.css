@@ -33,6 +33,16 @@
     --ring: 0 0% 3.9%;
 
     --radius: 0.5rem;
+
+    /* chart colors */
+    --x-axis: #8884d8;
+    --y-axis: #064e3b;
+    --bar: #413ea0;
+    --line: #eb7e09;
+    --area: #8884d8;
+    --area-secondary: #82ca9d;
+    --grid: #e5e5e5;
+    --tooltip: #f1f5f9e0;
   }
 
   .dark {
@@ -63,6 +73,16 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
+
+    /* chart colors */
+    --x-axis: #c7d2fe;
+    --y-axis: #d1fae5;
+    --bar: #4058d1;
+    --line: #ff7300;
+    --area: #896bb0;
+    --area-secondary: #6eab72;
+    --grid: #f5f5f5;
+    --tooltip: #1e2939e0;
   }
 
   button {

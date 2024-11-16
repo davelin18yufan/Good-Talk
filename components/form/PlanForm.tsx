@@ -4,10 +4,12 @@ export default function PlanForm({
   title,
   description,
   formClass,
+  isDialog,
 }: {
   title: string
   description?: string
   formClass?: string
+  isDialog?: boolean
 }) {
   return (
     <FormBase
@@ -16,6 +18,7 @@ export default function PlanForm({
       formClass={formClass}
       action={() => {}}
       isAuth={false}
+      isDialog={isDialog}
     >
       <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
         <CustomInput

@@ -28,22 +28,25 @@ export default function ProfitChart({ data }: { data: ProfitChartData[] }) {
             left: 0,
           }}
         >
-          <CartesianGrid stroke="#f5f5f5" />
-          <XAxis dataKey="month" />
-          <YAxis label={{ value: "％", position: "insideBottom" }} />
-          <Tooltip />
+          <CartesianGrid stroke="var(--grid)" />
+          <XAxis dataKey="month" stroke="var(--x-axis)" />
+          <YAxis
+            label={{ value: "％", position: "insideBottom" }}
+            stroke="var(--y-axis)"
+          />
+          <Tooltip contentStyle={{ backgroundColor: "var(--tooltip)" }} />
           <Legend />
           {/* 大盤 */}
           <Area
             type="monotone"
             dataKey="TWSE"
-            fill="#8884d8"
-            stroke="#8884d8"
+            fill="var(--area)"
+            stroke="var(--area)"
           />
           {/* relative */}
-          <Bar dataKey="相對表現" barSize={20} fill="#413ea0" />
+          <Bar dataKey="相對表現" barSize={20} fill="var(--bar)" />
           {/* performance */}
-          <Line type="natural" dataKey="Me" stroke="#ff7300" />
+          <Line type="natural" dataKey="Me" stroke="var(--line)" />
         </ComposedChart>
       </ResponsiveContainer>
     </section>

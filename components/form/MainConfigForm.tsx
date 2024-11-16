@@ -4,10 +4,12 @@ export default function MainConfigForm({
   title,
   description,
   formClass,
+  isDialog = false,
 }: {
   title: string
   description: string
   formClass?: string
+  isDialog?: boolean
 }) {
   return (
     <FormBase
@@ -16,6 +18,7 @@ export default function MainConfigForm({
       formClass={formClass}
       action={() => {}}
       isAuth={false}
+      isDialog={isDialog}
     >
       <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
         <CustomInput

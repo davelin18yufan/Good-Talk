@@ -109,12 +109,12 @@ function RealizedPnlChart({ pnLData }: { pnLData: PnLChartData[] }) {
         <DropdownMenuTrigger asChild>
           <Button
             variant="outline"
-            className="absolute right-1 top-1 z-10 block"
+            className="bg-primary absolute right-1 top-1 z-10 block"
           >
             更改參數
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 bg-white">
+        <DropdownMenuContent className="bg-primary w-56">
           <DropdownMenuLabel>參數1</DropdownMenuLabel>
           <DropdownMenuRadioGroup
             value={labelA}
@@ -158,30 +158,38 @@ function RealizedPnlChart({ pnLData }: { pnLData: PnLChartData[] }) {
         >
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop offset="5%" stopColor="var(--area)" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="var(--area)" stopOpacity={0} />
             </linearGradient>
             <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+              <stop
+                offset="5%"
+                stopColor="var(--area-secondary)"
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor="var(--area-secondary)"
+                stopOpacity={0}
+              />
             </linearGradient>
           </defs>
-          <XAxis dataKey="week" />
-          <YAxis />
+          <XAxis dataKey="week" stroke="var(--x-axis)" />
+          <YAxis stroke="var(--y-axis)" />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip content={renderTooltipContent} />
           <Legend />
           <Area
             type="monotone"
             dataKey={labelA}
-            stroke="#8884d8"
+            stroke="var(--area)"
             fillOpacity={1}
             fill="url(#colorUv)"
           />
           <Area
             type="monotone"
             dataKey={labelB}
-            stroke="#82ca9d"
+            stroke="var(--area-secondary)"
             fillOpacity={1}
             fill="url(#colorPv)"
           />
