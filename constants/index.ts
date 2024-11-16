@@ -260,7 +260,7 @@ export const DEFAULT_LAYOUTS = {
     },
     {
       w: 4,
-      h: 9,
+      h: 10,
       x: 0,
       y: 0,
       i: "5",

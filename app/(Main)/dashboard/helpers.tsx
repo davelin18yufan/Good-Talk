@@ -1,13 +1,4 @@
 import {
-  ProfitChart,
-  RealizedPnlChart,
-  TradeFundBase,
-  TradeLog,
-  TradeSummary,
-  TradePlan,
-  DatePicker,
-} from "@/components/dashboard"
-import {
   DynamicChartProps,
   ProfitChartData,
   PnLChartData,
@@ -17,6 +8,15 @@ import {
   Plan,
 } from "@/types/chart"
 import dynamic from "next/dynamic"
+
+// Dynamically import components
+const ProfitChart = dynamic(() => import("@/components/dashboard/ProfitChart"))
+const RealizedPnlChart = dynamic(() => import("@/components/dashboard/RealizedPnlChart"))
+const TradeFundBase = dynamic(() => import("@/components/dashboard/TradeFundBase"))
+const TradeLog = dynamic(() => import("@/components/dashboard/TradeLog"))
+const TradeSummary = dynamic(() => import("@/components/dashboard/TradeSummary"))
+const TradePlan = dynamic(() => import("@/components/dashboard/TradePlan"))
+const DatePicker = dynamic(() => import("@/components/dashboard/DatePicker"), { ssr: false })
 
 export const renderChart = (
   chartId: keyof DynamicChartProps,

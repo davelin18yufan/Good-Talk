@@ -37,10 +37,13 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
       />
 
       {/* using wrapper for scrolling and max-height */}
-      <div className="relative max-h-[230px] overflow-y-auto overscroll-contain">
+      <div
+        className="relative z-10 max-h-[230px] cursor-text select-all overflow-y-auto overscroll-contain text-subtext"
+        onMouseDown={(e) => e.stopPropagation()}
+      >
         <Table>
           <TableHeader>
-            <TableRow className="*:lg:px-0">
+            <TableRow className="*:lg:px-0 text-header">
               <TableHead>ID</TableHead>
               <TableHead>標的</TableHead>
               <TableHead>成本</TableHead>
@@ -69,7 +72,7 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
 
               return (
                 <TableRow
-                  className="text-xs text-slate-500 *:lg:px-0"
+                  className="text-xs text-subtext *:lg:px-0"
                   key={p.asset_id}
                 >
                   <TableCell>{p.asset_id}</TableCell>

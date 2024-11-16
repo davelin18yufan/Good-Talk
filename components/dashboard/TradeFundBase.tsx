@@ -48,7 +48,7 @@ export default function TradeFundBase({
               </Tooltip>
             </h5>
 
-            <LiquidProgress percent={90} className="px-2.5" />
+            <LiquidProgress percent={level} className="px-2.5" />
           </div>
 
           {/* Net Asset Value */}

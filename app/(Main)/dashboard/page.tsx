@@ -1,7 +1,13 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
-import { Responsive, WidthProvider, Layout } from "react-grid-layout"
+import { useState, useEffect, useCallback, useRef, Component, use } from "react"
+import {
+  Responsive,
+  WidthProvider,
+  Layout,
+  ResponsiveProps,
+  WidthProviderProps,
+} from "react-grid-layout"
 import "@/styles/RGL.css"
 import { cn } from "@/lib/utils"
 import { DEFAULT_TOOLBOX, DEFAULT_LAYOUTS } from "@/constants"
@@ -41,11 +47,15 @@ export interface ResponsiveLayouts {
 type CompactType = "horizontal" | "vertical" | null
 
 // TODO:Replace dummy data
-const userLayouts: { layouts: ResponsiveLayouts; toolbox: ResponsiveLayouts } =
-  {
-    layouts: DEFAULT_LAYOUTS,
-    toolbox: DEFAULT_TOOLBOX,
-  }
+const userLayouts: {
+  layouts: ResponsiveLayouts
+  toolbox: ResponsiveLayouts
+  compactType: CompactType
+} = {
+  layouts: DEFAULT_LAYOUTS,
+  toolbox: DEFAULT_TOOLBOX,
+  compactType: "vertical",
+}
 const chartProps: DynamicChartProps = {
   ProfitChart: [
     { month: "Jan", TWSE: 23, Me: 8, 相對表現: ((8 / 23) * 100).toFixed(1) },
@@ -213,7 +223,9 @@ const initLayoutsState = (
 
 // TODO: Fetch userLayouts from database.
 function Dashboard() {
-  const [compactType, setCompactType] = useState<CompactType>("vertical")
+  const [compactType, setCompactType] = useState<CompactType>(
+    userLayouts.compactType ?? "vertical",
+  )
   const [mounted, setMounted] = useState<boolean>(false)
   const [layouts, setLayouts] = useState<ResponsiveLayouts>(
     initLayoutsState(userLayouts.layouts ?? DEFAULT_LAYOUTS, chartProps),
@@ -221,8 +233,20 @@ function Dashboard() {
   const [toolbox, setToolbox] = useState<ResponsiveLayouts>(
     initLayoutsState(userLayouts.toolbox ?? DEFAULT_TOOLBOX, chartProps),
   )
-  // TODO: detect current breakpoint based on parent container width
-  const [currentBreakpoint, setCurrentBreakpoint] = useState<string>("lg")
+  // !This is a heck to get the container width
+  const containerRef =
+    useRef<Component<ResponsiveProps & WidthProviderProps, any, any>>(null)
+  const [currentBreakpoint, setCurrentBreakpoint] = useState<string>(() => {
+    const containerWidth =
+      containerRef.current instanceof HTMLElement
+        ? containerRef.current.getBoundingClientRect().width
+        : window.innerWidth
+    if (containerWidth >= 1024) return "lg"
+    if (containerWidth >= 768) return "md"
+    if (containerWidth >= 640) return "sm"
+    if (containerWidth >= 480) return "xs"
+    return "xxs"
+  })
 
   // componentDidMount equivalent
   useEffect(() => {
@@ -241,9 +265,8 @@ function Dashboard() {
         transition={{ duration: 0.3 }}
         className={cn(
           l.static && "static",
-          "relative z-[2] cursor-pointer rounded-lg bg-slate-100 shadow-md dark:bg-slate-800 overflow-hidden",
+          "relative z-[2] cursor-pointer overflow-hidden rounded-lg bg-slate-100 shadow-md dark:bg-slate-800",
         )}
-        // onClick={() => console.log("layout", 1)}
       >
         {/* Render custom charts based on chartId */}
         {renderChart(l.chartId, chartProps)}
@@ -302,6 +325,7 @@ function Dashboard() {
     )
   }
 
+  // Toggle static behavior
   const onStaticToggle = (item: DashboardItem) => {
     setLayouts((prev) => ({
       ...prev,
@@ -311,7 +335,19 @@ function Dashboard() {
     }))
   }
 
-  // Handle layout change
+  /**
+   * Callback for when the layout of a chart changes.
+   *
+   * Updates the layout state by iterating over all breakpoints and
+   * updating the layout properties of the changed item.
+   *
+   * If the layout property of the changed item is different from the
+   * current value in the state, or if the chartProps of the changed item
+   * has changed, the state is updated.
+   *
+   * @param changedLayoutItem The changed layout item.
+   * @param allLayouts The layout state for all breakpoints.
+   */
   const onLayoutChange = (
     changedLayoutItem: DashboardItem[],
     allLayouts: ResponsiveLayouts,
@@ -375,8 +411,17 @@ function Dashboard() {
     })
   }
 
+/**
+ * Updates the current breakpoint and sets the layout for the specified breakpoint.
+ * 
+ * @param breakpoint - The breakpoint that is currently active, affecting the layout.
+ */
   const onBreakpointChange = (breakpoint: string) => {
     setCurrentBreakpoint(breakpoint)
+    setLayouts((prev) => ({
+      ...prev,
+      [breakpoint]: [...userLayouts.layouts[breakpoint]],
+    }))
   }
 
   // Remove from layout and add it to the toolbox.
@@ -439,6 +484,7 @@ function Dashboard() {
       <aside className="flex flex-col gap-2.5 px-1">
         {/* //TODO: Store user preference */}
         <ButtonEffect emphasis={6}>儲存設定</ButtonEffect>
+
         {/* Compact type */}
         <div className="flex items-center justify-between last:inline-block">
           <span className="max-sm:hidden">自動排序方向 : </span>
@@ -490,6 +536,7 @@ function Dashboard() {
         compactType={compactType}
         preventCollision={!compactType}
         isDroppable={true}
+        ref={containerRef}
       >
         {generateDOM()}
       </ResponsiveReactGridLayout>
