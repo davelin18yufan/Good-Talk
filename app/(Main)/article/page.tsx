@@ -33,7 +33,7 @@ const blogs = [
     author: {
       id: "123q3",
       name: "Jane Smith",
-      url: "https://unsplash.com/@janesmith",
+      url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww",
     },
     date: new Date(new Date().setDate(new Date().getDate() - 1))
       .toISOString()
@@ -50,7 +50,7 @@ const blogs = [
     author: {
       id: "14123",
       name: "Amit Kumar",
-      url: "https://unsplash.com/@amitkumar",
+      url: "https://images.unsplash.com/photo-1636041282783-e218bb0a217b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D",
     },
     date: new Date(new Date().setDate(new Date().getDate() - 2))
       .toISOString()
@@ -68,7 +68,7 @@ const blogs = [
     author: {
       id: "1134223",
       name: "Lisa Ray",
-      url: "https://unsplash.com/@lisaray",
+      url: "https://plus.unsplash.com/premium_photo-1670884441012-c5cf195c062a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YXZhdGFyfGVufDB8fDB8fHww",
     },
     date: new Date(new Date().setDate(new Date().getDate() - 3))
       .toISOString()
@@ -86,7 +86,7 @@ const blogs = [
     author: {
       id: "1243",
       name: "Robert Frost",
-      url: "https://unsplash.com/@robertfrost",
+      url: "https://plus.unsplash.com/premium_photo-1671656349218-5218444643d8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXZhdGFyfGVufDB8fDB8fHww",
     },
     date: new Date(new Date().setDate(new Date().getDate() - 4))
       .toISOString()
