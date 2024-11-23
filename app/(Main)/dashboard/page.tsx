@@ -10,14 +10,13 @@ import {
 } from "react-grid-layout"
 import "@/styles/RGL.css"
 import { cn } from "@/lib/utils"
-import { DEFAULT_TOOLBOX, DEFAULT_LAYOUTS } from "@/constants"
-import { Delete, Pin, PinOff } from "lucide-react"
+import { DEFAULT_TOOLBOX, DEFAULT_LAYOUTS, DEFAULT_COMPACTTYPE } from "@/constants"
+import { Delete,  History,  Pin, PinOff } from "lucide-react"
 import ButtonEffect from "@/components/buttons/ButtonEffect"
 import { motion } from "motion/react"
 import { renderChart } from "./helpers"
-import { DynamicChartProps, ChartID, ChartProps } from "@/types/chart"
-
-// ?如何處理拿到的資料，在layout.tsx處理再往下傳還是傳進去在各元件處理，拿到的資料是要在後端處理還是前端處理 => 把目前往下包，由父層去打API往下傳給CSR的元件，前端去打不同API再把它組合起來
+import { DynamicChartProps, ChartID, ChartProps, CompactType } from "@/types/chart"
+import Toolbox from "@/components/dashboard/Toolbox"
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -30,7 +29,7 @@ const defaultProps = {
 
 // * Layout => A single layoutItem config.
 // * Layouts => { [breakpoints]: Layout[] }
-interface DashboardItem extends Layout {
+export interface DashboardItem extends Layout {
   static: boolean
   chartId: ChartID // Identifier for charts
   chartProps?: ChartProps
@@ -41,7 +40,6 @@ export interface ResponsiveLayouts {
   [v: string]: DashboardItem[]
 }
 
-type CompactType = "horizontal" | "vertical" | null
 
 // TODO:Replace dummy data
 const userLayouts: {
@@ -51,7 +49,7 @@ const userLayouts: {
 } = {
   layouts: DEFAULT_LAYOUTS,
   toolbox: DEFAULT_TOOLBOX,
-  compactType: "vertical",
+  compactType: DEFAULT_COMPACTTYPE,
 }
 const chartProps: DynamicChartProps = {
   ProfitChart: [
@@ -312,7 +310,6 @@ function Dashboard() {
       </motion.div>
     ))
   }, [layouts, toolbox])
-  // TODO: 把每個圖表的排版訂好，最大最小寬高，剩下DatePicker
 
   // Toggle compaction type
   const onCompactTypeChange = () => {
@@ -479,15 +476,39 @@ function Dashboard() {
     })
   }
 
+  // Reset layouts
+  const onResetLayout = useCallback((type: "user" | "default") => {
+    setCompactType(type === "user" ? userLayouts.compactType : DEFAULT_COMPACTTYPE)
+    setLayouts(type === "user" ? userLayouts.layouts : DEFAULT_LAYOUTS)
+    setToolbox(type === "user" ? userLayouts.toolbox : DEFAULT_TOOLBOX)
+  }, [userLayouts])
+
   return (
     <main className="flex">
       <aside className="flex flex-col gap-2.5 px-1">
         {/* //TODO: Store user preference */}
-        <ButtonEffect emphasis={6}>儲存設定</ButtonEffect>
+        <ButtonEffect emphasis={0}>儲存設定</ButtonEffect>
+
+        <div className="flex gap-1 overflow-hidden">
+          <ButtonEffect
+            emphasis={0}
+            onClick={() => onResetLayout("user")}
+            className="min-w-[65%]"
+          >
+            <History width={20} height={20}/>
+          </ButtonEffect>
+          <ButtonEffect
+            emphasis={0}
+            onClick={() => onResetLayout("default")}
+            className="min-w-[31%]"
+          >
+            <span className="md:text-sm text-xs overflow-hidden">Reset</span>
+          </ButtonEffect>
+        </div>
 
         {/* Compact type */}
         <div className="flex items-center justify-between last:inline-block">
-          <span className="max-sm:hidden">自動排序方向 : </span>
+          <span className="max-md:hidden">自動排序方向 : </span>
           <span className="bg-button text-invert ml-1 rounded-sm px-1.5 capitalize">
             {compactType
               ? compactType.charAt(0).toUpperCase() + compactType.slice(1)
@@ -500,7 +521,7 @@ function Dashboard() {
 
         {/* Breakpoint */}
         <div className="flex items-center justify-start">
-          <span className="max-sm:hidden">現在畫面尺寸 : </span>
+          <span className="max-md:hidden">現在畫面尺寸 : </span>
           <span className="bg-button text-invert ml-1 rounded-sm px-1.5 capitalize">
             {currentBreakpoint || "None"}
           </span>
@@ -508,19 +529,7 @@ function Dashboard() {
 
         {/* Toolbox */}
         <article className="flex flex-col items-center justify-start gap-2 will-change-contents">
-          {toolbox[currentBreakpoint]?.map((tool: DashboardItem) => (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-button w-full cursor-pointer rounded-md"
-              onClick={() => onTakeItem(tool)}
-              key={tool.i}
-            >
-              {tool.chartId}
-            </motion.div>
-          ))}
+          <Toolbox tools={toolbox[currentBreakpoint]} onTakeItem={onTakeItem} />
         </article>
       </aside>
 

@@ -1,5 +1,7 @@
 import { Charts } from "@/constants"
 
+export type CompactType = "horizontal" | "vertical" | null
+
 //* Atomic type
 export type Target = {
   symbol: string

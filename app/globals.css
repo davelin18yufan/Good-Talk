@@ -77,7 +77,7 @@
     /* chart colors */
     --x-axis: #c7d2fe;
     --y-axis: #d1fae5;
-    --bar: #4058d1;
+    --bar: #2c81dc;
     --line: #ff7300;
     --area: #896bb0;
     --area-secondary: #6eab72;
@@ -194,6 +194,15 @@
     @apply text-tertiary-light dark:text-tertiary-dark;
   }
 
+  /* Danger */
+  .bg-danger {
+    @apply bg-danger-light dark:bg-danger-dark;
+  }
+
+  .text-danger {
+    @apply text-danger-light dark:text-danger-dark;
+  }
+
   /* Button (btn) */
   .bg-button {
     @apply bg-btn-light dark:bg-btn-dark;
@@ -218,15 +227,6 @@
     @apply text-gray-300 dark:text-gray-500;
   }
 
-  /* Danger */
-  .bg-danger {
-    @apply bg-danger-light dark:bg-danger-dark;
-  }
-
-  .text-danger {
-    @apply text-danger-light dark:text-danger-dark;
-  }
-
   /* Text */
   .text-header {
     @apply text-neutral-900 dark:text-neutral-100;
@@ -242,5 +242,22 @@
 
   .text-invert {
     @apply text-slate-100 dark:text-slate-800;
+  }
+
+  /* Chart */
+  .text-nagative {
+    @apply text-rose-700;
+  }
+
+  .text-positive {
+    @apply text-green-700;
+  }
+
+  .bg-positive {
+    @apply !bg-green-200 dark:!bg-green-300;
+  }
+
+  .bg-nagative {
+    @apply !bg-rose-200 dark:!bg-rose-300;
   }
 }

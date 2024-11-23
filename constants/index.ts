@@ -1,6 +1,7 @@
 import { ResponsiveLayouts } from "@/app/(Main)/dashboard/page"
 import { Theme } from "@/hooks/useTheme"
 import { ROUTES } from "./routes"
+import { CompactType } from "@/types/chart"
 
 export const NAV_LINKS = [
   {
@@ -121,7 +122,9 @@ export const Charts = [
   "DatePicker",
 ] as const
 
-// 6 items
+export const DEFAULT_COMPACTTYPE: CompactType = "vertical"
+
+// Default Layout => 6 items
 export const DEFAULT_LAYOUTS = {
   lg: [
     {
@@ -495,7 +498,7 @@ export const DEFAULT_LAYOUTS = {
   ],
 } as ResponsiveLayouts
 
-// rest
+// Toolboxt
 export const DEFAULT_TOOLBOX = {
   xxs: [
     {
@@ -569,4 +572,3 @@ export const FORM_TYPES = Object.freeze({
   NOTE: "note",
   REVIEW: "review",
 })
-

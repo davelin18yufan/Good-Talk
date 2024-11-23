@@ -56,8 +56,8 @@ function PlanCard({
   return (
     <ShineBorder
       className={cn("min-h-fit w-full py-2 px-2.5", {
-        "!bg-rose-200 dark:bg-rose-300": type === "多單",
-        "!bg-green-200 dark:bg-green-300": type === "空單",
+        "bg-nagative": type === "多單",
+        "bg-positive": type === "空單",
       })}
       borderWidth={4}
       duration={10}

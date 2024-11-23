@@ -38,18 +38,18 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
 
       {/* using wrapper for scrolling and max-height */}
       <div
-        className="relative z-10 max-h-[230px] cursor-text select-all overflow-y-auto overscroll-contain text-subtext"
+        className="text-subtext relative z-10 max-h-[250px] cursor-text select-all overflow-y-auto overscroll-contain"
         onMouseDown={(e) => e.stopPropagation()}
       >
         <Table>
-          <TableHeader>
-            <TableRow className="*:lg:px-0 text-header">
+          <TableHeader className="font-bold">
+            <TableRow className="text-header *:lg:px-0">
               <TableHead>ID</TableHead>
-              <TableHead>標的</TableHead>
+              <TableHead>標的名稱</TableHead>
               <TableHead>成本</TableHead>
               <TableHead>現價</TableHead>
               <TableHead>數量</TableHead>
-              <TableHead className="text-right">損益</TableHead>
+              <TableHead className="text-right">損益(NTD)</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -72,7 +72,7 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
 
               return (
                 <TableRow
-                  className="text-xs text-subtext *:lg:px-0"
+                  className="text-subtext text-sm *:lg:px-0"
                   key={p.asset_id}
                 >
                   <TableCell>{p.asset_id}</TableCell>
@@ -81,7 +81,16 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
                   <TableCell>{marketPrice?.closePrice}</TableCell>
                   <TableCell>{formatNumber(p.quantity)}</TableCell>
                   {profit.length ? (
-                    <TableCell className="text-right">{profit}</TableCell>
+                    <TableCell
+                      className={cn(
+                        "text-right",
+                        profit.includes("-")
+                          ? "text-nagative"
+                          : "text-positive",
+                      )}
+                    >
+                      {profit}
+                    </TableCell>
                   ) : (
                     <TableCell className="animate-pulse text-right text-slate-400">
                       Calculating..
@@ -96,11 +105,16 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
 
       <Table>
         <TableFooter>
-          <TableRow>
-            <TableCell colSpan={4} className="text-lg">
-              未實現損益
-            </TableCell>
-            <TableCell className="text-right text-red-500">
+          <TableRow className="text-lg">
+            <TableCell colSpan={4}>未實現損益</TableCell>
+            <TableCell
+              className={cn(
+                "text-right",
+                unrealizedProfit.includes("-")
+                  ? "text-rose-500"
+                  : "text-green-500",
+              )}
+            >
               {unrealizedProfit}
             </TableCell>
           </TableRow>
