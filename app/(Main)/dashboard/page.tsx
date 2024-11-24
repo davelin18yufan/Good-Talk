@@ -189,6 +189,26 @@ const chartProps: DynamicChartProps = {
       isExecuted: true,
     },
   ],
+  GoalProgress : [
+    {
+      name: "Goal",
+      value: 100,
+      color: "var(--chart-3)",
+      actualValue: 1000000,
+    },
+    {
+      name: "已達成進度",
+      value: 40,
+      color: "var(--chart-2",
+      actualValue: 400000,
+    },
+    {
+      name: "剩餘進度",
+      value: 60,
+      color: "var(--chart-1",
+      actualValue: 600000,
+    },
+  ],
 }
 
 const initLayoutsState = (
@@ -407,6 +427,10 @@ function Dashboard() {
     setLayouts((prev) => ({
       ...prev,
       [breakpoint]: [...userLayouts.layouts[breakpoint]],
+    }))
+    setToolbox((prev) => ({
+      ...prev,
+      [breakpoint]: [...userLayouts.toolbox[breakpoint]],
     }))
   }
 

@@ -119,7 +119,7 @@ export const Charts = [
   "TradeLog",
   "TradePlan",
   "TradeSummary",
-  "DatePicker",
+  "GoalProgress",
 ] as const
 
 export const DEFAULT_COMPACTTYPE: CompactType = "vertical"
@@ -502,62 +502,72 @@ export const DEFAULT_LAYOUTS = {
 export const DEFAULT_TOOLBOX = {
   xxs: [
     {
-      w: 4,
-      h: 2,
+      w: 5,
+      h: 6,
       x: 0,
       y: 0,
       i: "6",
+      minW: 4,
+      minH:5,
       moved: false,
       static: false,
-      chartId: "DatePicker",
+      chartId: "GoalProgress",
     },
   ],
   xs: [
     {
-      w: 4,
-      h: 2,
+      w: 5,
+      h: 6,
       x: 0,
       y: 0,
       i: "6",
+      minW: 4,
+      minH:5,
       moved: false,
       static: false,
-      chartId: "DatePicker",
+      chartId: "GoalProgress",
     },
   ],
   sm: [
     {
-      w: 4,
-      h: 2,
+      w: 6,
+      h: 6,
       x: 0,
       y: 0,
       i: "6",
+      minW: 4,
+      minH:5,
       moved: false,
       static: false,
-      chartId: "DatePicker",
+      chartId: "GoalProgress",
     },
   ],
   md: [
     {
       w: 4,
-      h: 2,
+      h: 6,
       x: 0,
       y: 0,
       i: "6",
+      minW: 4,
+      minH:5,
       moved: false,
       static: false,
-      chartId: "DatePicker",
+      chartId: "GoalProgress",
     },
   ],
   lg: [
     {
-      w: 4,
-      h: 2,
+      w: 5,
+      h: 6,
       x: 0,
       y: 0,
       i: "6",
+      minW: 4,
+      minH:5,
       moved: false,
       static: false,
-      chartId: "DatePicker",
+      chartId: "GoalProgress",
     },
   ],
 } as ResponsiveLayouts
@@ -593,9 +603,16 @@ export const CHART_IMAGES: ChartImageProps[] = [
     src: "https://plus.unsplash.com/premium_vector-1720102933697-e125583f8edb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGNoYXJ0fGVufDB8fDB8fHww",
     alt: "Big Data",
   },
+  {
+    id: "GoalProgress",
+    src: "https://plus.unsplash.com/premium_vector-1682308668096-7293690b5500?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZ3Jlc3N8ZW58MHx8MHx8fDA%3D",
+    alt: "Progress",
+  },
 ]
 
 export const ASSET_DIFF_LABELS = ["總資產淨值", "總持倉", "總現金"] as const
+
+export const GOAL_PROGRESS_LABELS = ["已達成進度", "剩餘進度", "Goal"] as const
 
 export const FORM_TYPES = Object.freeze({
   MAIN: "main",

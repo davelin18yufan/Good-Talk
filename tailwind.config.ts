@@ -1,4 +1,5 @@
 import typography from "@tailwindcss/typography"
+import exp from "constants"
 
 const {
   default: flattenColorPalette,
@@ -8,6 +9,12 @@ const {
 module.exports = {
   darkMode: "selector",
   content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
+  blocklist: [
+    "duration-[.16s]",
+    "ease-[cubic-bezier(.4,0,.2,1)]",
+    "after:ease-[cubic-bezier(0.65_0.05_0.36_1)]",
+    "active:duration-[25ms]",
+  ],
   prefix: "",
   theme: {
     container: {

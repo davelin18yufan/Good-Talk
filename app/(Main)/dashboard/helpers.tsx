@@ -6,6 +6,7 @@ import {
   Log,
   TradeSummaryData,
   Plan,
+  GoalProgressData,
 } from "@/types/chart"
 import dynamic from "next/dynamic"
 
@@ -16,7 +17,7 @@ const TradeFundBase = dynamic(() => import("@/components/dashboard/TradeFundBase
 const TradeLog = dynamic(() => import("@/components/dashboard/TradeLog"))
 const TradeSummary = dynamic(() => import("@/components/dashboard/TradeSummary"))
 const TradePlan = dynamic(() => import("@/components/dashboard/TradePlan"))
-const DatePicker = dynamic(() => import("@/components/dashboard/DatePicker"), { ssr: false })
+const GoalProgress = dynamic(() => import("@/components/dashboard/GoalProgress"), { ssr: false })
 
 export const renderChart = (
   chartId: keyof DynamicChartProps,
@@ -37,8 +38,8 @@ export const renderChart = (
       return <TradeSummary summary={props as TradeSummaryData} />
     case "TradePlan":
       return <TradePlan plans={props as Plan[]} />
-    case "DatePicker":
-      return <DatePicker />
+    case "GoalProgress":
+      return <GoalProgress progress={props as GoalProgressData[]} />
     default:
       return <div>No chart found</div>
   }
