@@ -15,7 +15,7 @@ import { Delete,  History,  Pin, PinOff } from "lucide-react"
 import ButtonEffect from "@/components/buttons/ButtonEffect"
 import { motion } from "motion/react"
 import { renderChart } from "./helpers"
-import { DynamicChartProps, ChartID, ChartProps, CompactType } from "@/types/chart"
+import { DynamicChartProps, ChartID, ChartProps, CompactType, DashboardItem, ResponsiveLayouts } from "@/types/chart"
 import Toolbox from "@/components/dashboard/Toolbox"
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
@@ -26,20 +26,9 @@ const defaultProps = {
   cols: { lg: 13, md: 10, sm: 6, xs: 4, xxs: 2 },
   breakpoints: { lg: 1024, md: 768, sm: 640, xs: 480, xxs: 0 }, // based on parent container size.
 }
-
+// TODO: add a new toolbox component
 // * Layout => A single layoutItem config.
 // * Layouts => { [breakpoints]: Layout[] }
-export interface DashboardItem extends Layout {
-  static: boolean
-  chartId: ChartID // Identifier for charts
-  chartProps?: ChartProps
-  content?: React.ReactNode
-}
-
-export interface ResponsiveLayouts {
-  [v: string]: DashboardItem[]
-}
-
 
 // TODO:Replace dummy data
 const userLayouts: {
@@ -450,7 +439,6 @@ function Dashboard() {
 
   // Remove from the toolbox and add it to layouts.
   const onTakeItem = (item: DashboardItem) => {
-    console.log("take", item)
     // Remove the item from the toolbox across all breakpoints
     setToolbox((prev) => {
       const updatedToolbox = { ...prev }

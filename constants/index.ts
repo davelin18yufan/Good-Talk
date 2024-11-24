@@ -1,7 +1,7 @@
-import { ResponsiveLayouts } from "@/app/(Main)/dashboard/page"
 import { Theme } from "@/hooks/useTheme"
 import { ROUTES } from "./routes"
-import { CompactType } from "@/types/chart"
+import { ChartImageProps, CompactType } from "@/types/chart"
+import { ResponsiveLayouts } from "@/types/chart"
 
 export const NAV_LINKS = [
   {
@@ -561,6 +561,39 @@ export const DEFAULT_TOOLBOX = {
     },
   ],
 } as ResponsiveLayouts
+
+export const CHART_IMAGES: ChartImageProps[] = [
+  {
+    id: "TradeSummary",
+    src: "https://plus.unsplash.com/premium_vector-1731550773801-fff33ce70b82?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI5fHx8ZW58MHx8fHx8",
+    alt: "Partnership",
+  },
+  {
+    id: "TradePlan",
+    src: "https://plus.unsplash.com/premium_vector-1731309600268-514b749b68a3?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Plans",
+  },
+  {
+    id: "TradeFundBase",
+    src: "https://plus.unsplash.com/premium_vector-1721680794481-312360aafed4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNoYXJ0fGVufDB8fDB8fHww",
+    alt: "Review",
+  },
+  {
+    id: "TradeLog",
+    src: "https://plus.unsplash.com/premium_vector-1682297811554-692cb64a8fca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI2fHx8ZW58MHx8fHx8",
+    alt: "Trading",
+  },
+  {
+    id: "RealizedPnlChart",
+    src: "https://plus.unsplash.com/premium_vector-1727956884194-a3a43efcf726?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y2hhcnR8ZW58MHx8MHx8fDA%3D",
+    alt: "Big Data",
+  },
+  {
+    id: "ProfitChart",
+    src: "https://plus.unsplash.com/premium_vector-1720102933697-e125583f8edb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGNoYXJ0fGVufDB8fDB8fHww",
+    alt: "Big Data",
+  },
+]
 
 export const ASSET_DIFF_LABELS = ["總資產淨值", "總持倉", "總現金"] as const
 

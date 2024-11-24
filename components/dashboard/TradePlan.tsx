@@ -55,7 +55,7 @@ function PlanCard({
 }) {
   return (
     <ShineBorder
-      className={cn("min-h-fit w-full py-2 px-2.5", {
+      className={cn("min-h-fit w-full px-2.5 py-2", {
         "bg-nagative": type === "多單",
         "bg-positive": type === "空單",
       })}
@@ -64,7 +64,7 @@ function PlanCard({
       color={`${type === "多單" ? ["rgb(251 113 133)", "rgb(225 29 72)"] : ["rgb(74 222 128)", "rgb(22 163 74)"]}`}
     >
       <div className="flex items-center justify-between">
-        <h2 className="font-bold lg:text-lg text-zinc-600">
+        <h2 className="font-bold text-zinc-600 lg:text-lg">
           {target.name} ({target.symbol})
         </h2>
         <span
@@ -111,12 +111,16 @@ function PlanCard({
           initialText={
             <span className="group inline-flex items-center">
               未執行{" "}
-              <CheckIcon className="ml-1 h-4 w-4 !transition-opacity duration-300 group-hover:translate-x-1" />
+              <CheckIcon
+                className="ml-1 !transition-opacity duration-300 group-hover:translate-x-1"
+                width={16}
+                height={16}
+              />
             </span>
           }
           changeText={
             <span className="group inline-flex items-center text-slate-600">
-              <CheckCheck className="mr-2 h-4 w-4" />
+              <CheckCheck className="mr-2" width={16} height={16} />
               已執行{" "}
             </span>
           }

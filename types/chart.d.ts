@@ -1,4 +1,5 @@
 import { Charts } from "@/constants"
+import { Layout } from "react-grid-layout"
 
 export type CompactType = "horizontal" | "vertical" | null
 
@@ -120,3 +121,20 @@ export type ChartID = (typeof Charts)[number]
 export type DynamicChartProps = Partial<{
   [K in ChartID]: K extends keyof ChartProps ? ChartProps[K] : never
 }>
+
+export interface DashboardItem extends Layout {
+  static: boolean
+  chartId: ChartID // Identifier for charts
+  chartProps?: ChartProps
+  content?: React.ReactNode
+}
+
+export interface ResponsiveLayouts {
+  [v: string]: DashboardItem[]
+}
+
+export interface ChartImageProps {
+  id: (typeof Charts)[number]
+  src: string
+  alt: string
+}

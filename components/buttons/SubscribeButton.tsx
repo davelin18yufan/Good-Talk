@@ -24,9 +24,9 @@ export default function SubscribeButton({
     <AnimatePresence mode="wait">
       {isSubscribed ? (
         <motion.button
-          className="relative flex items-center justify-center overflow-hidden rounded-md p-[8px] max-lg:w-[200px]"
+          className="relative flex items-center justify-center overflow-hidden rounded-md border-none p-[8px] max-lg:w-[200px]"
           onClick={() => setIsSubscribed(false)}
-          onMouseDown={(e) => e.stopPropagation()} // preventimg drag event
+          onMouseDown={(e) => e.stopPropagation()} // prevent img drag event
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -41,15 +41,18 @@ export default function SubscribeButton({
         </motion.button>
       ) : (
         <motion.button
-          className="relative flex cursor-pointer items-center justify-center rounded-md border-none p-[10px] max-lg:w-[200px]"
+          className="relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md border-none p-[8px] max-lg:w-[200px]"
           style={{ backgroundColor: buttonColor, color: buttonTextColor }}
           onClick={() => setIsSubscribed(true)}
-          onMouseDown={(e) => e.stopPropagation()} // preventimg drag event
+          onMouseDown={(e) => e.stopPropagation()} // prevent img drag event
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <span key="reaction" className="relative block font-semibold">
+          <span
+            key="reaction"
+            className="relative block h-full w-full font-semibold"
+          >
             {initialText}
           </span>
         </motion.button>

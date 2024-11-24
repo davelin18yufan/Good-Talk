@@ -14,7 +14,7 @@ export default function SectionTitle({
   formType: FormType
 }) {
   return (
-    <div className="mb-2 flex items-center gap-2">
+    <div className="py-2 flex items-center gap-2">
       <h2 className="text-xl font-bold">{title}</h2>
       <FormDialog
         triggerElement={icon.icon}

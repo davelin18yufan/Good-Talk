@@ -6,6 +6,7 @@ import { cn, formatNumber } from "@/lib/utils"
 import { Log as LogType } from "@/types/chart"
 import { Badge, badgeVariants } from "@/components/ui/badge"
 import Tooltip from "@/components/Tooltip"
+import { SmartDatetimeInput } from "./DatePicker"
 
 function Log({ log }: { log: LogType }) {
   const logCardItems = [
@@ -123,9 +124,20 @@ const TradeLog = ({
   // TODO: fetch log by selectDate
   // const { selectDate } = useDate((store) => store.selectDate)
   // const trades = await getTradeLog(selectDate)
+  // TODO: set selectDate with zustand or useContext
+  const handleDateChange = (date: Date) => {}
   return (
     <section className={cn("section", className)}>
-      <SectionTitle title="交易紀錄" formType="log" />
+      <div className="flex items-center gap-6 md:gap-8">
+        <SectionTitle title="交易紀錄" formType="log" />
+        <SmartDatetimeInput
+          // value={selectedDate}
+          showCalendar={true}
+          showTimePicker={false}
+          onValueChange={handleDateChange}
+          placeholder="Enter a date and time"
+        />
+      </div>
       <AllLogs logs={logs} />
     </section>
   )

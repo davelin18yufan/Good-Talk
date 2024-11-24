@@ -74,7 +74,7 @@ export default function NumberDiffWithButton({
   handleSwitchClick: () => void
 }) {
   return (
-    <div className={cn(className, "flex-center gap-4")}>
+    <div className={cn(className, "flex-center gap-x-4 flex-wrap")}>
       <PriceWithDiff value={number} diff={diff} />
       <button
         onMouseDown={(e) => e.stopPropagation()}

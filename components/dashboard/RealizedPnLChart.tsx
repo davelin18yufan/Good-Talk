@@ -109,7 +109,7 @@ function RealizedPnlChart({ pnLData }: { pnLData: PnLChartData[] }) {
         <DropdownMenuTrigger asChild>
           <Button
             variant="outline"
-            className="bg-primary absolute right-1 top-1 z-10 block"
+            className="bg-primary absolute right-1 bottom-1 z-10 block"
           >
             更改參數
           </Button>
