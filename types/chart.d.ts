@@ -1,4 +1,5 @@
-import { Charts } from "@/constants"
+import { GoalProgress } from "@/components/dashboard"
+import { Charts, GOAL_PROGRESS_LABELS } from "@/constants"
 import { Layout } from "react-grid-layout"
 
 export type CompactType = "horizontal" | "vertical" | null
@@ -107,6 +108,14 @@ export type TradeSummaryData = {
   currentPrices: CurrentPrices
 }
 
+export type GoalProgressLabel = typeof GOAL_PROGRESS_LABELS[number]
+export interface GoalProgressData {
+  name: GoalProgressLabel
+  value: number
+  color: string
+  actualValue: number
+}
+
 // charts with data
 export interface ChartProps {
   ProfitChart: ProfitChartData[]
@@ -115,6 +124,7 @@ export interface ChartProps {
   TradeLog: Log[]
   TradeSummary: TradeSummaryData
   TradePlan: Plan[]
+  GoalProgress: GoalProgressData[]
 }
 
 export type ChartID = (typeof Charts)[number]

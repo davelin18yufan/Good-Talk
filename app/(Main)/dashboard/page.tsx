@@ -26,7 +26,6 @@ const defaultProps = {
   cols: { lg: 13, md: 10, sm: 6, xs: 4, xxs: 2 },
   breakpoints: { lg: 1024, md: 768, sm: 640, xs: 480, xxs: 0 }, // based on parent container size.
 }
-// TODO: add a new toolbox component
 // * Layout => A single layoutItem config.
 // * Layouts => { [breakpoints]: Layout[] }
 
@@ -187,6 +186,26 @@ const chartProps: DynamicChartProps = {
       stop: { type: "停利", price: 150 },
       expectation: 180 / 150,
       isExecuted: true,
+    },
+  ],
+  GoalProgress : [
+    {
+      name: "Goal",
+      value: 100,
+      color: "var(--chart-3)",
+      actualValue: 1000000,
+    },
+    {
+      name: "已達成進度",
+      value: 40,
+      color: "var(--chart-2",
+      actualValue: 400000,
+    },
+    {
+      name: "剩餘進度",
+      value: 60,
+      color: "var(--chart-1",
+      actualValue: 600000,
     },
   ],
 }
@@ -407,6 +426,10 @@ function Dashboard() {
     setLayouts((prev) => ({
       ...prev,
       [breakpoint]: [...userLayouts.layouts[breakpoint]],
+    }))
+    setToolbox((prev) => ({
+      ...prev,
+      [breakpoint]: [...userLayouts.toolbox[breakpoint]],
     }))
   }
 
