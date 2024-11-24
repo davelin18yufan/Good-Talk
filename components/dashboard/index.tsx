@@ -1,4 +1,3 @@
-import DatePicker from "./DatePicker";
 import FundPieChart from "./FundPieChart";
 import RealizedPnlChart from "./RealizedPnlChart";
 import ProfitChart from "./ProfitChart";
@@ -8,6 +7,9 @@ import TradePlan from "./TradePlan";
 import TradeSummary from "./TradeSummary";
 import NumberDiffWithButton,{ PriceWithDiff } from "./PriceWithDiff"
 import LiquidProgress from "./LiquidProgress";
+import * as DatePicker from "./DatePicker";
+import SectionTitle from "./SectionTitle";
+import GoalProgress from "./GoalProgress"
 
 export {
   DatePicker,
@@ -20,5 +22,7 @@ export {
   TradeSummary,
   PriceWithDiff,
   NumberDiffWithButton,
-  LiquidProgress
+  LiquidProgress,
+  SectionTitle,
+  GoalProgress
 }

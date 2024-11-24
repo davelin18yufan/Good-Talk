@@ -1,4 +1,3 @@
-import SectionTitle from "./SectionTitle"
 import { Tabs } from "@/components/Tabs"
 
 import { cn, formatNumber } from "@/lib/utils"
@@ -6,7 +5,7 @@ import { cn, formatNumber } from "@/lib/utils"
 import { Log as LogType } from "@/types/chart"
 import { Badge, badgeVariants } from "@/components/ui/badge"
 import Tooltip from "@/components/Tooltip"
-import { SmartDatetimeInput } from "./DatePicker"
+import { SectionTitle, DatePicker } from "./"
 
 function Log({ log }: { log: LogType }) {
   const logCardItems = [
@@ -130,7 +129,7 @@ const TradeLog = ({
     <section className={cn("section", className)}>
       <div className="flex items-center gap-6 md:gap-8">
         <SectionTitle title="交易紀錄" formType="log" />
-        <SmartDatetimeInput
+        <DatePicker.SmartDatetimeInput
           // value={selectedDate}
           showCalendar={true}
           showTimePicker={false}

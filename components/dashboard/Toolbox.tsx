@@ -8,7 +8,6 @@ import { CHART_IMAGES as images } from "@/constants"
 import { ChartImageProps } from "@/types/chart"
 import { DashboardItem } from "@/types/chart"
 
-// TODO: Add specigic chart images
 const Toolbox = ({
   tools,
   onTakeItem,
