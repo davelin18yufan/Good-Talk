@@ -1,22 +1,27 @@
-import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography"
-const defaultTheme = require("tailwindcss/defaultTheme");
-
-const colors = require("tailwindcss/colors");
+import exp from "constants"
 
 const {
   default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
-const config = {
+} = require("tailwindcss/lib/util/flattenColorPalette")
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: "selector",
   content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
+  blocklist: [
+    "duration-[.16s]",
+    "ease-[cubic-bezier(.4,0,.2,1)]",
+    "after:ease-[cubic-bezier(0.65_0.05_0.36_1)]",
+    "active:duration-[25ms]",
+  ],
   prefix: "",
   theme: {
     container: {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1536px",
       },
     },
     extend: {
@@ -24,10 +29,23 @@ const config = {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-roboto-mono)"],
       },
+      backgroundImage: {
+        logo: "url('/logo.svg')",
+      },
       colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
         primary: {
           light: "#CAC6BD",
-          dark: "#151515",
+          dark: "#030712",
         },
         secondary: {
           light: "#BB9A88",
@@ -65,25 +83,43 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "shine-pulse": {
+          "0%": {
+            "background-position": "0% 0%",
+          },
+          "50%": {
+            "background-position": "100% 100%",
+          },
+          to: {
+            "background-position": "0% 0%",
+          },
+        },
+        "progress-wave": {
+          from: {
+            transform: "rotate(0deg)",
+          },
+          to: {
+            transform: "rotate(360deg)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "progress-wave": "progress-wave 8s linear infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate"), addVariablesForColors, typography],
-} satisfies Config
-
-function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
- 
-  addBase({
-    ":root": newVars,
-  });
 }
 
-export default config;
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"))
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
+  )
+
+  addBase({
+    ":root": newVars,
+  })
+}

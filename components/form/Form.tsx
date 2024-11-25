@@ -2,15 +2,17 @@
 
 import { usePathname } from "next/navigation"
 import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/form/input"
 import { cn } from "@/lib/utils"
 import { IconBrandGoogle } from "@tabler/icons-react"
-import ButtonEffect, { BottomGradient } from "./ButtonEffect"
+import ButtonEffect, { BottomGradient } from "../buttons/ButtonEffect"
 import Link from "next/link"
-import { FadeText } from "./FadeText"
-import { AnimatePresence } from "framer-motion"
-import { FORM_TYPES, FormBaseProps, CustomInputProps } from "@/types/form.d"
+import { FadeText } from "../FadeText"
+import { AnimatePresence } from "motion/react"
+import { FormBaseProps, CustomInputProps } from "@/types/form.d"
 import TypingAnimation from "./TypingAnimation"
+import { DialogTitle, DialogDescription } from "@radix-ui/react-dialog"
+import { FORM_TYPES } from "@/constants"
 
 /**
  * Form container with submit button
@@ -24,8 +26,9 @@ export function FormBase({
   formClass,
   type = FORM_TYPES.AUTH,
   action,
-  pending = false,
+  isAuth = false,
   children,
+  isDialog = false,
 }: FormBaseProps) {
   const pathname = usePathname()
   const isLoginPage = pathname === "/login"
@@ -36,22 +39,29 @@ export function FormBase({
         formClass,
       )}
     >
-      <h2 className="font-mono text-2xl font-bold">{title}</h2>
+      {isDialog ? (
+        <DialogTitle asChild>
+          <h2 className="text-2xl font-bold">{title}</h2>
+        </DialogTitle>
+      ) : (
+        <h2 className="text-2xl font-bold">{title}</h2>
+      )}
+      
       {description && (
-        <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
+        isDialog ? (
+          <DialogDescription asChild>
+            <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
+          </DialogDescription>
+        ) : (
+          <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
+        )
       )}
 
       <form className="my-4" action={action}>
         {children}
 
         <ButtonEffect className="mb-2 mt-4" type="submit">
-          {pending ? (
-            <TypingAnimation text="Loading..." />
-          ) : isLoginPage ? (
-            "登入"
-          ) : (
-            "註冊"
-          )}
+          {isAuth ? "送出" : isLoginPage ? "登入" : "註冊"}
         </ButtonEffect>
 
         {type === "auth" && <AuthFooter isLoginPage={isLoginPage} />}
