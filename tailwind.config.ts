@@ -1,13 +1,11 @@
-import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography"
-const defaultTheme = require("tailwindcss/defaultTheme");
-
-const colors = require("tailwindcss/colors");
 
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
-const config = {
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: "selector",
   content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
   prefix: "",
@@ -16,11 +14,31 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1440px",
       },
     },
     extend: {
+<<<<<<< HEAD
+=======
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+        mono: ["var(--font-roboto-mono)"],
+      },
+      backgroundImage: {
+        'logo': "url('/logo.svg')",
+      },
+>>>>>>> feature/mainPage_articleList_Footer
       colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
         primary: {
           light: "#CAC6BD",
           dark: "#151515",
@@ -69,7 +87,7 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate"), addVariablesForColors, typography],
-} satisfies Config
+}
 
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));
@@ -81,5 +99,3 @@ function addVariablesForColors({ addBase, theme }: any) {
     ":root": newVars,
   });
 }
-
-export default config;

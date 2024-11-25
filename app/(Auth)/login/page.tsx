@@ -1,5 +1,12 @@
 "use client"
+<<<<<<< HEAD
 import { CustomInput, FormBase } from "@/components/Form"
+=======
+import { CustomInput, ErrorMessage, FormBase } from "@/components/form/Form"
+import { LoginSchema } from "@/lib/validation"
+import { useFormState } from "react-dom"
+import { ZodError } from "zod"
+>>>>>>> feature/mainPage_articleList_Footer
 
 function LoginPage() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -7,7 +14,14 @@ function LoginPage() {
     console.log("Send")
   }
   return (
+<<<<<<< HEAD
     <div className="bg-primary grid min-h-screen place-items-center">
+=======
+    <div className="w-full">
+      {getErrorMessage("form") && (
+        <ErrorMessage message={getErrorMessage("form") as string} />
+      )}
+>>>>>>> feature/mainPage_articleList_Footer
       <FormBase
         title="Welcome to GoodTalk"
         description="Where amazing happen"
