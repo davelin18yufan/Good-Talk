@@ -1,14 +1,7 @@
 "use client"
 import { cn } from "@/lib/utils"
-import { IconExclamationCircle } from "@tabler/icons-react"
 import { useState } from "react"
-
-interface TooltipProps {
-  children: React.ReactNode
-  content: React.ReactNode
-  side?: "top" | "bottom" | "left" | "right"
-  delayTransition?: number
-}
+import { TooltipProps } from "@/types/shared"
 
 function Tooltip({
   children,

@@ -57,7 +57,7 @@ function SignUpPage() {
         title="Be one of us in Good Talk"
         description="So excited to have you, almost there."
         action={signUpAction}
-        pending={pending}
+        isAuth
       >
         <div className="flex flex-col gap-4">
           <CustomInput

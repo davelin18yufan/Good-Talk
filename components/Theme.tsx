@@ -1,26 +1,17 @@
 "use client"
 
-import { THEME_ITEMS } from "@/constants"
+import { DARK_THEME, LIGHT_THEME, SYSTEM_THEME, THEME_ITEMS } from "@/constants"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import React, {
   useState,
   useEffect,
-  ButtonHTMLAttributes,
 } from "react"
-import { DARK_THEME, LIGHT_THEME, SYSTEM_THEME, useTheme, type Theme } from "@/hooks/useTheme"
+import { Theme, ThemeButtonProps } from "@/types/shared"
+import { useTheme } from "@/hooks/useTheme"
 
-interface ThemeButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick: () => void
-  children: React.ReactNode
-  active: boolean
-}
 
-export const ThemeButton: React.FC<ThemeButtonProps> = ({
-  onClick,
-  children,
-  active,
-}) => (
+export const ThemeButton = ({ onClick, children, active }: ThemeButtonProps) => (
   <button
     onClick={onClick}
     className={cn(

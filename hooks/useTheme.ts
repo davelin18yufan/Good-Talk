@@ -1,11 +1,7 @@
+import { SYSTEM_THEME, DARK_THEME, THEME_KEY } from "@/constants"
+import { Theme } from "@/types/shared"
 import { useState, useEffect, useCallback } from "react"
 
-export const THEME_KEY = "theme"
-export const SYSTEM_THEME = "system"
-export const DARK_THEME = "dark"
-export const LIGHT_THEME = "light"
-
-export type Theme = typeof SYSTEM_THEME | typeof DARK_THEME | typeof LIGHT_THEME
 
 export const useTheme = () => {
   const [theme, setTheme] = useState<Theme>(SYSTEM_THEME)

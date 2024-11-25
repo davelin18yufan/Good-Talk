@@ -10,23 +10,7 @@ import {
 } from "@/components/ui/select"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Image from "next/image"
-import { cn } from "@/lib/utils"
-
-interface FilterItem {
-  name: string
-  value: string
-}
-
-interface FilterGroup {
-  groupName: string
-  items: FilterItem[]
-}
-
-interface FilterProps {
-  filters: FilterGroup[]
-  otherClasses?: string
-  containerClasses?: string
-}
+import { FilterProps } from "@/types/shared"
 
 const Filter = ({ filters, otherClasses, containerClasses }: FilterProps) => {
   const router = useRouter()

@@ -1,8 +1,4 @@
-import { ButtonHTMLAttributes } from "react"
-
-interface ButtonLinkProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode
-}
+import { ButtonLinkProps } from "@/types/shared"
 
 function ButtonLink({ children, ...props }: ButtonLinkProps) {
   return (

@@ -3,12 +3,8 @@
 import { useState } from "react"
 import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
+import { Tab } from "@/types/shared"
 
-type Tab = {
-  title: string
-  value: string
-  content?: string | React.ReactNode | any
-}
 
 export const Tabs = ({
   tabs: propTabs,
