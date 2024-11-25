@@ -1,4 +1,4 @@
-import { Theme } from "@/hooks/useTheme"
+import { Theme } from "@/types/shared"
 import { ROUTES } from "./routes"
 import { ChartImageProps, CompactType } from "@/types/chart"
 import { ResponsiveLayouts } from "@/types/chart"
@@ -21,6 +21,10 @@ export const NAV_LINKS = [
   },
 ]
 
+export const THEME_KEY = "theme"
+export const SYSTEM_THEME = "system"
+export const DARK_THEME = "dark"
+export const LIGHT_THEME = "light"
 export const THEME_ITEMS: Array<{ mode: Theme; icon: string }> = [
   {
     mode: "light",

@@ -1,16 +1,20 @@
 "use client"
 
+import { AnimatedSubscribeButtonProps } from "@/types/shared"
 import { AnimatePresence, motion } from "motion/react"
-import React, { useState } from "react"
+import { useState } from "react"
 
-interface AnimatedSubscribeButtonProps {
-  buttonColor: string
-  buttonTextColor?: string
-  subscribeStatus: boolean
-  initialText: React.ReactElement | string
-  changeText: React.ReactElement | string
-}
-
+/**
+ * A subscribe button that can be used to show a changing text when the button is clicked.
+ * The button will change its text from the initialText to the changeText when clicked.
+ * The button will have a fade-in and fade-out animation when the state changes.
+ *
+ * @param {string} buttonColor The color of the button.
+ * @param {boolean} subscribeStatus The initial status of the button, true if subscribed, false if not.
+ * @param {string} buttonTextColor The color of the text of the button.
+ * @param {string} changeText The text of the button when it is clicked.
+ * @param {string} initialText The initial text of the button.
+ */
 export default function SubscribeButton({
   buttonColor,
   subscribeStatus,
