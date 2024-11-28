@@ -1,14 +1,8 @@
 "use client"
 
 import { useMemo } from "react"
-import { motion, Variants } from "motion/react"
-
-type FadeTextProps = {
-  className?: string
-  direction?: "up" | "down" | "left" | "right"
-  framerProps?: Variants
-  text: string
-}
+import { motion } from "motion/react"
+import { FadeTextProps } from "@/types/shared"
 
 export function FadeText({
   direction = "up",

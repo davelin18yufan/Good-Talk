@@ -50,7 +50,7 @@ function LoginPage() {
         title="Welcome to Good Talk"
         description="Where amazing happen, welcome back."
         action={loginAction}
-        pending={pending}
+        isAuth
       >
         <div className="flex flex-col gap-4">
           <CustomInput
