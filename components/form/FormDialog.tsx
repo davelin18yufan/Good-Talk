@@ -2,6 +2,8 @@ import { Dialog, DialogTrigger, DialogContent } from "../ui/dialog"
 import { Button } from "../ui/button"
 import { cn } from "@/lib/utils"
 
+import type { JSX } from "react";
+
 /**
  * FormDialog component renders a dialog modal with a trigger element.
  *

@@ -1,13 +1,12 @@
 "use client"
+import { useActionState } from "react";
 import { CustomInput, ErrorMessage, FormBase } from "@/components/form/Form"
 import { LoginSchema } from "@/lib/validation"
-import { useFormState } from "react-dom"
 import { ZodError } from "zod"
 
 function LoginPage() {
   // update state based on form action value
-  // ! Should Replace useFormState to useActionState after react 19 is stable and update to next14.13 canary. which can be used in RSC.
-  const [messages, loginAction, pending] = useFormState(handleSubmit, [
+  const [messages, loginAction, pending] = useActionState(handleSubmit, [
     { name: "", message: "" },
   ])
 
