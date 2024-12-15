@@ -14,7 +14,7 @@ import { ReactElement } from "react"
 // Dynamically import components
 const ProfitChart = dynamic(() => import("@/components/dashboard/ProfitChart"))
 const RealizedPnlChart = dynamic(
-  () => import("@/components/dashboard/RealizedPnlChart"),
+  () => import("@/components/dashboard/RealizedPnLChart"),
 )
 const TradeFundBase = dynamic(
   () => import("@/components/dashboard/TradeFundBase"),
@@ -52,7 +52,7 @@ const chartComponentsMap = new Map<keyof ChartComponentProps, (props: any) => Re
 export const renderChart = (
   chartId: keyof DynamicChartProps,
   chartProps: DynamicChartProps,
-): ReactElement => {
+): ReactElement<any> => {
   const renderComponent = chartComponentsMap.get(chartId)
 
   if (!renderComponent) {
