@@ -88,6 +88,6 @@ export interface AnimatedSubscribeButtonProps {
   buttonColor: string
   buttonTextColor?: string
   subscribeStatus: boolean
-  initialText: React.ReactElement | string
-  changeText: React.ReactElement | string
+  initialText: React.ReactElement<any> | string
+  changeText: React.ReactElement<any> | string
 }

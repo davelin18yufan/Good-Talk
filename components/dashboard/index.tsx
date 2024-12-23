@@ -1,5 +1,5 @@
 import FundPieChart from "./FundPieChart";
-import RealizedPnlChart from "./RealizedPnlChart";
+import RealizedPnlChart from "./RealizedPnLChart";
 import ProfitChart from "./ProfitChart";
 import TradeFundBase from "./TradeFundBase";
 import TradeLog from "./TradeLog";
