@@ -1,4 +1,4 @@
-export default function ArticlePage () {
+export default function ArticleDetailPage () {
   return (
     <div>
       Article detail page.
