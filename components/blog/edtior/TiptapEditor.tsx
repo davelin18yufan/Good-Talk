@@ -3,8 +3,9 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable quotes */
 import { debounce } from "@/lib/utils"
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useRef, useState } from "react"
 import RcTiptapEditor, {
+  type Editor as EditorType,
   BaseKit,
   Blockquote,
   Bold,
@@ -22,10 +23,13 @@ import RcTiptapEditor, {
   History,
   HorizontalRule,
   Image,
+  ImageGif,
   Indent,
   Italic,
   LineHeight,
   Link,
+  locale,
+  Mermaid,
   MoreMark,
   OrderedList,
   SearchAndReplace,
@@ -33,16 +37,11 @@ import RcTiptapEditor, {
   Strike,
   TaskList,
   TextAlign,
-  Underline,
-  locale,
   TextDirection,
-  ImageGif,
-  Mermaid,
+  Underline,
 } from "reactjs-tiptap-editor"
-
 import "reactjs-tiptap-editor/style.css"
 import { zh_TW } from "../../../constants/zh_TW"
-import { Input } from "@/components/form"
 
 function convertBase64ToBlob(base64: string) {
   const arr = base64.split(",")
@@ -111,7 +110,7 @@ const extensions = [
   Code.configure({
     toolbar: false,
   }),
-  CodeBlock.configure({ defaultTheme: "dracula" }),
+  CodeBlock.configure({ defaultTheme: "material-theme-lighter" }),
   ColumnActionButton,
   Mermaid.configure({
     upload: (file: File) => {
@@ -135,24 +134,33 @@ export const DEFAULT = `<h1 style="text-align: center">Rich Text Editor</h1><p>A
 // ! [Yjs was already imported. This breaks constructor checks and will lead to issues! - https://github.com/yjs/yjs/issues/438]
 // ! This error occurs because yjs was imported twice. And the official solution is to resolve alias for yjs dependency. But the package react-tiptap-editor could not find the yjs module in the node_modules folder.
 function Editor({ initialContent }: { initialContent?: string }) {
-  const DEFAULT_TITLE = `<h1 style="text-align:center"><span style="color:#D9D9D9">請輸入標題</span></h1>`
+  const DEFAULT_TITLE = `<h1 style="text-align:center"><span style="color:#D9D9D9"></span></h1>`
   // TODO: 保持第一列一定要是H1，不能被移動也不能被刪除
   const [content, setContent] = useState(initialContent ?? DEFAULT_TITLE)
-  
-  const refEditor = React.useRef<any>(null)
+
+  const refEditor = useRef<{ editor: EditorType | null }>(null)
 
   const [disable, setDisable] = useState(false)
 
   const onValueChange = useCallback(
     debounce((value: string) => {
-      const lines = value.split("\n")
-      const titleElement = lines[0].trim().startsWith("<h1") ? lines[0] : DEFAULT_TITLE
-      const updatedContent = [titleElement, ...lines.slice(1)].join("\n")
-      setContent(updatedContent)
-      console.log(updatedContent)
+      // analyze HTML
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(value, "text/html")
+
+      // get first element
+      const firstElement = doc.body.firstChild as HTMLElement
+
+      let finalContent = value
+
+      // if first element is not h1, add default h1 title
+      if (!firstElement || firstElement.tagName.toLowerCase() !== "h1") {
+        finalContent = DEFAULT_TITLE + value
+      }
+
+      setContent(finalContent)
     }, 200),
     [],
-
   )
 
   // set locale to Traditional Chinese
@@ -161,11 +169,6 @@ function Editor({ initialContent }: { initialContent?: string }) {
   return (
     <main className="px-0 py-5 md:px-2 lg:px-6">
       <div className="place-content-center">
-        {/* <button onClick={() => locale.setLang("en")}>English</button>
-          <button onClick={() => locale.setLang("zh_TW")}>Manderin</button>
-          <button onClick={() => setDisable(!disable)}>
-            {disable ? "Editable" : "Readonly"}
-          </button> */}
         <RcTiptapEditor
           ref={refEditor}
           output="html"
@@ -176,7 +179,7 @@ function Editor({ initialContent }: { initialContent?: string }) {
           useEditorOptions={{
             immediatelyRender: false,
           }}
-          contentClass="p-2"
+          contentClass="p-2 min-h-[600px]"
         />
       </div>
     </main>
