@@ -133,14 +133,12 @@ export const DEFAULT = `<h1 style="text-align: center">Rich Text Editor</h1><p>A
 // TODO: replace default dummy template
 // ! [Yjs was already imported. This breaks constructor checks and will lead to issues! - https://github.com/yjs/yjs/issues/438]
 // ! This error occurs because yjs was imported twice. And the official solution is to resolve alias for yjs dependency. But the package react-tiptap-editor could not find the yjs module in the node_modules folder.
-function Editor({ initialContent }: { initialContent?: string }) {
+function Editor({ initialContent, disabled = false }: { initialContent?: string; disabled?: boolean }) {  
   const DEFAULT_TITLE = `<h1 style="text-align:center"><span style="color:#D9D9D9"></span></h1>`
   // TODO: 保持第一列一定要是H1，不能被移動也不能被刪除
   const [content, setContent] = useState(initialContent ?? DEFAULT_TITLE)
 
   const refEditor = useRef<{ editor: EditorType | null }>(null)
-
-  const [disable, setDisable] = useState(false)
 
   const onValueChange = useCallback(
     debounce((value: string) => {
@@ -175,7 +173,7 @@ function Editor({ initialContent }: { initialContent?: string }) {
           content={content}
           onChangeContent={onValueChange}
           extensions={extensions}
-          disabled={disable}
+          disabled={disabled}
           useEditorOptions={{
             immediatelyRender: false,
           }}
