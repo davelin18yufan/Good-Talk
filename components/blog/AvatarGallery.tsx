@@ -28,7 +28,7 @@ export function AvatarCard({ person }: { person: Author }) {
             transitionTimingFunction: "cubic-bezier(.5,.85,.25,1.8)",
           }}
         >
-          {person?.description}
+          {person?.aka}
         </span>
       </a>
       {person.url ? (

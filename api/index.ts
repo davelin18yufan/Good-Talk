@@ -294,6 +294,7 @@ export const persons = [
     url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
     name: "Adrian Paul",
     description: "COO & Co-Founder",
+    aka: "COO & Co-Founder",
     tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
   },
 
@@ -301,14 +302,17 @@ export const persons = [
     id: "765752",
     url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXZhdGFyfGVufDB8fDB8fHww",
     name: "Flualy Cual",
-    description: "Founder & CEO",
+    description:
+      "Founder & CEO, enthusiast of nature, also known as Omfi's best friend",
+    aka: "Founder & CEO of Omfi",
     tags: ["Twilight", "Peaks", "Silhouette", "Evening Sky", "Peaceful"],
   },
   {
     id: "45673",
     url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww",
     name: "Naymur Rahman",
-    description: "CTO & Co-Founder",
+    aka: "JS Wizard",
+    description: "JavaScript Enthusiast and Full-Stack Developer",
     tags: ["Rocky", "Ridges", "Contrast", "Adventure", "Clouds"],
   },
 ]
@@ -326,11 +330,14 @@ export const article = {
   author: {
     id: "12542",
     url: "https://images.unsplash.com/photo-1702884162674-b05320817c58?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    name: "Adrian Paul",
-    description: "COO & Co-Founder",
+    name: "Amber Huang",
+    description:
+      "Founder & CEO of Ambrosia, a company that specializes in AI-powered financial analysis and portfolio management.",
+    aka: "Lider of Ambrosia and speaker of Ambrosia",
     tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
   },
   date: "2022-01-01",
+  category: ["Finance", "Business"],
 }
 
 export const articles = [
@@ -347,10 +354,12 @@ export const articles = [
       id: "1265442",
       url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
       name: "Adrian Paul",
+      aka: "COO & Co-Founder",
       description: "COO & Co-Founder",
       tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
     },
     date: "2023-11-06",
+    category: ["Nature", "Photography"],
   },
   {
     id: "224",
@@ -364,11 +373,13 @@ export const articles = [
     author: {
       id: "16543",
       url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
-      name: "Adrian Paul",
-      description: "COO & Co-Founder",
+      name: "Shahriar Rahman",
+      description: "Head of Marketing in Capital One",
+      aka: "Head of Marketing in Capital One",
       tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
     },
     date: "2024-01-06",
+    category: ["Food", "Gardening"],
   },
   {
     id: "777",
@@ -382,10 +393,13 @@ export const articles = [
     author: {
       id: "126",
       url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
-      name: "Adrian Paul",
-      description: "COO & Co-Founder",
+      name: "Nicole Smith",
+      aka: "Experienced Writer",
+      description: "Experienced Writer",
       tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
     },
     date: "2024-04-21",
+    category: ["Business", "Leadership"],
   },
 ]
+

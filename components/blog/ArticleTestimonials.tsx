@@ -41,10 +41,10 @@ const AnimatedTestimonials = ({
   }, [autoplay])
 
   const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10
+    return Math.floor(Math.random() * 22) - 11
   }
   return (
-    <div className="mx-auto max-w-sm px-4 py-10 font-sans antialiased md:max-w-4xl md:px-4 z-20">
+    <div className="mx-auto max-w-sm px-4 py-2 antialiased md:max-w-4xl md:px-4 z-20">
       <div className="relative grid grid-cols-1 gap-10">
         <div className="relative h-80 w-full">
           <AnimatePresence>
@@ -92,7 +92,7 @@ const AnimatedTestimonials = ({
             ))}
           </AnimatePresence>
         </div>
-        <div className="flex flex-col justify-between py-4">
+        <div className="flex flex-col justify-between py-3">
           <motion.div
             key={active}
             initial={{
@@ -112,13 +112,13 @@ const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <h3 className="text-2xl font-bold text-black dark:text-white">
+            <h3 className="text-2xl font-bold text-black dark:text-white py-1">
               {testimonials[active].name}
             </h3>
             <p className="text-sm text-gray-500 dark:text-neutral-500">
               {testimonials[active].designation}
             </p>
-            <motion.p className="mt-8 text-lg text-gray-500 dark:text-neutral-300">
+            <motion.p className="mt-4 text-lg text-gray-500 dark:text-neutral-300">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
