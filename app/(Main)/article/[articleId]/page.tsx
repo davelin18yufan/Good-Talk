@@ -48,7 +48,7 @@ export default function ArticleDetailPage() {
           <div className="mx-auto flex w-10/12 items-center justify-between">
             {/* Author */}
             <Link
-              href={`/author/${blog.author.id}`}
+              href={`/profile/${blog.author.id}`}
               className="flex items-center"
             >
               <Avatar className="bg-muted-background m-auto size-20 border dark:bg-foreground">
@@ -98,7 +98,7 @@ export default function ArticleDetailPage() {
             </CardHeader>
             <CardContent className="flex flex-col items-center">
               <Link
-                href={`/author/${blog.author.id}`}
+                href={`/profile/${blog.author.id}`}
                 className="flex items-center"
               >
                 <Avatar className="bg-muted-background size-16 border dark:bg-foreground">
