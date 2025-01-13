@@ -38,7 +38,7 @@
     --x-axis: #8884d8;
     --y-axis: #064e3b;
     --bar: #413ea0;
-    --line: #eb7e09;
+    --line: #ca3b10;
     --area: #8884d8;
     --area-secondary: #82ca9d;
     --grid: #e5e5e5;
@@ -49,6 +49,7 @@
     --chart-3: #e8c468;
     --chart-4: #274754;
     --chart-5: #f4a462;
+    --progress: #7f8764;
   }
 
   .dark {
@@ -95,6 +96,8 @@
     --chart-3: #2662d9;
     --chart-4: #af57db;
     --chart-5: #e23670;
+    --progress: #89916B;
+    --progress: #939650; /* bg-slate-900 */
   }
 
   button {
