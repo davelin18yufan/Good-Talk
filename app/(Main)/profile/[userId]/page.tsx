@@ -4,8 +4,6 @@ import { Progress } from "@/components/ui/progress"
 import {
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
   ResponsiveContainer,
   Legend,
   Line,
@@ -32,6 +30,8 @@ import Link from "next/link"
 import VideoPlayer from "@/components/VedioPlayer"
 import NumberTicker from "@/components/NumberTicker"
 import { cn } from "@/lib/utils"
+import { persons } from "@/api"
+import { AvatarTooltip } from "@/components/blog/AvatarTooltip"
 
 const DELAY = 0.5
 
@@ -59,50 +59,51 @@ export default function ProfilePage() {
     },
   ]
 
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-]
+  const data = [
+    {
+      month: "Jan.",
+      totalAsset: 4000,
+      views: 2400,
+      follows: 2400,
+    },
+    {
+      month: "Feb.",
+      totalAsset: 3000,
+      views: 1398,
+      follows: 2210,
+    },
+    {
+      month: "Mar.",
+      totalAsset: 2000,
+      views: 9800,
+      follows: 2290,
+    },
+    {
+      month: "Apr.",
+      totalAsset: 2780,
+      views: 3908,
+      follows: 2000,
+    },
+    {
+      month: "May",
+      totalAsset: 1890,
+      views: 4800,
+      follows: 2181,
+    },
+    {
+      month: "Jun.",
+      totalAsset: 2390,
+      views: 3800,
+      follows: 2500,
+    },
+    {
+      month: "Jul.",
+      totalAsset: 3490,
+      views: 4300,
+      follows: 2100,
+    },
+  ]
+
   const achievements = [
     {
       id: 1,
@@ -364,7 +365,7 @@ const data = [
           description={
             <BlurFade key="achievements" delay={DELAY + Math.random()}>
               <div className="space-y-2">
-                <h3 className="text-progress text-center text-4xl font-bold">
+                <h3 className="text-center text-4xl font-bold text-progress">
                   750
                 </h3>
                 <Progress value={75} className="mt-2 h-2" />
@@ -402,7 +403,7 @@ const data = [
                       {title}
                     </dt>
 
-                    <dd className="text-xl font-extrabold text-blue-700 md:text-2xl dark:text-sky-500">
+                    <dd className="text-xl font-extrabold text-sky-800 md:text-2xl dark:text-sky-500">
                       <NumberTicker
                         value={value}
                         className={cn(
@@ -440,16 +441,25 @@ const data = [
                     bottom: 5,
                   }}
                 >
-                  <XAxis dataKey="name" color="var(--x-axis)"/>
-                  <YAxis color="var(--y-axis)"/>
+                  <XAxis dataKey="month" color="var(--x-axis)" />
+                  <YAxis color="var(--y-axis)" />
                   <Legend />
                   <Line
                     type="monotone"
-                    dataKey="pv"
+                    dataKey="totalAsset"
                     stroke="var(--line)"
                     activeDot={{ r: 8 }}
                   />
-                  <Line type="monotone" dataKey="uv" stroke="var(--chart-4)" />
+                  <Line
+                    type="monotone"
+                    dataKey="views"
+                    stroke="var(--chart-4)"
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="follows"
+                    stroke="var(--chart-2)"
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </BlurFade>
@@ -484,25 +494,15 @@ const data = [
           }
         />
 
-        {/* Recent Activities */}
+        {/* Followed */}
         <BentoGridItem
-          title="Recent Comments"
+          title="Followed"
           description={
-            <BlurFade key="recent-activities" delay={DELAY + Math.random()}>
-              <div className="space-y-2">
-                {comments.map((comment) => (
-                  <div
-                    key={comment.id}
-                    className="rounded bg-neutral-100 p-2 dark:bg-neutral-800"
-                  >
-                    <h3 className="font-semibold text-neutral-800 dark:text-neutral-200">
-                      {comment.article}
-                    </h3>
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400">
-                      {comment.content}
-                    </p>
-                  </div>
-                ))}
+            <BlurFade key="followed" delay={DELAY + Math.random()}>
+              <div className="relative mt-2 flex flex-row flex-wrap items-center justify-center">
+                {/* //TODO Watch for the length */}
+                <AvatarTooltip persons={persons} />
+                <ButtonLink className="ml-auto">See More</ButtonLink>
               </div>
             </BlurFade>
           }
