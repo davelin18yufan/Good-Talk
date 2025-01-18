@@ -293,10 +293,11 @@ export const persons = [
     id: "1265412",
     url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
     name: "Adrian Paul",
-    aka: "Someone Prefer to be called Captain", 
+    aka: "Someone Prefer to be called Captain",
     description:
       "I'm Adrian Paul, a passionate entrepreneur and tech enthusiast. As the COO & Co-Founder of Omfi, I'm dedicated to empowering individuals and businesses to take control of their finances and achieve their financial goals. With extensive experience in the fintech industry, I'm committed to driving innovation and making a positive impact on the world. When I'm not working, you can find me exploring new hiking trails, practicing yoga, or simply enjoying the beauty of nature.",
     tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
+    location: "New York, USA",
   },
   {
     id: "765752",
@@ -306,6 +307,7 @@ export const persons = [
       "Founder & CEO, enthusiast of nature, also known as Omfi's best friend",
     aka: "Founder & CEO of Omfi",
     tags: ["Twilight", "Peaks", "Silhouette", "Evening Sky", "Peaceful"],
+    location: "San Francisco, USA",
   },
   {
     id: "45673",
@@ -314,9 +316,9 @@ export const persons = [
     aka: "JS Wizard",
     description: "JavaScript Enthusiast and Full-Stack Developer",
     tags: ["Rocky", "Ridges", "Contrast", "Adventure", "Clouds"],
+    location: "London, UK",
   },
 ]
-
 // dummy article
 export const article = {
   id: "199",

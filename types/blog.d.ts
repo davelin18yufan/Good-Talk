@@ -6,6 +6,7 @@ export interface Author {
   aka?: string
   tags?: string[]
   badges?: string[]
+  location?: string
 }
 
 // Base blog interface with common properties

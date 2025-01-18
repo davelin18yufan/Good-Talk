@@ -10,6 +10,17 @@ import {
 } from "motion/react"
 import { type Author } from "@/types/blog"
 import { StaticImport } from "next/dist/shared/lib/get-img-props"
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogTrigger,
+  DialogHeader,
+} from "@/components/ui/dialog"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { ProfileList } from "./ProfileCard"
+import Link from "next/link"
 
 export const AvatarTooltip = ({ persons }: { persons: Author[] }) => {
   const [hoveredIndex, setHoveredIndex] = useState<null | string>(null)
@@ -31,9 +42,10 @@ export const AvatarTooltip = ({ persons }: { persons: Author[] }) => {
   }
 
   return (
-    <>
+    <div className="flex-center">
       {persons.map((person, idx) => (
-        <div
+        <Link
+          href={`profile/${person.id}`}
           className="group relative -mr-4"
           key={person.name}
           onMouseEnter={() => setHoveredIndex(person.id)}
@@ -76,10 +88,38 @@ export const AvatarTooltip = ({ persons }: { persons: Author[] }) => {
             width={100}
             src={person.url as string | StaticImport}
             alt={person.name}
-            className="relative !m-0 size-14 lg:size-20 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
+            className="relative !m-0 size-14 rounded-full border-2 border-primary-light object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105 lg:size-20"
           />
-        </div>
+        </Link>
       ))}
-    </>
+      {persons.length > 8 && (
+        <Dialog>
+          <DialogTrigger asChild key="more-followers">
+            <Button
+              variant="ghost"
+              className={cn(
+                "rounded-full dark:hover:bg-transparent",
+                "transition-transform hover:scale-110",
+                "hover:bg-transparent",
+              )}
+            >
+              <p className="text-subtext bg-secondary relative left-2 z-10 rounded-md px-2 py-1 text-base font-bold">
+                ... {persons.length - 10}+
+              </p>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[50vh]">
+            <div className="bg-tertiary rounded-md p-3">
+              <DialogHeader>
+                <DialogTitle className="text-header text-2xl font-bold">
+                  All Followers {persons.length}+
+                </DialogTitle>
+              </DialogHeader>
+              <ProfileList persons={persons} />
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+    </div>
   )
 }

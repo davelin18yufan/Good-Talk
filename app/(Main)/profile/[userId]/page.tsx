@@ -32,6 +32,7 @@ import NumberTicker from "@/components/NumberTicker"
 import { cn } from "@/lib/utils"
 import { persons } from "@/api"
 import { AvatarTooltip } from "@/components/blog/AvatarTooltip"
+import Stat from "@/components/Stat"
 
 const DELAY = 0.5
 
@@ -45,19 +46,6 @@ export default function ProfilePage() {
     aka: "COO & Co-Founder",
     tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
   }
-
-  const comments = [
-    {
-      id: 1,
-      article: "Introduction to GraphQL",
-      content: "Great article! Very informative.",
-    },
-    {
-      id: 2,
-      article: "CSS Grid Layout Mastery",
-      content: "This helped me understand grid layout better. Thanks!",
-    },
-  ]
 
   const data = [
     {
@@ -342,7 +330,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="relative">
                   <IconPencilBolt
-                    className="text-invert absolute right-5 top-3 z-10 h-5 w-5 cursor-pointer"
+                    className="text-invert absolute right-5 top-3 z-10 h-5 w-5 cursor-pointer max-lg:hidden"
                     onClick={() => {}}
                   />
                   <VideoPlayer
@@ -448,7 +436,7 @@ export default function ProfilePage() {
                     type="monotone"
                     dataKey="totalAsset"
                     stroke="var(--line)"
-                    activeDot={{ r: 8 }}
+                    // activeDot={{ r: 8 }} // only available with Tooltip
                   />
                   <Line
                     type="monotone"
@@ -496,13 +484,13 @@ export default function ProfilePage() {
 
         {/* Followed */}
         <BentoGridItem
+          className="pb-0"
           title="Followed"
           description={
             <BlurFade key="followed" delay={DELAY + Math.random()}>
-              <div className="relative mt-2 flex flex-row flex-wrap items-center justify-center">
-                {/* //TODO Watch for the length */}
+              <div className="flex-center relative max-md:py-4 md:mt-7">
+                {/* //TODO Careful for the length */}
                 <AvatarTooltip persons={persons} />
-                <ButtonLink className="ml-auto">See More</ButtonLink>
               </div>
             </BlurFade>
           }
@@ -514,28 +502,10 @@ export default function ProfilePage() {
           description={
             <BlurFade key="content-statistics" delay={DELAY + Math.random()}>
               <div className="space-y-2">
-                <div>
-                  <div className="mb-1 flex justify-between text-xs text-neutral-600 dark:text-neutral-400">
-                    <span>Total Views</span>
-                    <span>3680</span>
-                  </div>
-                  <Progress value={73} className="h-2" />
-                </div>
-                <div>
-                  <div className="mb-1 flex justify-between text-xs text-neutral-600 dark:text-neutral-400">
-                    <span>Total Comments</span>
-                    <span>43</span>
-                  </div>
-                  <Progress value={43} className="h-2" />
-                </div>
-                <div>
-                  <div className="mb-1 flex justify-between text-xs text-neutral-600 dark:text-neutral-400">
-                    <span>Total Likes</span>
-                    <span>137</span>
-                  </div>
-                  <Progress value={55} className="h-2" />
-                </div>
-              </div>
+                <Stat label="Total Views" value={3680} maxValue={5000} />
+                <Stat label="Total Comments" value={43} maxValue={100} />
+                <Stat label="Total Likes" value={137} maxValue={250} />
+              </div>{" "}
             </BlurFade>
           }
         />

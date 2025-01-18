@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { AvatarFallback } from "../ui/avatar"
 import type { Author } from "@/types/blog"
+import Link from "next/link"
 
 export function AvatarCard({
   person,
@@ -16,9 +17,10 @@ export function AvatarCard({
         transitionTimingFunction: "cubic-bezier(.5,.85,.25,1.15)",
       }}
     >
-      <a
+      <Link
         className="absolute inset-0 z-10 flex flex-col justify-end p-3 text-white"
         href={isAnchor ? `/profile/${person.id}` : "#0"}
+        prefetch
       >
         <h3
           className="text-md font-medium transition duration-200 group-focus-within/article:translate-y-0 group-focus-within/article:opacity-100 group-focus-within/article:delay-300 group-hover/article:translate-y-0 group-hover/article:opacity-100 group-hover/article:delay-300 md:translate-y-2 md:truncate md:whitespace-nowrap md:opacity-0"
@@ -36,7 +38,7 @@ export function AvatarCard({
         >
           {person?.aka}
         </span>
-      </a>
+      </Link>
       {person.url ? (
         <Image
           className="h-28 w-full object-cover md:h-36"
