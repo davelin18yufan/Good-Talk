@@ -3,6 +3,6 @@ export const ROUTES = {
   LOG_IN: "/login",
   SIGN_UP: "/signup",
   DASHBOARD: "/dashboard",
-  ARTICLE: (id: string = "") => `/article${"/" + id}`,
-  ARTHOR: (id: string) => `/author/${id}`,
+  ARTICLE: (id: string = "") => `/article/${id}`,
+  PROFILE: (id: string = "") => `/profile/${id}`,
 }

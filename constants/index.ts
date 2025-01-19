@@ -19,6 +19,11 @@ export const NAV_LINKS = [
     tabName: "部落格",
     icon: "/books.svg",
   },
+  {
+    route: ROUTES.PROFILE(),
+    tabName: "個人檔案",
+    icon: "/user.svg"
+  }
 ]
 
 export const THEME_KEY = "theme"

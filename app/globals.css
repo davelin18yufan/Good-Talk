@@ -49,7 +49,7 @@
     --chart-3: #e8c468;
     --chart-4: #274754;
     --chart-5: #f4a462;
-    --progress: #7f8764;
+    --progress: #808b5b;
   }
 
   .dark {
@@ -96,8 +96,7 @@
     --chart-3: #2662d9;
     --chart-4: #af57db;
     --chart-5: #e23670;
-    --progress: #89916B;
-    --progress: #939650; /* bg-slate-900 */
+    --progress: #a3b562; 
   }
 
   button {
@@ -252,7 +251,11 @@
   }
 
   .text-subtext {
-    @apply text-neutral-700 dark:!text-neutral-300/80;
+    @apply text-neutral-600 dark:!text-neutral-300/80;
+  }
+
+  .text-lighter {
+    @apply text-neutral-500 dark:text-neutral-400;
   }
 
   .text-invert {

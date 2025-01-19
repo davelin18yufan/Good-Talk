@@ -7,6 +7,7 @@ export interface Author {
   tags?: string[]
   badges?: string[]
   location?: string
+  email?: string
 }
 
 // Base blog interface with common properties

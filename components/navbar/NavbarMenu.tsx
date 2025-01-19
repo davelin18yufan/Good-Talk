@@ -19,12 +19,14 @@ export const MenuItem = ({
   item,
   children,
   trigger,
+  itemClasses
 }: {
   setActive: (item: string) => void
   active: string | null
   item: string
   trigger: React.JSX.Element
   children?: React.ReactNode
+  itemClasses?: string
 }) => {
   return (
     <div onMouseEnter={() => setActive(item)} className="relative">
@@ -41,7 +43,7 @@ export const MenuItem = ({
           transition={transition}
         >
           {active === item && (
-            <div className="absolute left-1/2 top-full z-10 -translate-x-1/2 transform pt-4">
+            <div className={`absolute left-1/2 top-full z-10 -translate-x-1/2 transform pt-4 ${itemClasses}`}>
               <motion.div
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation

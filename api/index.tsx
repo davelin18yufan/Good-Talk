@@ -1,5 +1,6 @@
 import { DEFAULT_LAYOUTS, DEFAULT_TOOLBOX, DEFAULT_COMPACTTYPE } from "@/constants"
 import { ResponsiveLayouts, CompactType, DynamicChartProps } from "@/types/chart"
+import { ArrowUpRight, Flame, Shield } from "lucide-react"
 
 // !All dummy datas
 export const blogs = [
@@ -337,6 +338,8 @@ export const article = {
       "Founder & CEO of Ambrosia, a company that specializes in AI-powered financial analysis and portfolio management.",
     aka: "Lider of Ambrosia and speaker of Ambrosia",
     tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
+    location: "New York, USA",
+    email: "BZ8eX@example.com",
   },
   date: "2022-01-01",
   category: ["Finance", "Business"],
@@ -405,3 +408,24 @@ export const articles = [
   },
 ]
 
+export const userCardItems = [
+  {
+    icon: <ArrowUpRight className="h-4 w-4 text-amber-500" />,
+    label: "Current Level",
+    value: 42,
+    desc: `2600/4000 XP`,
+    progress: 0.26 * 100,
+  },
+  {
+    icon: <Flame className="h-4 w-4 text-red-500" />,
+    label: "Daily Streak",
+    value: "7 days",
+    desc: "🔥 Keep it up!",
+  },
+  {
+    icon: <Shield className="h-4 w-4 text-emerald-500" />,
+    label: "Achievements",
+    value: "12/30",
+    desc: "Master III",
+  },
+]
