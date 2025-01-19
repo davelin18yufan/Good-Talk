@@ -5,6 +5,7 @@ import PlanForm from "./PlanForm"
 import { Input } from "./input"
 import { FormBase, CustomInput, ErrorMessage } from "./Form"
 import FormDialog from "./FormDialog"
+import { PlaceholdersAndVanishInput } from "./PlaceholdersAndVanishInput"
 
 export {
   MainConfigForm,
@@ -15,4 +16,5 @@ export {
   CustomInput,
   ErrorMessage,
   FormDialog,
+  PlaceholdersAndVanishInput,
 }
