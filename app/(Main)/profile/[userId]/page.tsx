@@ -10,7 +10,6 @@ import {
   LineChart,
 } from "recharts"
 import { BentoGrid, BentoGridItem } from "@/components/BentoGrid"
-import ButtonLink from "@/components/buttons/ButtonLink"
 import NoResult from "@/components/NoResult"
 import { BlogSetCard } from "@/components/blog/ArticleSets"
 import { articles } from "@/api"
@@ -25,6 +24,7 @@ import {
   IconMail,
   IconLink,
   IconPencilBolt,
+  IconBrandBluesky,
 } from "@tabler/icons-react"
 import Link from "next/link"
 import VideoPlayer from "@/components/VedioPlayer"
@@ -33,6 +33,8 @@ import { cn } from "@/lib/utils"
 import { persons } from "@/api"
 import { AvatarTooltip } from "@/components/blog/AvatarTooltip"
 import Stat from "@/components/Stat"
+import { UserRoundPen } from "lucide-react"
+import { motion } from "motion/react"
 
 const DELAY = 0.5
 
@@ -120,7 +122,7 @@ export default function ProfilePage() {
       url: "https://facebook.com/alice_codes",
     },
     {
-      name: "Twitter",
+      name: "X",
       icon: <IconBrandTwitter className="h-6 w-6" />,
       url: "https://twitter.com/alice_codes",
     },
@@ -154,6 +156,11 @@ export default function ProfilePage() {
       icon: <IconMail className="h-6 w-6" />,
       url: "mailto:K0L0w@example.com",
     },
+    {
+      name: "Bluesky",
+      icon: <IconBrandBluesky className="h-6 w-6" />,
+      url: "https://bluesky.app/@alice_codes",
+    }
   ]
 
   const videos = [
@@ -292,8 +299,17 @@ export default function ProfilePage() {
                         .join("")}
                     </AvatarFallback>
                   </Avatar>
-                  <ButtonLink className="z-10 flex-1">Edit Profile</ButtonLink>
+                  <button className="!text-subtext group relative mt-2 inline-flex items-center overflow-hidden bg-transparent px-8 py-3 focus:outline-none">
+                    <span className="absolute -start-full transition-all group-hover:start-2">
+                      <UserRoundPen className="size-5 rtl:rotate-180" />
+                    </span>
+
+                    <span className="text-sm font-medium transition-all !duration-300">
+                      Edit Profile
+                    </span>
+                  </button>
                 </div>
+
                 <div className="flex-1 p-1 text-center md:ml-3 md:text-left">
                   <div className="flex flex-col gap-4">
                     {/* Name */}
@@ -314,10 +330,42 @@ export default function ProfilePage() {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:bg-primary flex size-16 flex-col items-center justify-center rounded-md px-2.5 py-1.5 transition-colors"
                         >
-                          {link.icon}
-                          <span className="mt-1 text-xs">{link.name}</span>
+                          <motion.span
+                            className={cn(
+                              "hover:bg-primary flex-center flex-col px-2.5 py-1.5 text-center text-xs transition-all rounded-md",
+                            )}
+                            whileHover="hover"
+                            initial="initial"
+                          >
+                            {link.icon}
+                            <span className="mt-1">
+                              {link.name.split("").map((char, index) => (
+                                <motion.span
+                                  key={index}
+                                  className="inline-block"
+                                  variants={{
+                                    initial: {
+                                      y: 0,
+                                      scale: 1,
+                                    },
+                                    hover: {
+                                      y: -4,
+                                      scale: 1.2,
+                                      transition: {
+                                        type: "spring",
+                                        stiffness: 300,
+                                        damping: 15,
+                                        delay: index * 0.03,
+                                      },
+                                    },
+                                  }}
+                                >
+                                  {char}
+                                </motion.span>
+                              ))}
+                            </span>
+                          </motion.span>
                         </Link>
                       ))}
                     </div>
