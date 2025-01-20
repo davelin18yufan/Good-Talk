@@ -1,40 +1,40 @@
 "use client"
+import { articles, persons } from "@/api"
+import { BentoGrid, BentoGridItem } from "@/components/BentoGrid"
+import { BlogSetCard } from "@/components/blog/ArticleSets"
+import { AvatarTooltip } from "@/components/blog/AvatarTooltip"
+import BlurFade from "@/components/BlurFade"
+import { FormDialog, ProfileForm } from "@/components/form"
+import NoResult from "@/components/NoResult"
+import NumberTicker from "@/components/NumberTicker"
+import Stat from "@/components/Stat"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Progress } from "@/components/ui/progress"
+import VideoPlayer from "@/components/VedioPlayer"
+import { cn } from "@/lib/utils"
 import {
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
+  IconBrandBluesky,
+  IconBrandFacebook,
+  IconBrandGithub,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconBrandTwitter,
+  IconBrandYoutube,
+  IconLink,
+  IconMail,
+  IconPencilBolt,
+  IconUserEdit
+} from "@tabler/icons-react"
+import { motion } from "motion/react"
+import Link from "next/link"
+import {
   Legend,
   Line,
   LineChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
 } from "recharts"
-import { BentoGrid, BentoGridItem } from "@/components/BentoGrid"
-import NoResult from "@/components/NoResult"
-import { BlogSetCard } from "@/components/blog/ArticleSets"
-import { articles } from "@/api"
-import BlurFade from "@/components/BlurFade"
-import {
-  IconBrandFacebook,
-  IconBrandTwitter,
-  IconBrandLinkedin,
-  IconBrandGithub,
-  IconBrandYoutube,
-  IconBrandInstagram,
-  IconMail,
-  IconLink,
-  IconPencilBolt,
-  IconBrandBluesky,
-} from "@tabler/icons-react"
-import Link from "next/link"
-import VideoPlayer from "@/components/VedioPlayer"
-import NumberTicker from "@/components/NumberTicker"
-import { cn } from "@/lib/utils"
-import { persons } from "@/api"
-import { AvatarTooltip } from "@/components/blog/AvatarTooltip"
-import Stat from "@/components/Stat"
-import { UserRoundPen } from "lucide-react"
-import { motion } from "motion/react"
 
 const DELAY = 0.5
 
@@ -160,7 +160,7 @@ export default function ProfilePage() {
       name: "Bluesky",
       icon: <IconBrandBluesky className="h-6 w-6" />,
       url: "https://bluesky.app/@alice_codes",
-    }
+    },
   ]
 
   const videos = [
@@ -285,7 +285,7 @@ export default function ProfilePage() {
           description={
             <BlurFade key="profile-header" delay={DELAY + Math.random()}>
               <div className="flex flex-col gap-4 max-md:items-center md:col-span-3 md:flex-row">
-                <div className="flex flex-col justify-start">
+                <div className="flex flex-col justify- items-center">
                   <Avatar className="h-32 w-32 xl:size-36">
                     <AvatarImage
                       src={userProfile.url}
@@ -299,15 +299,28 @@ export default function ProfilePage() {
                         .join("")}
                     </AvatarFallback>
                   </Avatar>
-                  <button className="!text-subtext group relative mt-2 inline-flex items-center overflow-hidden bg-transparent px-8 py-3 focus:outline-none">
-                    <span className="absolute -start-full transition-all group-hover:start-2">
-                      <UserRoundPen className="size-5 rtl:rotate-180" />
-                    </span>
+                  <FormDialog
+                    triggerElement={
+                      <div className="!text-subtext group relative mt-2 inline-flex text-center overflow-hidden px-8 py-3">
+                        <span className="absolute -start-full transition-all group-hover:start-2">
+                          <IconUserEdit className="size-5 rtl:rotate-180" />
+                        </span>
 
-                    <span className="text-sm font-medium transition-all !duration-300">
-                      Edit Profile
-                    </span>
-                  </button>
+                        <span className="text-sm font-medium transition-all !duration-300">
+                          Edit Profile
+                        </span>
+                      </div>
+                    }
+                    triggerButtonClass="hover:bg-transparent"
+                    identity="edit-profile"
+                    key="edit-profile"
+                  >
+                    <ProfileForm
+                      title="Setting"
+                      description="Let us know you!"
+                      isDialog={true}
+                    />
+                  </FormDialog>
                 </div>
 
                 <div className="flex-1 p-1 text-center md:ml-3 md:text-left">
@@ -323,7 +336,7 @@ export default function ProfilePage() {
                     </div>
 
                     {/* Media */}
-                    <div className="flex flex-wrap items-center gap-2 text-sky-800 max-md:justify-center dark:text-btn-dark">
+                    <div className="flex flex-wrap items-center gap-2 text-sky-800 max-md:justify-center dark:text-btn-dark/80">
                       {mediaLinks.map((link, index) => (
                         <Link
                           key={index}
@@ -333,7 +346,7 @@ export default function ProfilePage() {
                         >
                           <motion.span
                             className={cn(
-                              "hover:bg-primary flex-center flex-col px-2.5 py-1.5 text-center text-xs transition-all rounded-md",
+                              "hover:bg-primary flex-center flex-col rounded-md px-2.5 py-1.5 text-center text-xs transition-all",
                             )}
                             whileHover="hover"
                             initial="initial"

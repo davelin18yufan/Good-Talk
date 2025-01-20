@@ -6,6 +6,7 @@ import { Input } from "./input"
 import { FormBase, CustomInput, ErrorMessage } from "./Form"
 import FormDialog from "./FormDialog"
 import { PlaceholdersAndVanishInput } from "./PlaceholdersAndVanishInput"
+import ProfileForm from "./ProfileForm"
 
 export {
   MainConfigForm,
@@ -17,4 +18,5 @@ export {
   ErrorMessage,
   FormDialog,
   PlaceholdersAndVanishInput,
+  ProfileForm,
 }

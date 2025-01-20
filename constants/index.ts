@@ -630,4 +630,5 @@ export const FORM_TYPES = Object.freeze({
   AUTH: "auth",
   NOTE: "note",
   REVIEW: "review",
+  PROFILE: "profile",
 })
