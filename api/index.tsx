@@ -1,6 +1,25 @@
-import { DEFAULT_LAYOUTS, DEFAULT_TOOLBOX, DEFAULT_COMPACTTYPE } from "@/constants"
-import { ResponsiveLayouts, CompactType, DynamicChartProps } from "@/types/chart"
+import {
+  DEFAULT_LAYOUTS,
+  DEFAULT_TOOLBOX,
+  DEFAULT_COMPACTTYPE,
+} from "@/constants"
+import {
+  ResponsiveLayouts,
+  CompactType,
+  DynamicChartProps,
+} from "@/types/chart"
 import { ArrowUpRight, Flame, Shield } from "lucide-react"
+import {
+  IconBrandBluesky,
+  IconBrandFacebook,
+  IconBrandGithub,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconBrandTwitter,
+  IconBrandYoutube,
+  IconLink,
+  IconMail,
+} from "@tabler/icons-react"
 
 // !All dummy datas
 export const blogs = [
@@ -427,5 +446,188 @@ export const userCardItems = [
     label: "Achievements",
     value: "12/30",
     desc: "Master III",
+  },
+]
+
+export const achievements = [
+  {
+    id: 1,
+    name: "First Article",
+    description: "Published your first article",
+    icon: "🏆",
+  },
+  {
+    id: 2,
+    name: "Popular Post",
+    description: "Received 1000+ views on a single post",
+    icon: "🌟",
+  },
+  {
+    id: 3,
+    name: "Consistent Writer",
+    description: "Published articles for 3 months in a row",
+    icon: "✍️",
+  },
+]
+
+export const mediaLinks = [
+  {
+    name: "Facebook",
+    icon: <IconBrandFacebook className="h-6 w-6" />,
+    url: "https://facebook.com/alice_codes",
+  },
+  {
+    name: "X",
+    icon: <IconBrandTwitter className="h-6 w-6" />,
+    url: "https://twitter.com/alice_codes",
+  },
+  {
+    name: "LinkedIn",
+    icon: <IconBrandLinkedin className="h-6 w-6" />,
+    url: "https://linkedin.com/in/alice_codes",
+  },
+  {
+    name: "GitHub",
+    icon: <IconBrandGithub className="h-6 w-6" />,
+    url: "https://github.com/alice_codes",
+  },
+  {
+    name: "YouTube",
+    icon: <IconBrandYoutube className="h-6 w-6" />,
+    url: "https://youtube.com/@alice_codes",
+  },
+  {
+    name: "Website",
+    icon: <IconLink className="h-6 w-6" />,
+    url: "https://alice-codes.dev",
+  },
+  {
+    name: "Instagram",
+    icon: <IconBrandInstagram className="h-6 w-6" />,
+    url: "https://instagram.com/alice_codes",
+  },
+  {
+    name: "Email",
+    icon: <IconMail className="h-6 w-6" />,
+    url: "mailto:K0L0w@example.com",
+  },
+  {
+    name: "Bluesky",
+    icon: <IconBrandBluesky className="h-6 w-6" />,
+    url: "https://bluesky.app/@alice_codes",
+  },
+]
+
+export const creativeVideos = [
+  {
+    id: 1,
+    width: 1920,
+    height: 1080,
+    url: "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    image:
+      "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    duration: 213,
+    type: "video/mp4",
+  },
+  {
+    id: 2,
+    width: 1920,
+    height: 1080,
+    url: "https://videos.pexels.com/video-files/4696278/4696278-hd_1920_1080_30fps.mp4",
+    image:
+      "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    duration: 213,
+    type: "video/mp4",
+  },
+  {
+    id: 3,
+    width: 1920,
+    height: 1080,
+    url: "https://videos.pexels.com/video-files/9867271/9867271-uhd_2560_1440_24fps.mp4",
+    image:
+      "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    duration: 213,
+    type: "video/mp4",
+  },
+  {
+    id: 4,
+    width: 1920,
+    height: 1080,
+    url: "https://videos.pexels.com/video-files/18069403/18069403-uhd_2560_1440_24fps.mp4",
+    image:
+      "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    duration: 213,
+    type: "video/mp4",
+  },
+  {
+    id: 5,
+    width: 1920,
+    height: 1080,
+    url: "https://videos.pexels.com/video-files/25744125/11904090_2560_1440_24fps.mp4",
+    image:
+      "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    duration: 213,
+    type: "video/mp4",
+  },
+  {
+    id: 6,
+    width: 1920,
+    height: 1080,
+    url: "https://videos.pexels.com/video-files/11315884/11315884-hd_1920_1080_24fps.mp4",
+    image:
+      "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    duration: 213,
+    type: "video/mp4",
+  },
+  {
+    id: 7,
+    width: 1920,
+    height: 1080,
+    url: "https://videos.pexels.com/video-files/28259250/12342186_1920_1080_30fps.mp4",
+    image:
+      "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    duration: 213,
+    type: "video/mp4",
+  },
+  {
+    id: 8,
+    width: 1920,
+    height: 1080,
+    url: "https://videos.pexels.com/video-files/12352337/12352337-hd_1920_1080_60fps.mp4",
+    image:
+      "https://videos.pexels.com/video-files/7710243/7710243-uhd_2560_1440_30fps.mp4",
+    duration: 213,
+    type: "video/mp4",
+  },
+]
+
+export const profileStats = [
+  {
+    id: 1,
+    title: "Frequency",
+    value: 30,
+    suffix: "",
+    decimal: 0,
+  },
+  {
+    id: 2,
+    title: "Performance",
+    value: 100,
+    suffix: "%",
+    decimal: 1,
+  },
+  {
+    id: 3,
+    title: "Followers",
+    value: 51,
+    suffix: "K",
+    decimal: 0,
+  },
+  {
+    id: 4,
+    title: "Following",
+    value: 60,
+    suffix: "K",
+    decimal: 0,
   },
 ]
