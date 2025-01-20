@@ -17,7 +17,7 @@ import { FORM_TYPES } from "@/constants"
 /**
  * Form container with submit button
  *
- * @param {obj} props
+ * @param {FormBaseProps} props
  * @returns
  */
 export function FormBase({
@@ -26,7 +26,6 @@ export function FormBase({
   formClass,
   type = FORM_TYPES.AUTH,
   action,
-  isAuth = false,
   children,
   isDialog = false,
 }: FormBaseProps) {
@@ -61,7 +60,7 @@ export function FormBase({
         {children}
 
         <ButtonEffect className="mb-2 mt-4" type="submit">
-          {isAuth ? "送出" : isLoginPage ? "登入" : "註冊"}
+          {type === "auth" ? "送出" : isLoginPage ? "登入" : "註冊"}
         </ButtonEffect>
 
         {type === "auth" && <AuthFooter isLoginPage={isLoginPage} />}

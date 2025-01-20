@@ -2,7 +2,7 @@ import { Dialog, DialogTrigger, DialogContent } from "../ui/dialog"
 import { Button } from "../ui/button"
 import { cn } from "@/lib/utils"
 
-import type { JSX } from "react";
+import type { JSX } from "react"
 
 /**
  * FormDialog component renders a dialog modal with a trigger element.
@@ -18,11 +18,13 @@ import type { JSX } from "react";
 export default function FormDialog({
   children,
   triggerElement,
+  triggerButtonClass,
   contentClass,
   identity,
 }: {
   children: React.ReactNode
   triggerElement: React.ReactNode
+  triggerButtonClass?: string
   contentClass?: string
   identity: string
 }): JSX.Element {
@@ -32,7 +34,13 @@ export default function FormDialog({
         <DialogTrigger asChild key={identity}>
           <Button
             variant="ghost"
-            className="rounded-full transition-transform hover:scale-110 dark:hover:bg-transparent"
+            className={cn(
+              "dark:hover:bg-transparent",
+              "rounded-full",
+              "transition-transform",
+              "hover:scale-110",
+              triggerButtonClass
+            )}
             onMouseDown={(e) => e.stopPropagation()}
           >
             {triggerElement}
