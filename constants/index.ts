@@ -22,8 +22,8 @@ export const NAV_LINKS = [
   {
     route: ROUTES.PROFILE(),
     tabName: "個人檔案",
-    icon: "/user.svg"
-  }
+    icon: "/user.svg",
+  },
 ]
 
 export const THEME_KEY = "theme"
@@ -517,7 +517,7 @@ export const DEFAULT_TOOLBOX = {
       y: 0,
       i: "6",
       minW: 4,
-      minH:5,
+      minH: 5,
       moved: false,
       static: false,
       chartId: "GoalProgress",
@@ -531,7 +531,7 @@ export const DEFAULT_TOOLBOX = {
       y: 0,
       i: "6",
       minW: 4,
-      minH:5,
+      minH: 5,
       moved: false,
       static: false,
       chartId: "GoalProgress",
@@ -545,7 +545,7 @@ export const DEFAULT_TOOLBOX = {
       y: 0,
       i: "6",
       minW: 4,
-      minH:5,
+      minH: 5,
       moved: false,
       static: false,
       chartId: "GoalProgress",
@@ -559,7 +559,7 @@ export const DEFAULT_TOOLBOX = {
       y: 0,
       i: "6",
       minW: 4,
-      minH:5,
+      minH: 5,
       moved: false,
       static: false,
       chartId: "GoalProgress",
@@ -573,7 +573,7 @@ export const DEFAULT_TOOLBOX = {
       y: 0,
       i: "6",
       minW: 4,
-      minH:5,
+      minH: 5,
       moved: false,
       static: false,
       chartId: "GoalProgress",
@@ -632,3 +632,15 @@ export const FORM_TYPES = Object.freeze({
   REVIEW: "review",
   PROFILE: "profile",
 })
+
+export const OPERATIONS = [
+  { type: "建倉", description: "Opening a position" },
+  { type: "平倉", description: "Closing a position" },
+  { type: "加碼", description: "Averaging up" },
+  { type: "減碼", description: "Averaging down" },
+  { type: "止損", description: "Stop loss" },
+  { type: "止盈", description: "Take profit" },
+  { type: "避險", description: "Hedging" },
+  { type: "空單", description: "Short position" },
+  { type: "多單", description: "Long position" },
+]
