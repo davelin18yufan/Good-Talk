@@ -45,16 +45,15 @@ export function FormBase({
       ) : (
         <h2 className="text-2xl font-bold">{title}</h2>
       )}
-      
-      {description && (
-        isDialog ? (
+
+      {description &&
+        (isDialog ? (
           <DialogDescription asChild>
             <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
           </DialogDescription>
         ) : (
           <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
-        )
-      )}
+        ))}
 
       <form className="my-4" action={action}>
         {children}
@@ -97,10 +96,21 @@ export function FormBase({
 function AuthFooter({ isLoginPage }: { isLoginPage: boolean }) {
   return (
     <div className="text-subtext pt-0.5 text-end">
+      {isLoginPage && (
+        <>
+          <Link
+            href="/reset-password"
+            className="text-sky-800 hover:opacity-80 dark:text-sky-500"
+          >
+            忘記密碼?
+          </Link>
+          <span className="text-subtext mx-2">or</span>
+        </>
+      )}
       <span>{isLoginPage ? "沒有帳號嗎?" : "已經有帳號了?"}</span>
       <Link
         href={isLoginPage ? "/signup" : "/login"}
-        className="ml-4 text-sky-800 hover:opacity-80 dark:text-sky-500"
+        className="ml-2 text-sky-800 hover:opacity-80 dark:text-sky-500"
       >
         {isLoginPage ? "前往註冊" : "回到登入"}
       </Link>
