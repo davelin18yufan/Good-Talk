@@ -3,6 +3,7 @@ export interface Author {
   name: string
   url?: string
   description?: string
+  aka?: string
   tags?: string[]
   badges?: string[]
 }

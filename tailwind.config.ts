@@ -1,5 +1,4 @@
 import typography from "@tailwindcss/typography"
-import exp from "constants"
 
 const {
   default: flattenColorPalette,

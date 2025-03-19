@@ -123,7 +123,7 @@ export function BlogSetCard({
             >
               <p className="line-clamp-3 pl-6 pr-24 py-0.5">{description}</p>
               <Link
-                href={`blog/${id}`}
+                href={`article/${id}`}
                 className="text-subtext absolute bottom-0 right-4"
               >
                 <ButtonEffect emphasis={0} className="z-10 px-2 text-xs">

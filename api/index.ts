@@ -290,10 +290,11 @@ export const chartProps: DynamicChartProps = {
 // !If replace this dummy data,  remove remotePatterns in nextConfig
 export const persons = [
   {
-    id: "126542",
+    id: "1265412",
     url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
     name: "Adrian Paul",
     description: "COO & Co-Founder",
+    aka: "COO & Co-Founder",
     tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
   },
 
@@ -301,14 +302,104 @@ export const persons = [
     id: "765752",
     url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXZhdGFyfGVufDB8fDB8fHww",
     name: "Flualy Cual",
-    description: "Founder & CEO",
+    description:
+      "Founder & CEO, enthusiast of nature, also known as Omfi's best friend",
+    aka: "Founder & CEO of Omfi",
     tags: ["Twilight", "Peaks", "Silhouette", "Evening Sky", "Peaceful"],
   },
   {
     id: "45673",
     url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww",
     name: "Naymur Rahman",
-    description: "CTO & Co-Founder",
+    aka: "JS Wizard",
+    description: "JavaScript Enthusiast and Full-Stack Developer",
     tags: ["Rocky", "Ridges", "Contrast", "Adventure", "Clouds"],
   },
 ]
+
+// dummy article
+export const article = {
+  id: "199",
+  title: "The Art of Nature Photography",
+  description:
+    "Discover the art of nature photography and capture the beauty of the natural world.",
+  content: `<h3 style="text-align: center">Rich Text Editor</h3><p>A modern WYSIWYG rich text editor based on <a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://github.com/scrumpy/tiptap">tiptap</a> and <a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://ui.shadcn.com/">shadcn ui</a> for Reactjs</p><p></p><p style="text-align: center"></p><div style="text-align: center;" class="image"><img height="auto" src="https://picsum.photos/1920/1080.webp?t=1" align="center" width="500"></div><p></p><div data-type="horizontalRule"><hr></div><h2>Demo</h2><p>👉<a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://reactjs-tiptap-editor.vercel.app/">Demo</a></p><h2>Features</h2><ul><li><p>Use <a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://ui.shadcn.com/">shadcn ui</a> components</p></li><li><p>Markdown support</p></li><li><p>TypeScript support</p></li><li><p>I18n support (vi, en, zh, pt)</p></li><li><p>React support</p></li><li><p>Slash Commands</p></li><li><p>Multi Column</p></li><li><p>TailwindCss</p></li><li><p>Support emoji</p></li><li><p>Support iframe</p></li><li><p>Support mermaid</p></li></ul><h2>Installation</h2><pre><code class="language-bash">pnpm add reactjs-tiptap-editor</code></pre><p></p>`,
+  coverUrl:
+    "https://images.unsplash.com/photo-1542397284385-6010376c5337?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  altText: "A winding road through a forest",
+  author: {
+    id: "12542",
+    url: "https://images.unsplash.com/photo-1702884162674-b05320817c58?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "Amber Huang",
+    description:
+      "Founder & CEO of Ambrosia, a company that specializes in AI-powered financial analysis and portfolio management.",
+    aka: "Lider of Ambrosia and speaker of Ambrosia",
+    tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
+  },
+  date: "2022-01-01",
+  category: ["Finance", "Business"],
+}
+
+export const articles = [
+  {
+    id: "187",
+    title: "The Art of Nature Photography",
+    description:
+      "Discover the art of nature photography and capture the beauty of the natural world.",
+    content: `<h3 style="text-align: center">Rich Text Editor</h3><p>A modern WYSIWYG rich text editor based on <a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://github.com/scrumpy/tiptap">tiptap</a> and <a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://ui.shadcn.com/">shadcn ui</a> for Reactjs</p><p></p><p style="text-align: center"></p><div style="text-align: center;" class="image"><img height="auto" src="https://picsum.photos/1920/1080.webp?t=1" align="center" width="500"></div><p></p><div data-type="horizontalRule"><hr></div><h2>Demo</h2><p>👉<a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://reactjs-tiptap-editor.vercel.app/">Demo</a></p><h2>Features</h2><ul><li><p>Use <a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://ui.shadcn.com/">shadcn ui</a> components</p></li><li><p>Markdown support</p></li><li><p>TypeScript support</p></li><li><p>I18n support (vi, en, zh, pt)</p></li><li><p>React support</p></li><li><p>Slash Commands</p></li><li><p>Multi Column</p></li><li><p>TailwindCss</p></li><li><p>Support emoji</p></li><li><p>Support iframe</p></li><li><p>Support mermaid</p></li></ul><h2>Installation</h2><pre><code class="language-bash">pnpm add reactjs-tiptap-editor</code></pre><p></p>`,
+    coverUrl:
+      "https://images.unsplash.com/photo-1734375063393-2ca2050512cd?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    altText: "A winding road through a forest",
+    author: {
+      id: "1265442",
+      url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
+      name: "Adrian Paul",
+      aka: "COO & Co-Founder",
+      description: "COO & Co-Founder",
+      tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
+    },
+    date: "2023-11-06",
+    category: ["Nature", "Photography"],
+  },
+  {
+    id: "224",
+    title: "The Art of Urban Gardening",
+    description:
+      "Discover the art of urban gardening and create vibrant oases in the city.",
+    content: `<h3 style="text-align: center">Urban Gardening</h3><p>Grow your own food in the heart of the city and create a sustainable oasis.</p><div style="text-align: center;" class="image"><img height="auto" src="https://picsum.photos/1920/1080.webp?t=2" align="center" width="500"></div><p></p><h2>Benefits</h2><ul><li><p>Fresh and healthy food</p></li><li><p>Reduced carbon footprint</p></li><li><p>Community building</p></li><li><p>Stress relief</p></li><li><p>Mental wellbeing</p></li><li><p>Personal growth</p></li></ul><h2>Tips</h2><ul><li><p>Choose the right plants</p></li><li><p>Prepare the soil</p></li><li><p>Water wisely</p></li><li><p>Harvest your bounty</p></li><li><p>Share your success</p></li></ul>`,
+    coverUrl:
+      "https://images.unsplash.com/photo-1532751203793-812308a10d8e?q=80&w=1846&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    altText: "A winding road through a forest",
+    author: {
+      id: "16543",
+      url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
+      name: "Shahriar Rahman",
+      description: "Head of Marketing in Capital One",
+      aka: "Head of Marketing in Capital One",
+      tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
+    },
+    date: "2024-01-06",
+    category: ["Food", "Gardening"],
+  },
+  {
+    id: "777",
+    title: "The Art of Storytelling",
+    description:
+      "Learn the art of storytelling and create captivating stories that inspire and motivate.",
+    content: `<h3 style="text-align: center">Storytelling</h3><p>Storytelling is an art that has the power to captivate and inspire people.</p><div style="text-align: center;" class="image"><img height="auto" src="https://picsum.photos/1920/1080.webp?t=3" align="center" width="500"></div><p></p><h2>Benefits</h2><ul><li><p>Engage audiences</p></li><li><p>Inspire and motivate</p></li><li><p>Build connections</p></li><li><p>Communicate effectively</p></li><li><p>Develop critical thinking</p></li></ul><h2>Tips</h2><ul><li><p>Know your audience</p></li><li><p>Use descriptive language</p></li><li><p>Use conflict and tension</p></li><li><p>Use dialogue</p></li><li><p>Use imagery</p></li></ul>`,
+    coverUrl:
+      "https://images.unsplash.com/photo-1542396601-dca920ea2807?q=80&w=1651&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    altText: "A winding road through a forest",
+    author: {
+      id: "126",
+      url: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww",
+      name: "Nicole Smith",
+      aka: "Experienced Writer",
+      description: "Experienced Writer",
+      tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
+    },
+    date: "2024-04-21",
+    category: ["Business", "Leadership"],
+  },
+]
+
