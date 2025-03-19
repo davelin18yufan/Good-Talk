@@ -64,32 +64,23 @@ function SignUpPage() {
             labelName="Email"
             placeholder="請輸入信箱.."
             type="email"
-            required
-            errorMessage={getErrorMessage("email")}
           />
           <CustomInput
             id="username"
             labelName="用戶名稱"
-            placeholder="請輸入您的名稱.."
-            type="text"
-            required
-            errorMessage={getErrorMessage("username")}
+            placeholder="請輸入您的用戶名稱.."
           />
           <CustomInput
             id="password"
             labelName="密碼"
-            placeholder="請輸入您的密碼.."
+            placeholder="請輸入密碼.."
             type="password"
-            required
-            errorMessage={getErrorMessage("password")}
           />
           <CustomInput
             id="confirmPassword"
             labelName="再次確認密碼"
             placeholder="請再次輸入密碼.."
             type="password"
-            required
-            errorMessage={getErrorMessage("confirmPassword")}
           />
         </div>
       </FormBase>
