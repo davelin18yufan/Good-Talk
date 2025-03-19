@@ -17,7 +17,7 @@ import {
   useMotionValue,
   useSpring,
   useTransform,
-} from "framer-motion"
+} from "motion/react"
 import Link from "next/link"
 import { useRef, useState, useEffect } from "react"
 

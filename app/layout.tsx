@@ -1,10 +1,7 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Roboto_Mono } from "next/font/google"
 import "./globals.css"
 
-<<<<<<< HEAD
-const inter = Inter({ subsets: ["latin"] })
-=======
 import { METADATA } from "@/constants/metadata"
 
 const inter = Inter({
@@ -18,7 +15,6 @@ const roboto_mono = Roboto_Mono({
   display: "swap",
   variable: "--font-roboto-mono",
 })
->>>>>>> feature/mainPage_articleList_Footer
 
 export const metadata: Metadata = {
   title: METADATA.title,
@@ -32,14 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-<<<<<<< HEAD
-      <body className={inter.className}>
+      <body className={`relative min-h-screen ${inter.className}`}>
         {children}
       </body>
-=======
-      <body className={`relative ${inter.className}`}>
-        {children}</body>
->>>>>>> feature/mainPage_articleList_Footer
     </html>
   )
 }

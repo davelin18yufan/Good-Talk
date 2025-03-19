@@ -6,32 +6,8 @@ import Filter from "../Filter"
 import { PlaceholdersAndVanishInput } from "../form/PlaceholdersAndVanishInput"
 import AvatarGallery from "./AvatarGallery"
 import ButtonLink from "../buttons/ButtonLink"
+import { persons } from "@/api"
 
-// !If replace this dummy data,  remove remotePatterns in nextConfig
-const persons = [
-  {
-    id: "126542",
-    url: "https://res.cloudinary.com/dzl9yxixg/image/upload/adrian_ibdgmu.png",
-    name: "Adrian Paul",
-    description: "COO & Co-Founder",
-    tags: ["Floral", "Highlands", "Wildflowers", "Colorful", "Resilience"],
-  },
-
-  {
-    id: "765752",
-    url: "https://res.cloudinary.com/dzl9yxixg/image/upload/person-portrait_pwxyyj.jpg",
-    name: "Flualy Cual",
-    description: "Founder & CEO",
-    tags: ["Twilight", "Peaks", "Silhouette", "Evening Sky", "Peaceful"],
-  },
-  {
-    id: "45673",
-    url: "https://res.cloudinary.com/dzl9yxixg/image/upload/naymr_bmv5ac.png",
-    name: "Naymur Rahman",
-    description: "CTO & Co-Founder",
-    tags: ["Rocky", "Ridges", "Contrast", "Adventure", "Clouds"],
-  },
-]
 
 export default function ArticleSidebar() {
   return (

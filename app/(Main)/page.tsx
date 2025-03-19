@@ -1,3 +1,4 @@
+
 export default function HomePage() {
-  return <main>MainPage</main>
+  return <main>Main Page</main>
 }

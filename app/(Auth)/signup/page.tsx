@@ -1,31 +1,62 @@
 "use client"
-<<<<<<< HEAD
-import { CustomInput, FormBase } from "@/components/Form"
-=======
+import { useActionState } from "react";
 import { CustomInput, ErrorMessage, FormBase } from "@/components/form/Form"
 import { SignUpSchema } from "@/lib/validation"
-import { useFormState } from "react-dom"
 import { ZodError } from "zod"
->>>>>>> feature/mainPage_articleList_Footer
 
 function SignUpPage() {
-   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-     e.preventDefault()
-     console.log("Send")
-   }
+  // update state based on form action value
+  const [messages, signUpAction, pending] = useActionState(handleSubmit, [
+    { name: "", message: "" },
+  ])
+
+  // It has to return a value for message state
+  async function handleSubmit(prevState: any, formData: FormData) {
+    const email = formData.get("email") as string
+    const username = formData.get("username") as string
+    const password = formData.get("password") as string
+    const confirmPassword = formData.get("confirmPassword") as string
+
+    try {
+      await SignUpSchema.parseAsync({
+        email,
+        username,
+        password,
+        confirmPassword,
+      })
+      // TODO: Signup action
+    } catch (error: any) {
+      if (error instanceof ZodError) {
+        const errors = error.issues.map((issue) => {
+          return { name: issue.path[0].toString(), message: issue.message }
+        })
+        return errors
+      } else {
+        console.error("Login Form Input error", error)
+        return [
+          {
+            name: "form",
+            message: "An unexpected error occurred. Please try again.",
+          },
+        ]
+      }
+    }
+    return null // return null if success, no error returned
+  }
+
+  // Only return first error.
+  const getErrorMessage = (inputName: string) =>
+    messages?.find((m) => m.name === inputName)?.message
   return (
-<<<<<<< HEAD
-    <div className="bg-primary grid min-h-screen place-items-center">
-=======
     <div className="w-full">
       {getErrorMessage("form") && (
         <ErrorMessage message={getErrorMessage("form") as string} />
       )}
->>>>>>> feature/mainPage_articleList_Footer
       <FormBase
-        title="Welcome to Good Talk"
-        description="Where amazing happen"
-        onSubmit={handleSubmit}
+        title="Be one of us in Good Talk"
+        description="So excited to have you, almost there."
+        action={signUpAction}
+        isAuth
       >
         <div className="flex flex-col gap-4">
           <CustomInput

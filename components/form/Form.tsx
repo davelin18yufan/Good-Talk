@@ -5,24 +5,25 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/form/input"
 import { cn } from "@/lib/utils"
 import { IconBrandGoogle } from "@tabler/icons-react"
-import ButtonEffect from "./ButtonEffect"
+import ButtonEffect, { BottomGradient } from "../buttons/ButtonEffect"
 import Link from "next/link"
+import { FadeText } from "../FadeText"
+import { AnimatePresence } from "motion/react"
+import { FormBaseProps, CustomInputProps } from "@/types/form.d"
+import TypingAnimation from "./TypingAnimation"
+import { DialogTitle, DialogDescription } from "@radix-ui/react-dialog"
+import { FORM_TYPES } from "@/constants"
 
 export function FormBase({
   title,
   description,
   formClass,
-  type = "auth",
-  onSubmit,
+  type = FORM_TYPES.AUTH,
+  action,
+  isAuth = false,
   children,
-}: {
-  title: string
-  description?: string
-  formClass?: string
-  type?: "auth" | "regular"
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-  children: React.ReactNode
-}) {
+  isDialog = false,
+}: FormBaseProps) {
   const pathname = usePathname()
   const isLoginPage = pathname === "/login"
   return (
@@ -32,16 +33,33 @@ export function FormBase({
         formClass,
       )}
     >
-      <h2 className="text-2xl font-bold">{title}</h2>
+      {isDialog ? (
+        <DialogTitle asChild>
+          <h2 className="text-2xl font-bold">{title}</h2>
+        </DialogTitle>
+      ) : (
+        <h2 className="text-2xl font-bold">{title}</h2>
+      )}
+      
       {description && (
-        <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
+        isDialog ? (
+          <DialogDescription asChild>
+            <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
+          </DialogDescription>
+        ) : (
+          <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
+        )
       )}
 
-      <form className="my-4" onSubmit={onSubmit}>
+      <form className="my-4" action={action}>
         {children}
 
         <ButtonEffect className="mb-2 mt-4" type="submit">
-          {isLoginPage ? "登入" : "註冊"}
+          {isLoginPage ? (
+            "登入"
+          ) : (
+            "註冊"
+          )}
         </ButtonEffect>
 
         {type === "auth" && <AuthFooter isLoginPage={isLoginPage} />}
@@ -69,14 +87,6 @@ export function FormBase({
   )
 }
 
-function BottomGradient() {
-  return (
-    <>
-      <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-      <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
-    </>
-  )
-}
 
 function AuthFooter({ isLoginPage }: { isLoginPage: boolean }) {
   return (
@@ -124,5 +134,29 @@ export function CustomInput({
       <Label htmlFor={id}>{labelName}</Label>
       <Input id={id} placeholder={placeholder} type={type} />
     </LabelInputContainer>
+  )
+}
+
+export function ErrorMessage({
+  message,
+  classNames,
+}: {
+  message: string
+  classNames?: string
+}) {
+  return (
+    <AnimatePresence>
+      <FadeText
+        className={cn(
+          "text-danger m-0 inline-block w-full text-end font-mono text-sm",
+          classNames,
+        )}
+        direction="down"
+        framerProps={{
+          show: { transition: { delay: 0.6 } },
+        }}
+        text={`! ${message}`}
+      />
+    </AnimatePresence>
   )
 }
