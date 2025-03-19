@@ -57,16 +57,12 @@ function LoginPage() {
             labelName="Email"
             placeholder="請輸入信箱.."
             type="email"
-            required
-            errorMessage={getErrorMessage("email")}
           />
           <CustomInput
             id="password"
             labelName="Password"
             placeholder="請輸入密碼.."
             type="password"
-            required
-            errorMessage={getErrorMessage("password")}
           />
         </div>
       </FormBase>

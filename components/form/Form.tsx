@@ -14,12 +14,6 @@ import TypingAnimation from "./TypingAnimation"
 import { DialogTitle, DialogDescription } from "@radix-ui/react-dialog"
 import { FORM_TYPES } from "@/constants"
 
-/**
- * Form container with submit button
- *
- * @param {obj} props
- * @returns
- */
 export function FormBase({
   title,
   description,
@@ -61,7 +55,11 @@ export function FormBase({
         {children}
 
         <ButtonEffect className="mb-2 mt-4" type="submit">
-          {isAuth ? "送出" : isLoginPage ? "登入" : "註冊"}
+          {isLoginPage ? (
+            "登入"
+          ) : (
+            "註冊"
+          )}
         </ButtonEffect>
 
         {type === "auth" && <AuthFooter isLoginPage={isLoginPage} />}
@@ -89,12 +87,7 @@ export function FormBase({
   )
 }
 
-/**
- * Third-party login buttons
- *
- * @param props
- * @returns
- */
+
 function AuthFooter({ isLoginPage }: { isLoginPage: boolean }) {
   return (
     <div className="text-subtext pt-0.5 text-end">
@@ -109,21 +102,38 @@ function AuthFooter({ isLoginPage }: { isLoginPage: boolean }) {
   )
 }
 
+export function LabelInputContainer({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div className={cn("flex w-full flex-col space-y-2", className)}>
+      {children}
+    </div>
+  )
+}
+
 export function CustomInput({
   id,
   labelName,
+  placeholder,
   type = "text",
   containerClass,
-  onChange,
-  errorMessage,
-  ...props
-}: CustomInputProps) {
+}: {
+  id: string
+  labelName: string
+  placeholder?: string
+  type?: string
+  containerClass?: string
+}) {
   return (
-    <div className={cn("flex w-full flex-col space-y-2", containerClass)}>
+    <LabelInputContainer className={containerClass}>
       <Label htmlFor={id}>{labelName}</Label>
-      <Input id={id} name={id} type={type} onChange={onChange} {...props} />
-      {errorMessage && <ErrorMessage message={errorMessage} />}
-    </div>
+      <Input id={id} placeholder={placeholder} type={type} />
+    </LabelInputContainer>
   )
 }
 

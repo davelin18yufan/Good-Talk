@@ -25,6 +25,8 @@ module.exports = {
       },
     },
     extend: {
+<<<<<<< HEAD
+=======
       fontFamily: {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-roboto-mono)"],
@@ -32,6 +34,7 @@ module.exports = {
       backgroundImage: {
         logo: "url('/logo.svg')",
       },
+>>>>>>> feature/mainPage_articleList_Footer
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -49,7 +52,7 @@ module.exports = {
         },
         secondary: {
           light: "#BB9A88",
-          dark: "#393E46",
+          dark: "#393E4",
         },
         tertiary: {
           light: "#B5A8A0",
@@ -64,7 +67,7 @@ module.exports = {
           dark: "#FFD369",
         },
         danger: {
-          light: "#982B1C",
+          light: "#fda4af",
           dark: "#e11d48",
         },
       },
