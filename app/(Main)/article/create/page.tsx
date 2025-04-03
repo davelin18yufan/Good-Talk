@@ -1,7 +1,10 @@
+import TiptapEditor from "@/components/blog/edtior/TiptapEditor";
+
+
 export default function CreateArticlePage(){
   return (
-    <div>
-      Create an new article.
-    </div>
+    <main>
+      <TiptapEditor />
+    </main>
   )
 }

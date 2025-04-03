@@ -1,13 +1,13 @@
 import { CustomInput, FormBase } from "./Form"
 
-export default function LogForm({
+export default function ProfileForm({
   title,
   description,
   formClass,
   isDialog = false,
 }: {
   title: string
-  description?: string
+  description: string
   formClass?: string
   isDialog?: boolean
 }) {

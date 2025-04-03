@@ -14,6 +14,9 @@ import Image from "next/image"
 import type { BaseBlog } from "@/types/blog"
 import { DEFAULT_COVER_URL } from "@/constants"
 
+interface BlogSetCardProps extends BaseBlog {
+  showAvatar?: boolean
+}
 export function BlogSetCard({
   coverUrl,
   altText,
@@ -23,7 +26,8 @@ export function BlogSetCard({
   tags,
   date,
   description,
-}: BaseBlog) {
+  showAvatar = true,
+}: BlogSetCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -56,7 +60,7 @@ export function BlogSetCard({
           <CardHeader className="pb-4">
             <div className="flex gap-4">
               {/* Author */}
-              <div className="flex-none">
+              {showAvatar && <div className="flex-none">
                 <Avatar className="bg-muted-background m-auto size-12 border dark:bg-foreground">
                   <AvatarImage
                     src={author?.url}
@@ -65,15 +69,15 @@ export function BlogSetCard({
                   />
                   <AvatarFallback>{author.name[0]}</AvatarFallback>
                 </Avatar>
-              </div>
+              </div>}
 
               {/* Title/Badges */}
               <div className="flex-1">
                 <div className="flex items-center justify-between text-base">
-                  <h3 className="inline-flex w-full text-start items-center justify-start gap-x-2 text-sm font-semibold leading-none md:text-base lg:text-xl truncate">
+                  <h3 className="inline-flex w-full items-center justify-start gap-x-2 truncate text-start text-sm font-semibold leading-none md:text-base lg:text-xl">
                     {title}
                     {tags && (
-                      <span className="inline-flex flex-wrap gap-1 capitalize max-md:hidden font-medium">
+                      <span className="inline-flex flex-wrap gap-1 font-medium capitalize max-md:hidden">
                         {tags.map((tag, index) => (
                           <Badge
                             variant="outline"
@@ -93,7 +97,7 @@ export function BlogSetCard({
                     />
                   </h3>
                   {/* Date */}
-                  <time className="text-right text-xs tabular-nums text-muted-foreground md:text-sm text-nowrap">
+                  <time className="text-nowrap text-right text-xs tabular-nums text-muted-foreground md:text-sm">
                     {date}
                   </time>
                 </div>
@@ -121,9 +125,9 @@ export function BlogSetCard({
                 "line-clamp-3 text-ellipsis text-xs antialiased sm:text-sm",
               )}
             >
-              <p className="line-clamp-3 pl-6 pr-24 py-0.5">{description}</p>
+              <p className="line-clamp-3 py-0.5 pl-6 pr-24">{description}</p>
               <Link
-                href={`blog/${id}`}
+                href={`article/${id}`}
                 className="text-subtext absolute bottom-0 right-4"
               >
                 <ButtonEffect emphasis={0} className="z-10 px-2 text-xs">
@@ -150,8 +154,8 @@ export function BlogSets({
       <BlurFade delay={delay * 5}>
         <h2 className="text-xl font-bold">最新文章</h2>
       </BlurFade>
-      {blogs.map((blog, id) => (
-        <BlurFade key={blog.title} delay={delay * 6 + id * 0.05}>
+      {blogs.map((blog, i) => (
+        <BlurFade key={blog.title} delay={delay * 6 + i * 0.05}>
           <BlogSetCard key={blog.title} {...blog} />
         </BlurFade>
       ))}

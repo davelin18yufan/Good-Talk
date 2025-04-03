@@ -11,16 +11,22 @@ import { FadeText } from "../FadeText"
 import { AnimatePresence } from "motion/react"
 import { FormBaseProps, CustomInputProps } from "@/types/form.d"
 import TypingAnimation from "./TypingAnimation"
-import { DialogTitle, DialogDescription } from "@radix-ui/react-dialog"
+import { DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { FORM_TYPES } from "@/constants"
 
+
+/**
+ * Form container with submit button
+ *
+ * @param {FormBaseProps} props
+ * @returns
+ */
 export function FormBase({
   title,
   description,
   formClass,
   type = FORM_TYPES.AUTH,
   action,
-  isAuth = false,
   children,
   isDialog = false,
 }: FormBaseProps) {
@@ -40,26 +46,21 @@ export function FormBase({
       ) : (
         <h2 className="text-2xl font-bold">{title}</h2>
       )}
-      
-      {description && (
-        isDialog ? (
+
+      {description &&
+        (isDialog ? (
           <DialogDescription asChild>
             <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
           </DialogDescription>
         ) : (
           <p className="text-subtext mt-2 max-w-sm text-sm">{description}</p>
-        )
-      )}
+        ))}
 
       <form className="my-4" action={action}>
         {children}
 
         <ButtonEffect className="mb-2 mt-4" type="submit">
-          {isLoginPage ? (
-            "登入"
-          ) : (
-            "註冊"
-          )}
+          {type === "auth" ? "送出" : isLoginPage ? "登入" : "註冊"}
         </ButtonEffect>
 
         {type === "auth" && <AuthFooter isLoginPage={isLoginPage} />}
@@ -91,10 +92,21 @@ export function FormBase({
 function AuthFooter({ isLoginPage }: { isLoginPage: boolean }) {
   return (
     <div className="text-subtext pt-0.5 text-end">
+      {isLoginPage && (
+        <>
+          <Link
+            href="/reset-password"
+            className="text-sky-800 hover:opacity-80 dark:text-sky-500"
+          >
+            忘記密碼?
+          </Link>
+          <span className="text-subtext mx-2">or</span>
+        </>
+      )}
       <span>{isLoginPage ? "沒有帳號嗎?" : "已經有帳號了?"}</span>
       <Link
         href={isLoginPage ? "/signup" : "/login"}
-        className="ml-4 text-sky-800 hover:opacity-80 dark:text-sky-500"
+        className="ml-2 text-sky-800 hover:opacity-80 dark:text-sky-500"
       >
         {isLoginPage ? "前往註冊" : "回到登入"}
       </Link>

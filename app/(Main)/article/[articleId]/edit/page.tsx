@@ -1,7 +1,11 @@
-export default function EditArticlePage(){
+import TiptapEditor, { DEFAULT } from "@/components/blog/edtior/TiptapEditor";
+
+export default async function EditArticlePage(){
+  // TODO: fetch article
+
   return (
-    <div>
-      Edit an existed article.
-    </div>
+    <main>
+      <TiptapEditor initialContent={DEFAULT}/>
+    </main>
   )
 }

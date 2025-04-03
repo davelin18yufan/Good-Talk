@@ -8,7 +8,6 @@ export interface FormBaseProps {
   formClass?: string
   type?: FormType
   action: (formData: FormData) => void
-  isAuth: boolean
   children: React.ReactNode
   isDialog?: boolean
 }

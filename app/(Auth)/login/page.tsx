@@ -3,6 +3,7 @@ import { useActionState } from "react";
 import { CustomInput, ErrorMessage, FormBase } from "@/components/form/Form"
 import { LoginSchema } from "@/lib/validation"
 import { ZodError } from "zod"
+import { login } from "@/api/auth";
 
 function LoginPage() {
   // update state based on form action value
@@ -18,6 +19,7 @@ function LoginPage() {
     try {
       await LoginSchema.parseAsync({ email, password })
       // TODO: Login action
+      await login({ email, password })
     } catch (error: any) {
       if (error instanceof ZodError) {
         const errors = error.issues.map((issue) => {
@@ -49,7 +51,6 @@ function LoginPage() {
         title="Welcome to Good Talk"
         description="Where amazing happen, welcome back."
         action={loginAction}
-        isAuth
       >
         <div className="flex flex-col gap-4">
           <CustomInput

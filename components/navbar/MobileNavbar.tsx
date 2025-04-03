@@ -2,6 +2,8 @@ import { NAV_LINKS } from "@/constants"
 import Image from "next/image"
 import { FloatingDockMobile } from "./FloatingDock"
 import { ThemeToggleButton } from "../Theme"
+import { ROUTES } from "@/constants/routes"
+import { User } from "lucide-react"
 
 export default function MobileNavbar() {
   const items = NAV_LINKS.map((link) => ({

@@ -19,7 +19,7 @@ export const BlogFocusCard = React.memo(
     setHovered: React.Dispatch<React.SetStateAction<number | null>>
   }) => (
     <Link
-      href={`/blog/${card.id}`}
+      href={`/article/${card.id}`}
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(

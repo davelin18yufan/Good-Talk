@@ -17,7 +17,6 @@ export default function PlanForm({
       description={description}
       formClass={formClass}
       action={() => {}}
-      isAuth={false}
       isDialog={isDialog}
     >
       <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
