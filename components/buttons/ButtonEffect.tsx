@@ -7,6 +7,7 @@ interface ButtonEffectProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   emphasis?: number
 }
 
+
 /**
  * Border-bottom effect.
  * @returns
