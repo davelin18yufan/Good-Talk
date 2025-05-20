@@ -4,18 +4,28 @@ import { useState, useEffect, useCallback, useRef, Component } from "react"
 import {
   Responsive,
   WidthProvider,
-  Layout,
   ResponsiveProps,
   WidthProviderProps,
 } from "react-grid-layout"
 import "@/styles/RGL.css"
 import { cn } from "@/lib/utils"
-import { DEFAULT_TOOLBOX, DEFAULT_LAYOUTS, DEFAULT_COMPACTTYPE } from "@/constants"
-import { Delete,  History,  Pin, PinOff } from "lucide-react"
+import {
+  DEFAULT_TOOLBOX,
+  DEFAULT_LAYOUTS,
+  DEFAULT_COMPACTTYPE,
+} from "@/constants"
+import { Delete, History, Pin, PinOff } from "lucide-react"
 import ButtonEffect from "@/components/buttons/ButtonEffect"
 import { motion } from "motion/react"
 import { renderChart } from "./helpers"
-import { CompactType, DashboardItem, ResponsiveLayouts } from "@/types/chart"
+import type {
+  Breakpoint,
+  CompactType,
+  DashboardItem,
+  ResponsiveLayouts,
+  DynamicChartProps,
+  ChartID,
+} from "@/types/chart"
 import Toolbox from "@/components/dashboard/Toolbox"
 import { userLayouts, chartProps } from "@/api"
 
@@ -32,17 +42,17 @@ const defaultProps = {
 
 const initLayoutsState = (
   initialLayouts: ResponsiveLayouts,
-  chartProps: Record<string, any>,
+  chartProps: DynamicChartProps,
 ): ResponsiveLayouts =>
   Object.fromEntries(
     Object.entries(initialLayouts).map(([breakpoint, layouts]) => [
       breakpoint,
       layouts.map((layout) => ({
         ...layout,
-        chartProps: chartProps[layout.i],
+        chartProps: chartProps[layout.i as ChartID],
       })),
     ]),
-  )
+  ) as ResponsiveLayouts
 
 // TODO: Fetch userLayouts from database.
 function Dashboard() {
@@ -56,10 +66,12 @@ function Dashboard() {
   const [toolbox, setToolbox] = useState<ResponsiveLayouts>(
     initLayoutsState(userLayouts.toolbox ?? DEFAULT_TOOLBOX, chartProps),
   )
+
   // !This is a heck to get the container width
   const containerRef =
+    // eslint-disable-next-line
     useRef<Component<ResponsiveProps & WidthProviderProps, any, any>>(null)
-  const [currentBreakpoint, setCurrentBreakpoint] = useState<string>("lg")
+  const [currentBreakpoint, setCurrentBreakpoint] = useState<Breakpoint>("lg")
 
   // componentDidMount equivalent
   useEffect(() => {
@@ -80,10 +92,34 @@ function Dashboard() {
     setCurrentBreakpoint(calculateSize()) // Set the size on mount
   }, [mounted])
 
+  // Toggle compaction type
+  const onCompactTypeChange = () => {
+    setCompactType((oldCompactType) =>
+      oldCompactType === "horizontal"
+        ? "vertical"
+        : oldCompactType === "vertical"
+          ? null
+          : "horizontal",
+    )
+  }
+
+  // Toggle static behavior
+  const onStaticToggle = useCallback(
+    (item: DashboardItem) => {
+      setLayouts((prev) => ({
+        ...prev,
+        [currentBreakpoint]: prev[currentBreakpoint].map((l) =>
+          l.i === item.i ? { ...l, static: !l.static } : l,
+        ),
+      }))
+    },
+    [currentBreakpoint],
+  )
+
   // Generate DOM elements for the grid.
   // !Cant extract item out cause key have to be set to equals to layout.i
   const generateDOM = useCallback(() => {
-    return layouts[currentBreakpoint].map((l: DashboardItem, i: number) => (
+    return layouts[currentBreakpoint].map((l: DashboardItem, _i: number) => (
       <motion.div
         key={l.i}
         initial={{ opacity: 0 }}
@@ -101,7 +137,7 @@ function Dashboard() {
         {/* function buttons */}
         {/* //* Button container is higher than icon in DOM tree level, so it will capture container's event first then icon  */}
         <div
-          className="text-btn flex-center absolute right-2 top-0.5 rounded-sm"
+          className="text-btn flex-center absolute top-0.5 right-2 rounded-sm"
           onMouseDown={(e) => e.stopPropagation()} // MouseDowni event will triger immediately when pressed, but click is trigered after MouseUp, so stop propogation at here prevent bubbling to the top level drag event.
         >
           {l.static ? (
@@ -137,28 +173,7 @@ function Dashboard() {
         </div>
       </motion.div>
     ))
-  }, [layouts, toolbox])
-
-  // Toggle compaction type
-  const onCompactTypeChange = () => {
-    setCompactType((oldCompactType) =>
-      oldCompactType === "horizontal"
-        ? "vertical"
-        : oldCompactType === "vertical"
-          ? null
-          : "horizontal",
-    )
-  }
-
-  // Toggle static behavior
-  const onStaticToggle = (item: DashboardItem) => {
-    setLayouts((prev) => ({
-      ...prev,
-      [currentBreakpoint]: prev[currentBreakpoint].map((l) =>
-        l.i === item.i ? { ...l, static: !l.static } : l,
-      ),
-    }))
-  }
+  }, [layouts, currentBreakpoint, onStaticToggle])
 
   /**
    * Callback for when the layout of a chart changes.
@@ -187,7 +202,7 @@ function Dashboard() {
 
       // Iterate over all breakpoints
       Object.keys(updatedLayouts).forEach((breakpoint) => {
-        const currentLayouts = updatedLayouts[breakpoint]
+        const currentLayouts = updatedLayouts[breakpoint as Breakpoint]
 
         const updatedBreakpointLayouts = currentLayouts.map((l) => {
           // If the current breakpoint is the one that changed, update its layout properties
@@ -207,8 +222,8 @@ function Dashboard() {
               return {
                 ...newLayout,
                 chartId: l.chartId,
-                chartProps: chartProps[l.chartId],
-              }
+                chartProps: { ...l.chartProps, ...chartProps[l.chartId] },
+              } as DashboardItem
             }
             return l
           } else {
@@ -227,8 +242,8 @@ function Dashboard() {
 
         // Only update the breakpoint layout if there's an actual change
         if (currentLayouts !== updatedBreakpointLayouts) {
-          // @ts-ignore
-          updatedLayouts[breakpoint] = updatedBreakpointLayouts
+          updatedLayouts[breakpoint as Breakpoint] =
+            updatedBreakpointLayouts as DashboardItem[]
         }
       })
       // console.log("layouts", layouts)
@@ -241,7 +256,7 @@ function Dashboard() {
    *
    * @param breakpoint - The breakpoint that is currently active, affecting the layout.
    */
-  const onBreakpointChange = (breakpoint: string) => {
+  const onBreakpointChange = (breakpoint: Breakpoint) => {
     setCurrentBreakpoint(breakpoint)
     setLayouts((prev) => ({
       ...prev,
@@ -260,9 +275,9 @@ function Dashboard() {
 
       // Remove the item from all breakpoints
       Object.keys(updatedLayouts).forEach((breakpoint) => {
-        updatedLayouts[breakpoint] = updatedLayouts[breakpoint].filter(
-          ({ i }) => i !== item.i,
-        )
+        updatedLayouts[breakpoint as Breakpoint] = updatedLayouts[
+          breakpoint as Breakpoint
+        ].filter(({ i }) => i !== item.i)
       })
 
       return updatedLayouts
@@ -273,7 +288,10 @@ function Dashboard() {
       const updatedToolbox = { ...prev }
 
       Object.keys(updatedToolbox).forEach((breakpoint) => {
-        updatedToolbox[breakpoint] = [...updatedToolbox[breakpoint], item]
+        updatedToolbox[breakpoint as Breakpoint] = [
+          ...updatedToolbox[breakpoint as Breakpoint],
+          item,
+        ]
       })
 
       return updatedToolbox
@@ -287,9 +305,9 @@ function Dashboard() {
       const updatedToolbox = { ...prev }
 
       Object.keys(updatedToolbox).forEach((breakpoint) => {
-        updatedToolbox[breakpoint] = updatedToolbox[breakpoint].filter(
-          (tbItem) => tbItem.i !== item.i,
-        )
+        updatedToolbox[breakpoint as Breakpoint] = updatedToolbox[
+          breakpoint as Breakpoint
+        ].filter((tbItem) => tbItem.i !== item.i)
       })
 
       return updatedToolbox
@@ -300,7 +318,10 @@ function Dashboard() {
       const updatedLayouts = { ...prev }
 
       Object.keys(updatedLayouts).forEach((breakpoint) => {
-        updatedLayouts[breakpoint] = [...updatedLayouts[breakpoint], item]
+        updatedLayouts[breakpoint as Breakpoint] = [
+          ...updatedLayouts[breakpoint as Breakpoint],
+          item,
+        ]
       })
 
       return updatedLayouts
@@ -309,10 +330,12 @@ function Dashboard() {
 
   // Reset layouts
   const onResetLayout = useCallback((type: "user" | "default") => {
-    setCompactType(type === "user" ? userLayouts.compactType : DEFAULT_COMPACTTYPE)
+    setCompactType(
+      type === "user" ? userLayouts.compactType : DEFAULT_COMPACTTYPE,
+    )
     setLayouts(type === "user" ? userLayouts.layouts : DEFAULT_LAYOUTS)
     setToolbox(type === "user" ? userLayouts.toolbox : DEFAULT_TOOLBOX)
-  }, [userLayouts])
+  }, [])
 
   return (
     <main className="flex">
@@ -326,14 +349,14 @@ function Dashboard() {
             onClick={() => onResetLayout("user")}
             className="min-w-[65%]"
           >
-            <History width={20} height={20}/>
+            <History width={20} height={20} />
           </ButtonEffect>
           <ButtonEffect
             emphasis={0}
             onClick={() => onResetLayout("default")}
             className="min-w-[31%]"
           >
-            <span className="md:text-sm text-xs overflow-hidden">Reset</span>
+            <span className="overflow-hidden text-xs md:text-sm">Reset</span>
           </ButtonEffect>
         </div>
 
