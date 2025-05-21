@@ -2,11 +2,13 @@
   "name": "good-talk",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --no-cache",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@number-flow/react": "^0.5.9",
@@ -49,8 +51,10 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9.27.0",
     "eslint-config-next": "15.3.2",
-    "eslint-plugin-next": "^0.0.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "no-typos": "link:@next\\next\\no-typos",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
@@ -58,7 +62,6 @@
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3"
   },
-  "pnpm": {
-  },
+  "pnpm": {},
   "packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a"
 }

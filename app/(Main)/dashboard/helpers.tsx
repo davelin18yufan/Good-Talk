@@ -1,3 +1,4 @@
+import NoResult from "@/components/NoResult"
 import {
   DynamicChartProps,
   ProfitChartData,
@@ -29,35 +30,66 @@ const GoalProgress = dynamic(
   { ssr: false },
 )
 
-// Define chart components map
-type ChartComponentProps = {
-  ProfitChart: ProfitChartData[];
-  RealizedPnlChart: PnLChartData[];
-  TradeFundBase: TradeFundData[];
-  TradeLog: Log[];
-  TradeSummary: TradeSummaryData;
-  TradePlan: Plan[];
-  GoalProgress: GoalProgressData[];
-};
+// Define chart components map with specific type mapping
+interface ChartComponentMap {
+  ProfitChart: (data: ProfitChartData[]) => ReactElement
+  RealizedPnlChart: (pnLData: PnLChartData[]) => ReactElement
+  TradeFundBase: (fundBase: TradeFundData[]) => ReactElement
+  TradeLog: (logs: Log[]) => ReactElement
+  TradeSummary: (summary: TradeSummaryData) => ReactElement
+  TradePlan: (plans: Plan[]) => ReactElement
+  GoalProgress: (progress: GoalProgressData[]) => ReactElement
+}
 
-const chartComponentsMap = new Map<keyof ChartComponentProps, (props: any) => ReactElement>([
-  ["ProfitChart", (data) => <ProfitChart data={data} />],
-  ["RealizedPnlChart", (pnLData) => <RealizedPnlChart pnLData={pnLData} />],
-  ["TradeFundBase", (fundBase) => <TradeFundBase fundBase={fundBase} />],
-  ["TradeLog", (logs) => <TradeLog logs={logs} />],
-  ["TradeSummary", (summary) => <TradeSummary summary={summary} />],
-  ["TradePlan", (plans) => <TradePlan plans={plans} />],
-  ["GoalProgress", (progress) => <GoalProgress progress={progress} />],
-]);
+const chartComponentsMap = new Map<
+  keyof ChartComponentMap,
+  ChartComponentMap[keyof ChartComponentMap]
+>([
+  ["ProfitChart", (data: ProfitChartData[]) => <ProfitChart data={data} />],
+  [
+    "RealizedPnlChart",
+    (pnLData: PnLChartData[]) => <RealizedPnlChart pnLData={pnLData} />,
+  ],
+  [
+    "TradeFundBase",
+    (fundBase: TradeFundData[]) => <TradeFundBase fundBase={fundBase} />,
+  ],
+  ["TradeLog", (logs: Log[]) => <TradeLog logs={logs} />],
+  [
+    "TradeSummary",
+    (summary: TradeSummaryData) => <TradeSummary summary={summary} />,
+  ],
+  ["TradePlan", (plans: Plan[]) => <TradePlan plans={plans} />],
+  [
+    "GoalProgress",
+    (progress: GoalProgressData[]) => <GoalProgress progress={progress} />,
+  ],
+])
+
 export const renderChart = (
   chartId: keyof DynamicChartProps,
   chartProps: DynamicChartProps,
-): ReactElement<any> => {
+): ReactElement => {
   const renderComponent = chartComponentsMap.get(chartId)
 
   if (!renderComponent) {
     return <div>No chart found</div>
   }
 
-  return renderComponent(chartProps[chartId])
+  const props = chartProps[chartId]
+
+  // 若 props 為 undefined，就不渲染
+  if (!props) {
+    return (
+      <NoResult
+        title="Oops! Something went wrong."
+        description="The chart you selected is not reachable, try again."
+        link="/dashboard"
+        linkTitle="Refresh"
+      />
+    )
+  }
+
+  // 類型縮小：顯式斷言 props 為對應類型
+  return renderComponent(props as never)
 }

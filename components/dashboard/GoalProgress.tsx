@@ -1,5 +1,5 @@
-/* eslint-disable no-shadow */
 "use client"
+
 import {
   PieChart,
   Pie,
@@ -60,7 +60,7 @@ const needle = (
 function CustomTooltip<TValue extends ValueType, TName extends NameType>({
   active = false,
   payload = [],
-  label = "",
+  // label = "",
 }: TooltipProps<TValue, TName>) {
   if (active && payload && payload.length) {
     const formatLable = (name: GoalProgressLabel) => {

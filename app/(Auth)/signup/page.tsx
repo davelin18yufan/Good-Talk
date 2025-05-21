@@ -11,7 +11,10 @@ function SignUpPage() {
   ])
 
   // It has to return a value for message state
-  async function handleSubmit(prevState: any, formData: FormData) {
+  async function handleSubmit(
+    prevState: { name: string; message: string }[] | null,
+    formData: FormData
+  ) {
     const email = formData.get("email") as string
     const username = formData.get("username") as string
     const password = formData.get("password") as string
@@ -25,7 +28,7 @@ function SignUpPage() {
         confirmPassword,
       })
       // TODO: Signup action
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error instanceof ZodError) {
         const errors = error.issues.map((issue) => {
           return { name: issue.path[0].toString(), message: issue.message }
@@ -56,7 +59,6 @@ function SignUpPage() {
         title="Be one of us in Good Talk"
         description="So excited to have you, almost there."
         action={signUpAction}
-        isAuth
       >
         <div className="flex flex-col gap-4">
           <CustomInput

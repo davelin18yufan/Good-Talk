@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 "use client"
 
@@ -12,7 +13,7 @@ import { ActiveModifiers } from "react-day-picker"
 import { Calendar, CalendarProps } from "@/components/ui/calendar"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Calendar as CalendarIcon, LucideTextCursorInput } from "lucide-react"
+import { Calendar as CalendarIcon } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 /* -------------------------------------------------------------------------- */
@@ -99,8 +100,8 @@ const inputBase =
 
 // @source: https://www.perplexity.ai/search/in-javascript-how-RfI7fMtITxKr5c.V9Lv5KA#1
 // use this pattern to validate the transformed date string for the natural language input
-const naturalInputValidationPattern =
-  "^[A-Z][a-z]{2}sd{1,2},sd{4},sd{1,2}:d{2}s[AP]M$"
+// const naturalInputValidationPattern =
+  // "^[A-Z][a-z]{2}sd{1,2},sd{4},sd{1,2}:d{2}s[AP]M$"
 
 const DEFAULT_SIZE = 96
 
@@ -207,7 +208,7 @@ const TimePicker = () => {
     (time: string, hour: number, partStamp: number) => {
       onTimeChange(time)
 
-      let newVal = value ? new Date(value) : new Date()
+      const newVal = value ? new Date(value) : new Date()
 
       // If no value exists, use current date but only set the time
       newVal.setHours(
@@ -485,7 +486,7 @@ const NaturalLanguageInput = React.forwardRef<
       ).padStart(2, "0")} ${hour >= 12 ? "PM" : "AM"}`
       onTimeChange(timeVal)
     }
-  }, [value, showCalendar, showTimePicker])
+  }, [value, showCalendar, showTimePicker, onTimeChange])
 
   const handleParse = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -528,12 +529,13 @@ const NaturalLanguageInput = React.forwardRef<
         }
       }
     },
-    [value, showCalendar, showTimePicker],
+    [value, showCalendar, showTimePicker, onTimeChange, onValueChange],
   )
 
   const handleKeydown = React.useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
+        // eslint-disable-next-line 
         handleParse(e as any)
       }
     },

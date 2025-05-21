@@ -57,7 +57,7 @@ export function AvatarCard({
 function AvatarGallery({ authors }: { authors: Author[] }) {
   return (
     <div className="group mx-auto flex justify-center gap-2 md:w-[80%]">
-      {authors.map((person, i: number) => (
+      {authors.map((person, _i: number) => (
         <AvatarCard {...{ person }} key={person.id} />
       ))}
     </div>

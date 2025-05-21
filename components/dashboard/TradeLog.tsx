@@ -124,7 +124,7 @@ const TradeLog = ({
   // const { selectDate } = useDate((store) => store.selectDate)
   // const trades = await getTradeLog(selectDate)
   // TODO: set selectDate with zustand or useContext
-  const handleDateChange = (date: Date) => {}
+  const handleDateChange = (_date: Date) => {}
   return (
     <section className={cn("section", className)}>
       <div className="flex items-center gap-6 md:gap-8">

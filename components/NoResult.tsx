@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+// import Image from "next/image"
 import Link from "next/link"
 import ButtonLink from "./buttons/ButtonLink"
 import { CloudAlertIcon } from "lucide-react"

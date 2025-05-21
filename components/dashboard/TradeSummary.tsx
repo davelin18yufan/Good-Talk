@@ -53,10 +53,10 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {position.map((p: any) => {
+            {position.map((p) => {
               let profit = ""
               const marketPrice = currentPrices.find(
-                (price: any) => price.symbol === p.asset_id,
+                (price) => price.symbol === p.asset_id,
               )
               if (marketPrice) {
                 profit = (

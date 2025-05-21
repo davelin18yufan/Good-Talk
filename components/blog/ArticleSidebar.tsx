@@ -9,7 +9,7 @@ import ButtonLink from "../buttons/ButtonLink"
 import { persons } from "@/api"
 
 
-export default function ArticleSidebar() {
+export function ArticleSidebar() {
   return (
     <article className="flex flex-col gap-y-2.5 rounded-lg">
       <h2 className="text-xl font-semibold">Panel</h2>

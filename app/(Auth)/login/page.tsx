@@ -1,9 +1,9 @@
 "use client"
-import { useActionState } from "react";
+import { useActionState } from "react"
 import { CustomInput, ErrorMessage, FormBase } from "@/components/form/Form"
 import { LoginSchema } from "@/lib/validation"
 import { ZodError } from "zod"
-import { login } from "@/api/auth";
+import { login } from "@/api/auth"
 
 function LoginPage() {
   // update state based on form action value
@@ -12,7 +12,10 @@ function LoginPage() {
   ])
 
   // It has to return a value for message state
-  async function handleSubmit(prevState: any, formData: FormData) {
+  async function handleSubmit(
+    prevState: { name: string; message: string }[] | null,
+    formData: FormData,
+  ) {
     const email = formData.get("email") as string
     const password = formData.get("password") as string
 
@@ -20,12 +23,12 @@ function LoginPage() {
       await LoginSchema.parseAsync({ email, password })
       // TODO: Login action
       await login({ email, password })
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error instanceof ZodError) {
         const errors = error.issues.map((issue) => {
           return { name: issue.path[0].toString(), message: issue.message }
         })
-        console.log(errors)
+        console.error(errors)
         return errors
       } else {
         console.error("Login Form Input error", error)

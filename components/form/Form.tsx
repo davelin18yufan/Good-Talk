@@ -10,7 +10,6 @@ import Link from "next/link"
 import { FadeText } from "../FadeText"
 import { AnimatePresence } from "motion/react"
 import { FormBaseProps, CustomInputProps } from "@/types/form.d"
-import TypingAnimation from "./TypingAnimation"
 import { DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { FORM_TYPES } from "@/constants"
 

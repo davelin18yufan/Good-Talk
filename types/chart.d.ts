@@ -1,8 +1,10 @@
-import { GoalProgress } from "@/components/dashboard"
 import { Charts, GOAL_PROGRESS_LABELS } from "@/constants"
 import { Layout } from "react-grid-layout"
 
 export type CompactType = "horizontal" | "vertical" | null
+
+const breakpoints = ["lg", "md", "sm", "xs", "xxs"] as const
+export type Breakpoint = (typeof breakpoints)[number]
 
 //* Atomic type
 export type Target = {
@@ -139,9 +141,7 @@ export interface DashboardItem extends Layout {
   content?: React.ReactNode
 }
 
-export interface ResponsiveLayouts {
-  [v: string]: DashboardItem[]
-}
+export type ResponsiveLayouts = Record<Breakpoint, DashboardItem[]>
 
 export interface ChartImageProps {
   id: (typeof Charts)[number]

@@ -3,7 +3,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react"
 import { motion, AnimatePresence } from "motion/react"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 type Testimonial = {
   id: string
@@ -12,7 +12,8 @@ type Testimonial = {
   designation: string
   src: string
 }
-const AnimatedTestimonials = ({
+
+export const AnimatedTestimonials = ({
   testimonials,
   autoplay = false,
 }: {
@@ -21,13 +22,13 @@ const AnimatedTestimonials = ({
 }) => {
   const [active, setActive] = useState(0)
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % testimonials.length)
-  }
+  }, [testimonials.length])
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+  }, [testimonials.length])
 
   const isActive = (index: number) => {
     return index === active
@@ -38,13 +39,13 @@ const AnimatedTestimonials = ({
       const interval = setInterval(handleNext, 5000)
       return () => clearInterval(interval)
     }
-  }, [autoplay])
+  }, [autoplay, handleNext, handlePrev])
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 22) - 11
   }
   return (
-    <div className="mx-auto max-w-sm px-4 py-2 antialiased md:max-w-4xl md:px-4 z-20">
+    <div className="z-20 mx-auto max-w-sm px-4 py-2 antialiased md:max-w-4xl md:px-4">
       <div className="relative grid grid-cols-1 gap-10">
         <div className="relative h-80 w-full">
           <AnimatePresence>
@@ -112,7 +113,7 @@ const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <h3 className="text-2xl font-bold text-black dark:text-white py-1">
+            <h3 className="py-1 text-2xl font-bold text-black dark:text-white">
               {testimonials[active].name}
             </h3>
             <p className="text-sm text-gray-500 dark:text-neutral-500">
@@ -163,5 +164,3 @@ const AnimatedTestimonials = ({
     </div>
   )
 }
-
-export default AnimatedTestimonials

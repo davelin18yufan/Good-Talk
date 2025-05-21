@@ -74,13 +74,17 @@ export default function NumberDiffWithButton({
   handleSwitchClick: () => void
 }) {
   return (
-    <div className={cn(className, "flex-center gap-x-4 flex-wrap")}>
+    <div className={cn(className, "flex-center flex-wrap gap-x-4")}>
       <PriceWithDiff value={number} diff={diff} />
       <button
         onMouseDown={(e) => e.stopPropagation()}
         onClick={handleSwitchClick}
-        // eslint-disable-next-line tailwindcss/no-custom-classname
-        className="duration-[.16s] ease-[cubic-bezier(.4,0,.2,1)] active:duration-[25ms] bg-button text-invert flex w-fit items-center gap-2 rounded-full px-2.5 py-2 text-sm font-medium transition hover:brightness-125 active:scale-[98%] active:brightness-[98%]"
+        className={cn(
+          "duration-[.16s] ease-[cubic-bezier(.4,0,.2,1)] active:duration-[25ms]",
+          "bg-button text-invert",
+          "flex w-fit items-center gap-2 rounded-full px-2.5 py-2 text-sm font-medium",
+          "transition hover:brightness-125 active:scale-[98%] active:brightness-[98%]",
+        )}
       >
         <svg className="size-3" strokeLinejoin="round" viewBox="0 0 16 16">
           <path

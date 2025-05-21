@@ -135,7 +135,7 @@ function TradePlan({ plans }: { plans?: Plan[] }) {
     <section className={cn("section overflow-y-auto")}>
       <SectionTitle title="進出場規劃" formType="plan" />
       <div className="flex-center flex-col gap-0.5">
-        {plans?.map((plan: any) => <PlanCard plan={plan} key={plan._id} />)}
+        {plans?.map((plan) => <PlanCard plan={plan} key={plan._id} />)}
       </div>
     </section>
   )

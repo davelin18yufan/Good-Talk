@@ -25,9 +25,9 @@ export function formatNumber(amount: number) {
  * @param {number} delay The number of milliseconds to delay.
  * @returns {function} The debounced function.
  */
-export function debounce(callback: (...args: any) => void, delay: number) {
+export function debounce(callback: (...args: unknown[]) => void, delay: number) {
   let timeoutId: NodeJS.Timeout
-  return (...args: any) => {
+  return (...args: unknown[]) => {
     clearTimeout(timeoutId)
     timeoutId = setTimeout(() => {
       callback(...args)

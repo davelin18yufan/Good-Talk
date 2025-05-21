@@ -1,8 +1,10 @@
 "use client"
+
 import React, { useState } from "react"
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts"
 import { formatNumber } from "@/lib/utils"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderActiveShape = (props: any) => {
   const RADIAN = Math.PI / 180
   const {
@@ -85,7 +87,7 @@ export default function FundPieChart({
   h?: number
 }) {
   const [activeIndex, setActiveIndex] = useState(1)
-  const onPieEnter = (_: any, index: number) => {
+  const onPieEnter = (_: React.MouseEvent<SVGElement, MouseEvent>, index: number) => {
     setActiveIndex(index)
   }
 

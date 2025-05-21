@@ -25,10 +25,15 @@ import { PnLChartData, PnLChartDataKeys } from "@/types/chart"
 
 const dataKeys: Array<PnLChartDataKeys> = ["成交筆數", "報酬率", "獲利筆數"]
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderTooltipContent = ({ payload = [] }: any) => {
   if (!payload || !payload.length) return null
 
-  const compareData = (data: any, label1: string, label2: string) => {
+  const compareData = (
+    data: Array<{ payload: Record<string, number> }>,
+    label1: string,
+    label2: string
+  ) => {
     const comparisonNameMapping: Record<string, string> = {
       "成交筆數:報酬率": "準確率",
       "報酬率:成交筆數": "準確率",
@@ -47,7 +52,7 @@ const renderTooltipContent = ({ payload = [] }: any) => {
       "比較結果"
 
     // calculate result
-    const result = data.map((entry: any) => {
+    const result = data.map((entry) => {
       const { payload: p } = entry
       const value1 = p[label1]
       const value2 = p[label2]
@@ -86,6 +91,7 @@ const renderTooltipContent = ({ payload = [] }: any) => {
   return (
     <div className="flex flex-col gap-2 border bg-white p-2">
       <ul className="list">
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         {payload.map((entry: any, index: number) => (
           <li key={`item-${index}`} style={{ color: entry.color }}>
             {`${entry.name}: ${entry.value}${entry.name === "報酬率" ? "%" : ""}`}

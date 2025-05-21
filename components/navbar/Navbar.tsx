@@ -8,12 +8,10 @@ import { cn } from "@/lib/utils"
 import { Menu, MenuItem, ProductItem } from "./"
 import { useTheme } from "@/hooks/useTheme"
 import { type Theme } from "@/types/shared"
-import { LogOut, Settings, User } from "lucide-react"
-import { Button, Badge, Progress } from "../ui"
-import { article, userCardItems } from "@/api"
+import { article } from "@/api"
 import { ProfileMenu } from "../blog"
 
-export default function Navbar({ itemClass }: { itemClass?: string }) {
+export function Navbar({ itemClass }: { itemClass?: string }) {
   const [active, setActive] = useState<string | null>(null)
   const { applyTheme } = useTheme()
   const handleThemeClick = (target: Theme) => {

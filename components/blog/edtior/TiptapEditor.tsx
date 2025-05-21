@@ -1,7 +1,5 @@
 "use client"
-
-/* eslint-disable unicorn/no-null */
-/* eslint-disable quotes */
+/* eslint-disable */
 import { debounce } from "@/lib/utils"
 import React, { useCallback, useRef, useState } from "react"
 import RcTiptapEditor, {
