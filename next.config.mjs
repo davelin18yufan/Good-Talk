@@ -22,13 +22,14 @@ const nextConfig = {
       .concat(createRemotePattern("res.cloudinary.com"))
       .concat(createRemotePattern("images.unsplash.com")),
   },
+  turbopack: {
+    resolveAlias: {
+      yjs: `${__dirname}/node_modules/yjs`,
+    },
+  },
   experimental: {
-    turbo:{
-      resolveAlias: {
-        yjs: `${__dirname}/node_modules/yjs`,
-      },
-    }
-  }
+    viewTransition: true
+  },
 }
 
 export default nextConfig
