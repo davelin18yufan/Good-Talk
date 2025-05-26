@@ -103,7 +103,7 @@ export const FloatingDockMobile = ({
                   <p className="text-header origin-right scale-x-0 whitespace-nowrap pr-2 transition-transform duration-200 ease-in-out group-hover:scale-x-100">
                     {item.title}
                   </p>
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center transition-transform group-hover:scale-110 dark:invert">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center transition-transform group-hover:scale-110 dark:invert">
                     {item.icon}
                   </div>
                 </Link>

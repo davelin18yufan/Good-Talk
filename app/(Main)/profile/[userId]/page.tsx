@@ -116,7 +116,7 @@ export default function ProfilePage() {
                           <IconUserEdit className="size-5 rtl:rotate-180" />
                         </span>
 
-                        <span className="text-sm font-medium transition-all !duration-300">
+                        <span className="text-sm font-medium transition-all duration-300!">
                           Edit Profile
                         </span>
                       </div>

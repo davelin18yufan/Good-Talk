@@ -63,7 +63,7 @@ export function FormBase({
 
         {type === "auth" && <AuthFooter isLoginPage={isLoginPage} />}
 
-        <div className="my-6 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
+        <div className="my-6 h-px w-full bg-linear-to-r from-transparent via-neutral-200 to-transparent" />
 
         {/* Third party auth */}
         {type === "auth" && (

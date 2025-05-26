@@ -1,13 +1,13 @@
 import Image from "next/image"
 import logo from "@/public/logo.svg"
 import { MAIN_HEADER_INTRO } from "@/constants/metadata"
-import Navbar from "./navbar/Navbar"
+import { Navbar } from "./navbar/Navbar"
 import Link from "next/link"
-import MobileNavbar from "./navbar/MobileNavbar"
+import { MobileNavbar } from "./navbar/MobileNavbar"
 
 export default function MainHeader() {
   return (
-    <header className="group/header fixed top-0 right-0 left-0 z-30 flex h-24 w-full origin-top items-center justify-between bg-neutral-50 p-2 transition-all !duration-300 hover:md:h-48 dark:bg-slate-800">
+    <header className="group/header fixed top-0 right-0 left-0 z-30 flex h-24 w-full origin-top items-center justify-between bg-neutral-50 p-2 transition-all duration-300! hover:md:h-48 dark:bg-slate-800">
       <Link href="/article" className="h-full">
         <Image
           src={logo}

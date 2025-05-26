@@ -1,5 +1,5 @@
 import BlurFade from "@/components/BlurFade"
-import ArticleSidebar from "@/components/blog/ArticleSidebar"
+import { ArticleSidebar } from "@/components/blog/ArticleSidebar"
 import { BlogSets } from "@/components/blog/ArticleSets"
 import { BlogGallery } from "@/components/blog/ArticleGallery"
 import { Separator } from "@/components/ui/separator"

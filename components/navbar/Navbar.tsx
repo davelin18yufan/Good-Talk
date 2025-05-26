@@ -20,7 +20,7 @@ export function Navbar({ itemClass }: { itemClass?: string }) {
 
   return (
     <Menu setActive={setActive}>
-      <div className="flex-center gap-2 px-4 py-2 max-md:hidden">
+      <div className="flex-center gap-2 px-4 py-2 max-md:!hidden">
         {/* Theme */}
         <MenuItem
           setActive={setActive}
@@ -65,7 +65,7 @@ export function Navbar({ itemClass }: { itemClass?: string }) {
               href={item.route}
               key={item.tabName}
               className={cn(
-                "flex-center text-header origin-top flex-col gap-2 px-2 py-1 opacity-0 transition-all hover:rotate-6 hover:!delay-0 group-hover/header:-translate-y-2 group-hover/header:opacity-100",
+                "flex-center text-header origin-top flex-col gap-2 px-2 py-1 opacity-0 transition-all hover:rotate-6 hover:delay-0! group-hover/header:-translate-y-2 group-hover/header:opacity-100",
                 itemClass,
               )}
               style={{ transitionDelay: `${index * 100 + 200}ms` }}
@@ -86,7 +86,7 @@ export function Navbar({ itemClass }: { itemClass?: string }) {
         <ProfileMenu
           setActive={setActive}
           active={active}
-          itemClass="!-translate-x-[90%]"
+          itemClass="-translate-x-[90%]!"
           user={article.author}
         />
       </div>

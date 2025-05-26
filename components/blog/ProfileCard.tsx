@@ -114,7 +114,7 @@ export function ProfileMenu({
         <Link
           href={ROUTES.PROFILE()}
           className={cn(
-            "flex-center text-header origin-top flex-col gap-2 px-2 py-1 opacity-0 transition-all hover:rotate-6 hover:!delay-0 group-hover/header:-translate-y-2 group-hover/header:opacity-100",
+            "flex-center text-header origin-top flex-col gap-2 px-2 py-1 opacity-0 transition-all hover:rotate-6 hover:delay-0! group-hover/header:-translate-y-2 group-hover/header:opacity-100",
             triggerClass,
           )}
           style={{ transitionDelay: `${NAV_LINKS.length * 100 + 300}ms` }}
@@ -124,7 +124,7 @@ export function ProfileMenu({
         </Link>
       }
     >
-      <article className="relative rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50/50 to-zinc-100/50 p-6 dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-900/50">
+      <article className="relative rounded-2xl border border-zinc-200 bg-linear-to-b from-zinc-50/50 to-zinc-100/50 p-6 dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-900/50">
         <div className="mb-6 flex items-start justify-between">
           <div className="mb-6 flex items-start justify-between gap-4 lg:gap-6">
             <figure className="flex basis-1/3 flex-col items-center">
@@ -137,7 +137,7 @@ export function ProfileMenu({
               />
               <Badge
                 variant="secondary"
-                className="mt-2 border-amber-200/50 bg-gradient-to-r from-amber-200 to-amber-300 px-2 py-0.5 text-xs font-medium text-amber-700 dark:border-amber-800/50 dark:from-amber-700/50 dark:to-amber-600/50 dark:text-amber-400"
+                className="mt-2 border-amber-200/50 bg-linear-to-r from-amber-200 to-amber-300 px-2 py-0.5 text-xs font-medium text-amber-700 dark:border-amber-800/50 dark:from-amber-700/50 dark:to-amber-600/50 dark:text-amber-400"
               >
                 Maker
               </Badge>

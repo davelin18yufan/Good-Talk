@@ -148,7 +148,7 @@ export default function ArticleDetailPage() {
                   <ButtonEffect
                     key={category}
                     emphasis={0}
-                    className="!min-w-fit"
+                    className="min-w-fit!"
                   >
                     {category}
                   </ButtonEffect>

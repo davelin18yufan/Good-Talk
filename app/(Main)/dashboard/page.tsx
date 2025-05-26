@@ -128,7 +128,7 @@ function Dashboard() {
         transition={{ duration: 0.3 }}
         className={cn(
           l.static && "static",
-          "relative z-[2] cursor-pointer overflow-hidden rounded-lg bg-slate-100 shadow-md dark:bg-slate-800",
+          "relative z-2 cursor-pointer overflow-hidden rounded-lg bg-slate-100 shadow-md dark:bg-slate-800",
         )}
       >
         {/* Render custom charts based on chartId */}
@@ -363,7 +363,7 @@ function Dashboard() {
         {/* Compact type */}
         <div className="flex items-center justify-between last:inline-block">
           <span className="max-md:hidden">自動排序方向 : </span>
-          <span className="bg-button text-invert ml-1 rounded-sm px-1.5 capitalize">
+          <span className="bg-btn text-invert ml-1 rounded-sm px-1.5 capitalize">
             {compactType
               ? compactType.charAt(0).toUpperCase() + compactType.slice(1)
               : "None"}
@@ -376,7 +376,7 @@ function Dashboard() {
         {/* Breakpoint */}
         <div className="flex items-center justify-start">
           <span className="max-md:hidden">現在畫面尺寸 : </span>
-          <span className="bg-button text-invert ml-1 rounded-sm px-1.5 capitalize">
+          <span className="bg-btn text-invert ml-1 rounded-sm px-1.5 capitalize">
             {currentBreakpoint || "None"}
           </span>
         </div>

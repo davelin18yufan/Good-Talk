@@ -112,7 +112,7 @@ function PlanCard({
             <span className="group inline-flex items-center">
               未執行{" "}
               <CheckIcon
-                className="ml-1 !transition-opacity duration-300 group-hover:translate-x-1"
+                className="ml-1 transition-opacity! duration-300 group-hover:translate-x-1"
                 width={16}
                 height={16}
               />

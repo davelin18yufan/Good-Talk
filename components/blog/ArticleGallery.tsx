@@ -41,7 +41,7 @@ export const BlogFocusCard = React.memo(
           hovered === index ? "opacity-100" : "opacity-0",
         )}
       >
-        <div className="flex w-full flex-wrap items-end justify-between gap-x-4 truncate bg-gradient-to-b from-neutral-50 to-neutral-200 bg-clip-text text-xl font-semibold text-transparent md:text-2xl">
+        <div className="flex w-full flex-wrap items-end justify-between gap-x-4 truncate bg-linear-to-b from-neutral-50 to-neutral-200 bg-clip-text text-xl font-semibold text-transparent md:text-2xl">
           {card.title}
           <span className="md:text-md to-neutral-300/50 text-sm font-medium">
             {card.author.name}

@@ -69,7 +69,7 @@ const LiquidProgress = ({
           <p
             className={cn(
               "flex-center absolute inset-0 whitespace-pre-wrap text-xl font-medium tracking-tighter md:text-2xl lg:text-3xl",
-              "bg-gradient-to-r bg-clip-text text-transparent",
+              "bg-linear-to-r bg-clip-text text-transparent",
             )}
             style={{
               backgroundImage: `linear-gradient(to right, ${color}, ${color})`,
