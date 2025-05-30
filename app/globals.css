@@ -5,12 +5,6 @@
 @theme {
   --font-family-sans: var(--font-inter);
   --font-family-mono: var(--font-roboto-mono);
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
   --color-primary: #cac6bd;
   --color-secondary: #bb9a88;
   --color-tertiary: #b5a8a0;

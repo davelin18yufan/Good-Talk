@@ -105,7 +105,7 @@ const TradeSummary = ({ summary }: { summary: TradeSummaryData }) => {
 
       <Table>
         <TableFooter>
-          <TableRow className="text-lg">
+          <TableRow className="xl:text-lg">
             <TableCell colSpan={4}>未實現損益</TableCell>
             <TableCell
               className={cn(
